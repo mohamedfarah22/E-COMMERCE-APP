@@ -5,6 +5,9 @@ function Header(){
     return(
 
         <div className='header-container'>
+            <div className="shop-online-banner">
+                <p className='banner-text'>Shop Online | Discover Luxuria</p>
+            </div>
             <div className="companyNameContainer">
                 <h1 className="companyName">Luxuria</h1> 
             </div>
