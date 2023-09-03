@@ -5,3 +5,5 @@ function Product({Product}){
         </div>
     )
 }
+
+export default Product;
