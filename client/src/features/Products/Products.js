@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react';
+import Product from '../../components/Product/Product';
 import axios from 'axios';
 function Products(){
     const [products, setProducts] = useState([])
@@ -12,7 +13,9 @@ function Products(){
     }, [products])
     return (
         <div className="products">
-            
+            {products.map((product) => {
+                return <Product product={product}/>
+            })}
 
         </div>
 
