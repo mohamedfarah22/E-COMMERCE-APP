@@ -1,0 +1,20 @@
+.search-button{
+  background-size: cover; /* Adjust the size as needed */
+  background-repeat: no-repeat;
+  width: 20px; /* Set the width of the button */
+  height: 20px; /* Set the height of the button */
+  border: none; /* Remove the default button border */
+  cursor: pointer; 
+  vertical-align: top;
+  padding-left: 10px;
+  
+}
+form{
+    padding: 5px 0 0 0;
+}
+input{
+    vertical-align: top;
+    height: 20px;
+    width: 200px;
+  
+}

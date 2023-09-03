@@ -1,0 +1,5 @@
+FROM nginx:alpine
+
+COPY images /usr/share/nginx/html/images
+
+EXPOSE 80

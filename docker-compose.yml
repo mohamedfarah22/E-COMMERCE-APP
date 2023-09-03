@@ -1,0 +1,45 @@
+version: '3.8'
+services:
+  database: 
+    container_name: ecomm-database-postgres
+    image: postgres:16beta2-alpine
+    environment:
+      POSTGRES_DB: ecommercedatabase
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: ecommdb
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./database/:/docker-entrypoint-initdb.d
+  api:
+    container_name: ecomm-api-express
+    build: 
+      context: ./api
+      dockerfile: dockerfile
+    volumes:
+      - ./api:/usr/app
+      - /usr/app/node_modules
+    ports:
+      - "4000:4000"
+    depends_on:
+      - database
+  frontend: 
+    container_name: ecomm-client-react
+    build:
+      context: ./client
+      dockerfile: dockerfile
+    volumes:
+      - ./client:/usr/app
+      - /usr/app/node_modules
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+      - database
+  image-server: 
+    container_name: image-container_name
+    build:
+      context: ./image-service
+      dockerfile: dockerfile
+    ports:
+      - "8080:80"
