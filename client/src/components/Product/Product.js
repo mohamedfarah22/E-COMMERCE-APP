@@ -1,7 +1,7 @@
 function Product({product}){
     return(
         <div className="product">
-            <p>{Product}</p>
+            <p>{product}</p>
         </div>
     )
 }
