@@ -17,7 +17,7 @@ function Categories() {
 
     return (
       <div className="categories">
-        <p>All</p>
+        <h3>All</h3>
         {categories.map((category) => {
             return <Category category = {category}/>
         })}
