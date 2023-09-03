@@ -1,0 +1,19 @@
+.product-image{
+    width: 300px;
+    height: 250px;
+    
+}
+.product-container{
+    margin: 40px 40px;
+    padding: 40px 40px;
+    background-color:#FDF5E6;
+    border-style: solid;
+    
+    
+}
+.product-container:hover{
+    box-shadow: 5px 5px 5px;
+}
+.product-name{
+    font-weight: bold;
+}
