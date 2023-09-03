@@ -3,7 +3,7 @@ function Category({category}) {
 
     return (
       <div className="category">
-        <p>{category.category}</p>
+        <p className="category-text">{category.category}</p>
         
       </div>
     );

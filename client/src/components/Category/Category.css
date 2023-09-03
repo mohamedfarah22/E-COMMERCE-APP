@@ -3,4 +3,9 @@
 p{
     text-align: center;
     font-family: 'Playfair Display', serif;
+
+}
+
+.category-text{
+    text-transform: capitalize;
 }
