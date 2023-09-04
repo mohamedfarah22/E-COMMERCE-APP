@@ -1,0 +1,4 @@
+.grid-product-page-container{
+    grid-template-columns: 5fr 1fr;
+    display:grid;
+}
