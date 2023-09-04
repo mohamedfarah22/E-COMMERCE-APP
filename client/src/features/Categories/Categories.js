@@ -2,7 +2,7 @@ import Category from "../../components/Category/Category";
 import {useEffect, useState} from 'react';
 import './categories.css'
 import axios from 'axios';
-function Categories({setFilterCategory}) {
+function Categories({filterCategory, setFilterCategory}) {
     const [categories, setCategories] = useState([])
 
     useEffect(() => {
@@ -10,10 +10,10 @@ function Categories({setFilterCategory}) {
             const categories = res.data
 
             setCategories(categories)
-        }, [categories])
+        })
 
 
-    }, [categories])
+    }, [filterCategory])
 
     return (
       <div className="categories">
