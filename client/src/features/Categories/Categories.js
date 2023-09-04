@@ -14,10 +14,14 @@ function Categories({filterCategory, setFilterCategory}) {
 
 
     }, [filterCategory])
+    const onClickHandler = (e) =>{
+      e.preventDefault()
+      setFilterCategory(e.target.textContent)
+    }
 
     return (
       <div className="categories">
-        <h3>All</h3>
+        <h3 onClick = {onClickHandler}>All</h3>
         {categories.map((category) => {
             return <Category category = {category} setFilterCategory = {setFilterCategory}/>
         })}

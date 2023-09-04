@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="App">
     <Header />
-    <Categories setFilterCategory = {setFilterCategory}/>
+    <Categories filterCategory = {filterCategory} setFilterCategory = {setFilterCategory}/>
     <Products filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} />
    
     </div>
