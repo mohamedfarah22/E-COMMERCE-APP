@@ -1,14 +1,20 @@
 import Searchbar from "../../components/Searchbar/Searchbar";
 import cartLogo from "../../images/market.png"
 import "./Header.css"
+import { useNavigate } from "react-router-dom";
 function Header(){
+    const navigate = useNavigate()
+
+    const onClickHandler = (e) => {
+        navigate('/')
+    }
     return(
 
         <div className='header-container'>
             <div className="shop-online-banner">
                 <p className='banner-text'>Shop Online | Discover Luxuria</p>
             </div>
-            <div className="companyNameContainer">
+            <div onClick = {onClickHandler} className="companyNameContainer">
                 <h1 className="companyName">Luxuria</h1> 
             </div>
            < div className="cart-log-search-container">

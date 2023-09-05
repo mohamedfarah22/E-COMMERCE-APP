@@ -1,4 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 .grid-product-page-container{
-    grid-template-columns: 5fr 1fr;
     display:grid;
+    grid-template-columns: 1fr 1fr;
+    
+}
+.image-container{
+    display: flex;
+    max-width: 50%;
+    justify-content: center;
+    align-items: center;
+    margin-left: 400px;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.image-container img{
+    width: 500px;
+    height: 500px;
+}
+.product-container-page{
+    display: flex;
+    justify-content: center;
+    flex-flow: column wrap;
+    max-width: 50%;
+    justify-content: center;
+    margin-left: 200px;
+    margin-top: 80px;
+}
+.product-name-page{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 32px;
+ 
+}
+.add-to-cart-button{
+    height: 50px;
+    background-color: #855dd5;
+    color: white;
+    font-size: white;
+    font-weight: bold;
+    font-size: 18px;
+}
+.description-header{
+    padding-right: 390px;
+    padding-bottom: 10px;
+    margin-top: 30px;
+    font-weight: bold;
+    font-family: 'Open Sans', sans-serif;
+     border-bottom: 2px solid black;
+}
+
+.product-description-text{
+    font-family: 'Open Sans', sans-serif;
+
+}
+.add-to-cart-button:hover{
+    cursor: pointer;
+
 }
