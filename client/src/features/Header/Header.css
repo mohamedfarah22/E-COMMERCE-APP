@@ -13,6 +13,7 @@
     display: flex;
     flex-direction: row;
     max-height: 100px;
+    flex-flow: row wrap;;
 }
 .cartLogo{
     max-height: 40px;
@@ -24,6 +25,12 @@
     font-size: 40px;
     
 
+}
+.shop-online-banner{
+    display: flex;
+    justify-content: center;
+    min-width: 100%;
+    background-color: #855dd5
 }
 
 .companyNameContainer{
@@ -44,8 +51,7 @@
     padding: 0px 40px;
 }
 
-.seperation-banner{
-    height: 20px;
-    width: 20px;
-    background-color: green;
+
+.banner-text{
+    color: white;
 }

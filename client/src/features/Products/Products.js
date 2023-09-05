@@ -2,20 +2,29 @@ import {useEffect, useState} from 'react';
 import Product from '../../components/Product/Product';
 import axios from 'axios';
 import './products.css'
-function Products(){
+function Products({filterCategory, setSelectedProduct}){
     const [products, setProducts] = useState([])
 
     useEffect(() => {
+        if(filterCategory==='All'){
         axios.get("http://localhost:4000/products").then(res => {
             const products = res.data;
 
             setProducts(products)
         })
-    }, [products])
+    }
+    else{
+        axios.get(`http://localhost:4000/products?category=${filterCategory}`).then(res => {
+            const products = res.data;
+
+            setProducts(products)
+        })  
+    }
+    }, [filterCategory])
     return (
         <div className="products">
             {products.map((product) => {
-                return <Product product={product}/>
+                return <Product product={product} setSelectedProduct={setSelectedProduct}/>
             })}
 
         </div>

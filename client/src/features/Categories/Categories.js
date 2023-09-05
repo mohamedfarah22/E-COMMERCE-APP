@@ -2,7 +2,7 @@ import Category from "../../components/Category/Category";
 import {useEffect, useState} from 'react';
 import './categories.css'
 import axios from 'axios';
-function Categories() {
+function Categories({filterCategory, setFilterCategory}) {
     const [categories, setCategories] = useState([])
 
     useEffect(() => {
@@ -10,16 +10,20 @@ function Categories() {
             const categories = res.data
 
             setCategories(categories)
-        }, [categories])
+        })
 
 
-    }, [categories])
+    }, [filterCategory])
+    const onClickHandler = (e) =>{
+      e.preventDefault()
+      setFilterCategory(e.target.textContent)
+    }
 
     return (
       <div className="categories">
-        <p>All</p>
+        <h3 onClick = {onClickHandler}>All</h3>
         {categories.map((category) => {
-            return <Category category = {category}/>
+            return <Category category = {category} setFilterCategory = {setFilterCategory}/>
         })}
         
         

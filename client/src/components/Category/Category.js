@@ -1,10 +1,13 @@
 import './Category.css'
-function Category({category}) {
+function Category({category, setFilterCategory}) {
+  const onClickHandler = (e) =>{
+    e.preventDefault()
+    setFilterCategory(e.target.textContent)
+  }
 
     return (
       <div className="category">
-        <p className="category-text">{category.category}</p>
-        
+        <h3 onClick = {onClickHandler} className="category-text">{category.category}</h3> 
       </div>
     );
   }
