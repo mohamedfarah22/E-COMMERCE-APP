@@ -2,11 +2,16 @@ import Searchbar from "../../components/Searchbar/Searchbar";
 import cartLogo from "../../images/market.png"
 import "./Header.css"
 import { useNavigate } from "react-router-dom";
-function Header(){
+function Header({setOpenPopUp}){
     const navigate = useNavigate()
 
     const onClickHandler = (e) => {
         navigate('/')
+    }
+    const onClickHandlerCart = (e)=> {
+        e.preventDefault()
+        setOpenPopUp(true)
+
     }
     return(
 
@@ -22,7 +27,7 @@ function Header(){
                 <Searchbar />
             </div>
                 <p className = "login-text">Log in</p>
-                <img className = "cartLogo" alt="cart logo" src={cartLogo}/>
+                <img onClick = {onClickHandlerCart} className = "cartLogo" alt="cart logo" src={cartLogo}/>
             </div> 
         </div>
     )

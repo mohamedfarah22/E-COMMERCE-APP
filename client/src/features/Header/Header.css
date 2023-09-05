@@ -55,3 +55,7 @@
 .banner-text{
     color: white;
 }
+.cartLogo:hover{
+    cursor: pointer;
+
+}
