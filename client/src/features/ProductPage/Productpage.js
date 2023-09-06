@@ -2,7 +2,7 @@ import './ProductPage.css'
 import Header from '../Header/Header';
 import Categories from '../Categories/Categories';
 import CartPopUp from '../Cart/Cart';
-import { useState } from 'react';
+import { useState} from 'react';
 function ProductPage({selectedProduct, filterCategory, setFilterCategory}){
     const [openPopUp, setOpenPopUp]  =useState(false);
     return(
