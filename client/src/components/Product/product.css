@@ -13,6 +13,7 @@
 }
 .product-container:hover{
     box-shadow: 5px 5px 5px;
+    cursor: pointer;
 }
 .product-name{
     font-weight: bold;
