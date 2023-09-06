@@ -1,11 +1,13 @@
 import './App.css';
-import { useState,} from 'react';
+import { useState} from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import ProductPage from './features/ProductPage/Productpage';
 import MainLayout from './features/MainLayout/MainLayout';
 function App() {
   const [filterCategory, setFilterCategory] = useState('All')
   const [selectedProduct, setSelectedProduct] = useState(null)
+  
+
  
   return (
     <div className="App">
