@@ -11,7 +11,7 @@ function ProductPage({selectedProduct, filterCategory, setFilterCategory}){
         <Categories filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} />
         {openPopUp ?
         <div className="cart-container">
-         <CartPopUp /> 
+         <CartPopUp setOpenPopUp = {setOpenPopUp} /> 
         </div>: null}
         <div className='grid-product-page-container'>
         <div className="image-container">
