@@ -51,9 +51,16 @@
 
 .product-description-text{
     font-family: 'Open Sans', sans-serif;
-
+   
 }
 .add-to-cart-button:hover{
     cursor: pointer;
 
+}
+.price-text{
+    font-size: 24px;
+    font-family: 'Open Sans', sans-serif;
+    margin-top: 0px;
+    padding-right: 400px;
+    
 }
