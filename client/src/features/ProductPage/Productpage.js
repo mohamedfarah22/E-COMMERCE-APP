@@ -3,39 +3,33 @@ import Header from '../Header/Header';
 import Categories from '../Categories/Categories';
 import CartPopUp from '../Cart/Cart';
 import { useState, useEffect} from 'react';
-function ProductPage({selectedProduct, filterCategory, setFilterCategory, loggedIn, cartItems, setCartItems}){
+import axios from 'axios';
+function ProductPage({selectedProduct, filterCategory, setFilterCategory, cartItems, setCartItems, userId}){
     const [openPopUp, setOpenPopUp]  =useState(false);
     const [cart, setCart] = useState([])
+    
     const onClickHandler = (e) => {
         e.preventDefault();
-    if(cartItems.length === 0){
-        setCartItems([selectedProduct])
-    }
-    else{setCartItems([...cartItems, selectedProduct])}
-      if(loggedIn){
-        //logic to send cart items to database
-      }
+        axios.post("http://localhost:4000/carts", {
+            user_id: userId,
+            product_id: selectedProduct.id,
+            quantity: 1
+        }).then((response) => {
+            console.log('Response: ', response.data)
+        })
+     
      
       setOpenPopUp(true)
     }
 
-    useEffect(() => {
-        cartItems.forEach((item) => {
-            if(cart.length === 0){
-                setCart([{id: item.id, price: item.price, quantity: 1}])
-            }
-            else{
-                setCart([...cart, {id: item.id, price: item.price, quantity: 1}])
-            }
-          })
-    }, [cartItems])
+   
     return(
     <div>
         <Header setOpenPopUp = {setOpenPopUp}/>
         <Categories filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} />
         {openPopUp ?
         <div className="cart-container">
-         <CartPopUp setOpenPopUp = {setOpenPopUp} loggedIn = {loggedIn} cartItems = {cartItems} setCartItems={setCartItems} cart = {cart} setCart = {setCart}/> 
+         <CartPopUp setOpenPopUp = {setOpenPopUp} cartItems = {cartItems} setCartItems={setCartItems} cart = {cart} setCart = {setCart} userId = {userId}/> 
         </div>: null}
         <div className='grid-product-page-container'>
         <div className="image-container">
