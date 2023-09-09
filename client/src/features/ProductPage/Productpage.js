@@ -4,7 +4,7 @@ import Categories from '../Categories/Categories';
 import CartPopUp from '../Cart/Cart';
 import { useState, useEffect} from 'react';
 import axios from 'axios';
-function ProductPage({selectedProduct, filterCategory, setFilterCategory, cartItems, setCartItems, userId}){
+function ProductPage({selectedProduct, filterCategory, setFilterCategory, userId}){
     const [openPopUp, setOpenPopUp]  =useState(false);
     const [cart, setCart] = useState([])
     
@@ -12,10 +12,14 @@ function ProductPage({selectedProduct, filterCategory, setFilterCategory, cartIt
         e.preventDefault();
         axios.post("http://localhost:4000/carts", {
             user_id: userId,
-            product_id: selectedProduct.id,
-            quantity: 1
+            product_id: selectedProduct.id, quantity: 1
         }).then((response) => {
-            console.log('Response: ', response.data)
+            setCart([...cart, {
+                user_id: userId,
+                product_id: selectedProduct.id,
+                quantity: response.data
+            }])
+            console.log(response.data)
         })
      
      
@@ -29,7 +33,7 @@ function ProductPage({selectedProduct, filterCategory, setFilterCategory, cartIt
         <Categories filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} />
         {openPopUp ?
         <div className="cart-container">
-         <CartPopUp setOpenPopUp = {setOpenPopUp} cartItems = {cartItems} setCartItems={setCartItems} cart = {cart} setCart = {setCart} userId = {userId}/> 
+         <CartPopUp openPopUp = {openPopUp}setOpenPopUp = {setOpenPopUp} cart = {cart} setCart = {setCart} userId = {userId}/> 
         </div>: null}
         <div className='grid-product-page-container'>
         <div className="image-container">

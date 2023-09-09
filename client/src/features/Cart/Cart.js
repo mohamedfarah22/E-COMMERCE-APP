@@ -2,54 +2,46 @@ import './cart.css';
 import { useEffect, useState } from 'react';
 import CartCard from '../../components/CartCards/CartCard';
 import axios from 'axios';
-function CartPopUp({setOpenPopUp, cartItems, userId, cart, setCart}){
+function CartPopUp({setOpenPopUp, userId, cart, setCart, openPopUp}){
     const [cartProducts, setCartProducts] = useState([]);
-    const [totals, setTotals] = useState([]); //set running total 
+   const [totals, setTotals] = useState(0)
+  
+    
     const onClickHandler = (e) => {
         e.preventDefault();
         setOpenPopUp(false)
 }
-//add totals array each number in this array represents the running total of each item in cart
- const adjustTotal = (id, total) => {
-        setTotals((prevTotals) => {
-          // Check if the id already exists in the totals array
-          const index = prevTotals.findIndex((item) => item.id === id);
-      
-          if (index !== -1) {
-            // If the id exists, update the total for that item
-            const updatedTotals = [...prevTotals];
-            updatedTotals[index].total = total;
-            return updatedTotals;
-          } else {
-            // If the id doesn't exist, add a new entry
-            return [...prevTotals, { id: id, total: total }];
-          }
-        });
-      };
-//remove item from totals array when item is removed
-const removeTotal = (id) => {
-    setTotals((prevTotals) => {
-      // Use the filter method to create a new array without the object with the specified id
-      const updatedTotals = prevTotals.filter((item) => item.id !== id);
-      return updatedTotals;
-    });
-  };
-  
 
 
-
-
+//get running total
 useEffect(() => {
-    // Fetch cart data
-    axios.get(`http://localhost:4000/carts/${userId}`)
-      .then((response) => {
-        const cart = response.data;
-        setCart(cart);
-      })
-      .catch((error) => {
-        console.error('Error fetching cart data:', error);
-      });
-  }, [userId]);
+    axios.get(`http://localhost:4000/carts/cart-total?user_id=${userId}`).then((response) => {
+        console.log(response.data)
+         setTotals(Math.ceil(response.data.total_cost))
+        
+
+    
+    })
+    
+}, [cartProducts])
+  
+  
+  
+  
+  
+//fetch cart for current user on mount with dependency of whether cart is open
+
+useEffect(()=>{
+    axios.get(`http://localhost:4000/carts/${userId}`).then((response) => {
+   const cart = response.data;
+   setCart(cart);
+
+
+ })
+  
+}, [openPopUp])
+
+
   
   useEffect(() => {
     // Fetch product data for each item in the cart
@@ -72,6 +64,8 @@ useEffect(() => {
         console.error('Error fetching product data:', error);
       });
   }, [cart]);
+
+  
   
 
     return (
@@ -85,11 +79,14 @@ useEffect(() => {
         </div>
         <div className="cart-items-container">
             {cartProducts.map((cartProduct) => {
-                    return <CartCard cartProduct={cartProduct}  setCart = {setCart} setCartProducts={setCartProducts} userId = {userId} adjustTotal = {adjustTotal} removeTotal = {removeTotal} />
+                    return <CartCard cart = {cart} cartProducts = {cartProducts} cartProduct={cartProduct}  setCart = {setCart} setCartProducts={setCartProducts} userId = {userId}  />
             })}
         </div>
-        <div>
 
+        <div className="totals-container">
+
+            <p>Total</p>
+            <p>{totals}</p>
         </div>
        
             
