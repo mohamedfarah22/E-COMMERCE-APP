@@ -2,22 +2,28 @@ import './cart.css';
 import { useEffect, useState } from 'react';
 import CartCard from '../../components/CartCards/CartCard';
 import axios from 'axios';
-function CartPopUp({setOpenPopUp, userId, cart, setCart, openPopUp}){
+import { usePopup } from '../Cart/CartPopUpContext';
+import { useCart } from './CartContext';
+function CartPopUp({ userId}){
     const [cartProducts, setCartProducts] = useState([]);
    const [totals, setTotals] = useState(0)
-  
+   const {openPopUp, setOpenPopUp} = usePopup()
+   const {cart, setCart} = useCart();
     
     const onClickHandler = (e) => {
         e.preventDefault();
         setOpenPopUp(false)
 }
-
+ //round total to 2 decimal places
+ function roundUpToTwoDecimalPlaces(number) {
+    return Math.ceil(number * 100) / 100;
+  }
 
 //get running total
 useEffect(() => {
     axios.get(`http://localhost:4000/carts/cart-total?user_id=${userId}`).then((response) => {
         console.log(response.data)
-         setTotals(Math.ceil(response.data.total_cost))
+         setTotals(roundUpToTwoDecimalPlaces(response.data.total_cost))
         
 
     
@@ -65,7 +71,7 @@ useEffect(()=>{
       });
   }, [cart]);
 
-  
+ 
   
 
     return (
@@ -85,8 +91,8 @@ useEffect(()=>{
 
         <div className="totals-container">
 
-            <p>Total</p>
-            <p>{totals}</p>
+            <p className="total-heading">Total</p>
+            <p className="total-value">{`$${totals}`}</p>
         </div>
        
             
