@@ -71,7 +71,7 @@ useEffect(()=>{
       });
   }, [cart]);
 
- 
+
   
 
     return (
@@ -82,6 +82,7 @@ useEffect(()=>{
             close
              </span>
             <h4 className="cart-heading">Cart</h4>
+            {cart.length === 0 ? <p className="empty-cart">Your cart is empty</p>: null}
         </div>
         <div className="cart-items-container">
             {cartProducts.map((cartProduct) => {
@@ -89,12 +90,20 @@ useEffect(()=>{
             })}
         </div>
 
+            {cart.length === 0 ? 
+             null
+            : 
+    <>
         <div className="totals-container">
-
             <p className="total-heading">Total</p>
             <p className="total-value">{`$${totals}`}</p>
-        </div>
+         </div>
+         <button className = "check-out-button">Check Out</button>
+    </>
+         }
        
+            
+      
             
         </div>
 

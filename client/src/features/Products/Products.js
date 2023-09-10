@@ -22,8 +22,6 @@ function Products({filterCategory}){
     }
     }, [filterCategory])
     return (
-        
-        
         <div className="products">
             {products.map((product) => {
                 return <Product product={product}/>
