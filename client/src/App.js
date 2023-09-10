@@ -4,11 +4,14 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import ProductPage from './features/ProductPage/Productpage';
 import MainLayout from './features/MainLayout/MainLayout';
 import {v4 as uuidv4} from 'uuid';
+import { CartProviderPopUp } from './features/Cart/CartPopUpContext';
+import { SelectedProductProvider } from './features/Products/ProductsContext';
+import { CartProvider } from './features/Cart/CartContext';
 function App() {
   const [filterCategory, setFilterCategory] = useState('All') //to filter products by category
-  const [selectedProduct, setSelectedProduct] = useState(null) //to be rendered on productPage
   const [loggedIn, setLoggedIn]  =useState(false); //to be passed into login page to authenticate user
   const [userId, setUserId] = useState(null)
+  
   
  useEffect(() => {
   if(loggedIn){
@@ -26,14 +29,20 @@ function App() {
   }
  }, [loggedIn])
   return (
-    <div className="App">
+<div className="App">
+  <CartProviderPopUp>
+    <SelectedProductProvider>
+      <CartProvider>
   <Router>
     <Routes>
-      <Route path="/products/:product_name" element={<ProductPage selectedProduct = {selectedProduct} filterCategory = {filterCategory} setFilterCategory = {setFilterCategory}  userId = {userId}/>} />
-      <Route path="/" element={<MainLayout filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} setSelectedProduct={setSelectedProduct}/>}/>
+      <Route path="/:product_id/:product_name" element={<ProductPage filterCategory = {filterCategory} setFilterCategory = {setFilterCategory}  userId = {userId}/>} />
+      <Route path="/" element={<MainLayout filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} userId = {userId}/>}/>
     </Routes>
-   </Router>
-    </div>
+    </Router>
+    </CartProvider>
+    </SelectedProductProvider>
+   </CartProviderPopUp>
+</div>
   );
 }
 
