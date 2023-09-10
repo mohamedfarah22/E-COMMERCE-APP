@@ -66,9 +66,10 @@ const increment = (e) => {
        
             }
             else{
-            setNumberOfItems(numberOfItems - 1)
+            const newQuantity = numberOfItems-1
             //change quantity of item in db
-            axios.put(`http://localhost:4000/carts?user_id=${userId}&product_id=${cartProduct[0].id}&quantity=${numberOfItems}`).then((response) => {
+            axios.put(`http://localhost:4000/carts?user_id=${userId}&product_id=${cartProduct[0].id}&quantity=${newQuantity}`).then((response) => {
+                setNumberOfItems(newQuantity)
                 console.log("response: ", response)
             }).catch((error) => {
                 console.log('Error',  error)
@@ -106,9 +107,9 @@ const increment = (e) => {
         </div>
         </div>
         <div className="quanity">
-            <button disabled = {loading} onClick = {decrement}>-</button>
+            <button className="quantity-button" disabled = {loading} onClick = {decrement}>-</button>
             <p className="quantity-text">{numberOfItems}</p>
-            <button disabled = {loading} onClick = {increment}>+</button>
+            <button className="quantity-button"  disabled = {loading} onClick = {increment}>+</button>
         </div>
     </div>
        
