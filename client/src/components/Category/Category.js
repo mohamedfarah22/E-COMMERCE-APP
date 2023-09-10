@@ -1,8 +1,11 @@
 import './Category.css'
+import { useNavigate } from 'react-router-dom'
 function Category({category, setFilterCategory}) {
+  const navigate = useNavigate()
   const onClickHandler = (e) =>{
     e.preventDefault()
     setFilterCategory(e.target.textContent)
+    navigate('/')
   }
 
     return (

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 .product-image{
     width: 300px;
     height: 250px;
@@ -13,7 +14,10 @@
 }
 .product-container:hover{
     box-shadow: 5px 5px 5px;
+    cursor: pointer;
 }
 .product-name{
     font-weight: bold;
+    font-family: 'Open Sans', sans-serif;
 }
+

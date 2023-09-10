@@ -1,12 +1,19 @@
 import Header from "../Header/Header";
 import Categories from "../Categories/Categories";
 import Products from "../Products/Products";
-function MainLayout({filterCategory,  setFilterCategory, setSelectedProduct}){
+import CartPopUp from "../Cart/Cart";
+import { usePopup } from '../Cart/CartPopUpContext';
+function MainLayout({filterCategory,  setFilterCategory, userId}){
+    const {openPopUp, setOpenPopUp }= usePopup();
     return(
     <div classname="main-layout-container">
-        <Header />
+        <Header setOpenPopup = {setOpenPopUp} />
         <Categories filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} />
-        <Products filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} setSelectedProduct={setSelectedProduct} />
+        {openPopUp ?
+        <div className="cart-container">
+         <CartPopUp userId={userId} /> 
+        </div>: null}
+        <Products filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} />
     </div>
     )
 }

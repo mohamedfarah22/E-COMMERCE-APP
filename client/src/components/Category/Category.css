@@ -9,3 +9,6 @@ p{
 .category-text{
     text-transform: capitalize;
 }
+.category-text:hover{
+    cursor: pointer;
+}

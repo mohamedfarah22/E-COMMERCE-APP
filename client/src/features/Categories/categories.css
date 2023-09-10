@@ -8,3 +8,6 @@
     margin-left: 150px;
 
 }
+.all-category:hover{
+    cursor: pointer;
+}

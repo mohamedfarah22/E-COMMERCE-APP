@@ -1,12 +1,15 @@
 import './product.css';
 import { useNavigate } from 'react-router-dom';
-function Product({product, setSelectedProduct}){
+//import selectedProductProvider
+import { useSelectedProduct } from '../../features/Products/ProductsContext';
+function Product({product}){
 const navigate = useNavigate()
+const {selectedProduct, setSelectedProduct} = useSelectedProduct();
 const onClickHandler = (e)=>{
     e.preventDefault()
-    setSelectedProduct(product)
+    setSelectedProduct([product])
     const productName = product.product_name.split(' ').join('-');
-    navigate(`/products/${productName}`)
+    navigate(`/${product.id}/${productName}`)
 }
 
     return(

@@ -1,9 +1,11 @@
 import Category from "../../components/Category/Category";
 import {useEffect, useState} from 'react';
+import { useNavigate } from "react-router-dom";
 import './categories.css'
 import axios from 'axios';
 function Categories({filterCategory, setFilterCategory}) {
     const [categories, setCategories] = useState([])
+    const navigate = useNavigate()
 
     useEffect(() => {
         axios.get("http://localhost:4000/products/categories").then(res => {
@@ -17,11 +19,13 @@ function Categories({filterCategory, setFilterCategory}) {
     const onClickHandler = (e) =>{
       e.preventDefault()
       setFilterCategory(e.target.textContent)
+      navigate('/')
+      
     }
 
     return (
       <div className="categories">
-        <h3 onClick = {onClickHandler}>All</h3>
+        <h3 className = "all-category" onClick = {onClickHandler}>All</h3>
         {categories.map((category) => {
             return <Category category = {category} setFilterCategory = {setFilterCategory}/>
         })}

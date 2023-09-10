@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+.cart-product-image-container img{
+    width: 100px;
+    height: 100px;
+    padding-top: 20px;
+}
+
+.card-cart-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 0px;
+    grid-auto-flow: row;
+    
+
+}
+
+
+.cart-product-name{
+    padding-top: 20px;
+    font-family: 'Open Sans', sans-serif;
+    
+   
+}
+.cart-item-description{
+    display: flex;
+    justify-content: center;
+    flex-flow: column wrap;
+    max-width: 80%;
+   
+
+}
+.cart-product-price{
+    width: 80%;
+    font-family: 'Open Sans', sans-serif;
+   
+} 
+.quantity{
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+    
+}
+.quantity-text{
+    width: 10%;
+    display: inline-block;
+    font-family: 'Open Sans', sans-serif;
+}
+.quantity-button{
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    font-size: 15px;
+    
+    
+}
+   
