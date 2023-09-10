@@ -39,9 +39,23 @@
     width: 100%;
     justify-content: flex-end;
     align-items: flex-end;
+
     
 }
 .quantity-text{
     width: 10%;
     display: inline-block;
+    font-family: 'Open Sans', sans-serif;
 }
+.quantity-button{
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    font-size: 15px;
+    
+    
+}
+   
