@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import Product from '../../components/Product/Product';
 import axios from 'axios';
 import './products.css'
-function Products({filterCategory, setSelectedProduct}){
+function Products({filterCategory}){
     const [products, setProducts] = useState([])
 
     useEffect(() => {
@@ -22,9 +22,11 @@ function Products({filterCategory, setSelectedProduct}){
     }
     }, [filterCategory])
     return (
+        
+        
         <div className="products">
             {products.map((product) => {
-                return <Product product={product} setSelectedProduct={setSelectedProduct}/>
+                return <Product product={product}/>
             })}
 
         </div>
