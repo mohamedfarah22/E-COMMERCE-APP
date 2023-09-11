@@ -71,7 +71,15 @@ useEffect(()=>{
       });
   }, [cart]);
 
-
+  //redirect to checkout page after customer is happy with cart
+  const onClickHandlerCheckout = (e) =>{
+    e.preventDefault();
+    axios.post('http://localhost:4000/check-out', cart).then((response) => {
+     window.location.href = response.data.url
+    }).catch((error) => {
+      console.log('Error ', error);
+    })
+  }
   
 
     return (
@@ -98,7 +106,7 @@ useEffect(()=>{
             <p className="total-heading">Total</p>
             <p className="total-value">{`$${totals}`}</p>
          </div>
-         <button className = "check-out-button">Check Out</button>
+         <button onClick={onClickHandlerCheckout} className = "check-out-button">Check Out</button>
     </>
          }
        

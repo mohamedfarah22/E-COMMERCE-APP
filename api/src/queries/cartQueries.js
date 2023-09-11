@@ -21,6 +21,7 @@ const getAllCarts = (req, res) => {
 //create a cart item
 const createCartItem = (req, res) => {
     const { user_id, product_id, quantity} = req.body;
+    
 
     pool.query('SELECT * FROM carts WHERE user_id = $1 AND product_id = $2', [user_id, product_id], (error, results) => {
         if (error) {
