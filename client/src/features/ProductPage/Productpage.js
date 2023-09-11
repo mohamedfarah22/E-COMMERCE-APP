@@ -33,12 +33,13 @@ function ProductPage({filterCategory, setFilterCategory, userId}){
     if(selectedProduct){
         axios.post("http://localhost:4000/carts", {
             user_id: userId,
-            product_id: selectedProduct[0].id, quantity: 1
+            product_id: selectedProduct[0].id, quantity: 1, product_price: selectedProduct[0].price
         }).then((response) => {
             setCart([...cart, {
                 user_id: userId,
                 product_id: selectedProduct[0].id,
-                quantity: parseInt(response.data)
+                quantity: parseInt(response.data),
+                product_price: selectedProduct[0].price
             }])
             console.log(response.data)
         })
