@@ -20,14 +20,15 @@ const getAllCarts = (req, res) => {
 
 //create a cart item
 const createCartItem = (req, res) => {
-    const { user_id, product_id, quantity} = req.body;
+    const { user_id, product_id, quantity, product_price} = req.body;
+    parseFloat(product_price)
 
     pool.query('SELECT * FROM carts WHERE user_id = $1 AND product_id = $2', [user_id, product_id], (error, results) => {
         if (error) {
             res.status(400).send(error);
         } else if (results.rows.length === 0) {
             // Cart item doesn't exist, insert a new one
-            pool.query('INSERT INTO carts (user_id, product_id, quantity) VALUES ($1, $2, $3) RETURNING *', [user_id, product_id, quantity], (error, insertResults) => {
+            pool.query('INSERT INTO carts (user_id, product_id, quantity, product_price) VALUES ($1, $2, $3, $4) RETURNING *', [user_id, product_id, quantity, product_price], (error, insertResults) => {
                 if (error) {
                     res.status(400).send(error);
                 }
