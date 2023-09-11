@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { usePopup } from '../Cart/CartPopUpContext';
 function Header(){
     const navigate = useNavigate()
-    const {openPopUp, setOpenPopUp} = usePopup()
+    const {setOpenPopUp} = usePopup()
 
     const onClickHandler = (e) => {
         navigate('/')

@@ -11,6 +11,7 @@ const productsRouter = require('./src/Routers/productsRouter.js')
 const authRouter = require('./src/Routers/authRouter.js')
 const usersRouter = require('./src/Routers/usersRouter.js')
 const cartsRouter = require('./src/Routers/cartRouter.js')
+const stripeRouter = require('./src/Routers/stripeRouterCheckout.js')
 //use cors
 app.use(cors());
 //use body parser
@@ -46,6 +47,8 @@ app.use('/users', usersRouter)
 //mount carts router
 app.use('/carts', cartsRouter)
 
+//mount stripe router
+app.use('/check-out', stripeRouter)
 app.listen(port, () => {
   console.log(`E-commerce app listening on ${port}`)
 })
