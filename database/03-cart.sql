@@ -5,6 +5,7 @@ CREATE TABLE carts(
     user_id VARCHAR NOT NULL,
     product_id INTEGER NOT NULL,
     quantity INTEGER,
+    product_price FLOAT,
     FOREIGN KEY (product_id) REFERENCES products(id)
 );
 
