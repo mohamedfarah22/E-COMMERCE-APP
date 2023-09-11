@@ -1,5 +1,5 @@
 // This is your test secret API key.
-const stripe = require('stripe')('sk_test_51LvWkeEeFxbwOuLXqCx6oPXNCUao920X8LudiebuCsyQ3bpBGNtyyOgOV6zqofgWORUOC3aCE8t6MQ6IPT5wMvvO00xEEpscXq');
+const stripe = require('stripe')('sk_test_51Np5AOLxfJykJ5Q6fYJ4Amv6DmOwzyKOQMGotSZ8A1rkNo7lXv9WmfeozbEJkPj2MCvSHu9Mv6wkTAVdvS0MQ94w00tPwJSP5K');
 const express = require('express');
 const router= express.Router();
 router.use(express.static('public'));
@@ -19,30 +19,31 @@ const YOUR_DOMAIN = 'http://localhost:3000';
 router.post('/', async (req, res) => {
   const cartItems = req.body
   let lineItems = []; //array to be passed to checkout Session;
-cartItems.forEach(async (item) => {
-    const product_id = item.product_id;
+const lineItemPromises = cartItems.map(async (item) => {
+    const product_id = parseInt(item.product_id); 
     const quantity = parseInt(item.quantity)
-    
    const productData =  await pool.query(
         'SELECT product_name, price FROM carts JOIN products ON carts.product_id = products.id WHERE product_id = $1',
         [product_id]
       );
-      const customAmount = item.quantity * productData[0].price;
+      
+      const customAmount = productData.rows[0].price * 100;
       const price = await stripe.prices.create({
         unit_amount: customAmount,
         currency: 'aud',
         product_data: {
-          name: productData[0].product_name,
+          name: productData.rows[0].product_name,
          
         }
     });
-    lineItems.push({
+    return {
         price: price.id,
         quantity: quantity,
-    })
-
+      };
+    
 })
-  
+lineItems = await Promise.all(lineItemPromises);   
+
 
   const session = await stripe.checkout.sessions.create({
     line_items: lineItems,
@@ -51,6 +52,6 @@ cartItems.forEach(async (item) => {
     cancel_url: `${YOUR_DOMAIN}?canceled=true`,
   });
 
-  res.redirect(303, session.url);
+  res.json({url: session.url})
 });
 module.exports = router;

@@ -28,7 +28,7 @@ const createCartItem = (req, res) => {
             res.status(400).send(error);
         } else if (results.rows.length === 0) {
             // Cart item doesn't exist, insert a new one
-            pool.query('INSERT INTO carts (user_id, product_id, quantity, product_price) VALUES ($1, $2, $3) RETURNING *', [user_id, product_id, quantity], (error, insertResults) => {
+            pool.query('INSERT INTO carts (user_id, product_id, quantity) VALUES ($1, $2, $3) RETURNING *', [user_id, product_id, quantity], (error, insertResults) => {
                 if (error) {
                     res.status(400).send(error);
                 }
