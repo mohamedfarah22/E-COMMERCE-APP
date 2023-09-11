@@ -17,35 +17,35 @@ const pool = new Pool({
 const YOUR_DOMAIN = 'http://localhost:3000';
 
 router.post('/', async (req, res) => {
-  const{id, product_id, quantity} = req.body
-  parseInt(quantity)
-  
-  //join products and carts table and get name, price description and name
-  const { rows: productData } = await pool.query(
-    'SELECT product_name, price FROM carts JOIN products ON carts.product_id = products.id WHERE product_id = $1',
-    [product_id]
-  );
-console.log(productData)
-  //custom amount is product_price
-  const customAmount = productData[0].price * quantity;
-  
-//create price object
- const price = await stripe.prices.create({
-    unit_amount: customAmount,
-    currency: 'aud',
-    product_data: {
-      name: productData[0].product_name,
-     
-    }
-});
-  const session = await stripe.checkout.sessions.create({
-    line_items: [
-      {
-        // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+  const cartItems = req.body
+  let lineItems = []; //array to be passed to checkout Session;
+cartItems.forEach(async (item) => {
+    const product_id = item.product_id;
+    const quantity = parseInt(item.quantity)
+    
+   const productData =  await pool.query(
+        'SELECT product_name, price FROM carts JOIN products ON carts.product_id = products.id WHERE product_id = $1',
+        [product_id]
+      );
+      const customAmount = item.quantity * productData[0].price;
+      const price = await stripe.prices.create({
+        unit_amount: customAmount,
+        currency: 'aud',
+        product_data: {
+          name: productData[0].product_name,
+         
+        }
+    });
+    lineItems.push({
         price: price.id,
         quantity: quantity,
-      },
-    ],
+    })
+
+})
+  
+
+  const session = await stripe.checkout.sessions.create({
+    line_items: lineItems,
     mode: 'payment',
     success_url: `${YOUR_DOMAIN}?success=true`,
     cancel_url: `${YOUR_DOMAIN}?canceled=true`,
