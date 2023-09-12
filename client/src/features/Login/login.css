@@ -1,0 +1,64 @@
+.login-container{
+    display: flex;
+    max-width: 100%;
+    justify-content: center;
+    align-items: center;;
+    flex-direction: column;
+    
+
+}
+.login-form{
+    min-width: 30%;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding-bottom: 40px;
+}
+form label{
+    padding-bottom: 20px;;
+}
+.login-header{
+    max-width:70%;
+}
+.text{
+    width: 100%;
+    height: 30px;
+    margin-bottom:40px;
+    align-self: center;
+}
+.sign-in-button{
+    max-width: 20%;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    font-size: 16px;
+    background-color: #855dd5;
+    border: none;
+    color: white;
+
+
+
+}
+.create-account-button-container{
+    display: flex;
+    justify-content: flex-start;
+    min-width: 30%;
+    margin-top: 30px;
+    
+
+
+}
+.create-acccount-button{
+    padding-bottom: 20px;
+    padding-top: 20px;
+    font-size: 16px;
+    background-color: #DCDCDC;
+    border: 1px solid  #855dd5;
+    color: black;
+
+}
+.sign-in-button:hover{
+    cursor: pointer;
+}
+.create-acccount-button:hover{
+    cursor: pointer;
+}
