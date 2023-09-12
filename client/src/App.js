@@ -7,6 +7,7 @@ import {v4 as uuidv4} from 'uuid';
 import { CartProviderPopUp } from './features/Cart/CartPopUpContext';
 import { SelectedProductProvider } from './features/Products/ProductsContext';
 import { CartProvider } from './features/Cart/CartContext';
+import Login from './features/Login/Login';
 function App() {
   const [filterCategory, setFilterCategory] = useState('All') //to filter products by category
   const [loggedIn, setLoggedIn]  =useState(false); //to be passed into login page to authenticate user
@@ -36,6 +37,7 @@ function App() {
   <Router>
     <Routes>
       <Route path="/:product_id/:product_name" element={<ProductPage filterCategory = {filterCategory} setFilterCategory = {setFilterCategory}  userId = {userId}/>} />
+      <Route path="/login" element={<Login ilterCategory = {filterCategory} setFilterCategory = {setFilterCategory} />} />
       <Route path="/" element={<MainLayout filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} userId = {userId}/>}/>
     </Routes>
     </Router>
