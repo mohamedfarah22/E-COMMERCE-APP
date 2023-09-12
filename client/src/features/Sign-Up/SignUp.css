@@ -1,0 +1,23 @@
+.sign-up-container{
+    display: flex;
+    max-width: 100%;
+    justify-content: center;
+    align-items: center;;
+    flex-direction: column;
+    
+
+}
+
+.create-account-button{
+    padding-bottom: 15px;
+    padding-top: 20px;
+    font-size: 16px;
+    background-color: #855dd5;
+    border: none;
+    color: white;
+
+}
+
+.create-account-button:hover{
+    cursor: pointer;
+}
