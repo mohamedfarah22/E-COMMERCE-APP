@@ -52,6 +52,9 @@
     font-family: 'Open Sans', sans-serif;
 }
 
+.login-text:hover{
+    cursor: pointer;
+}
 
 .banner-text{
     color: white;

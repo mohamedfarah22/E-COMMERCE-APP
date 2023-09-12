@@ -10,6 +10,9 @@ function Header(){
     const onClickHandler = (e) => {
         navigate('/')
     }
+    const onClickHandlerLogin = (e) => {
+        navigate('/login')
+    }
     const onClickHandlerCart = (e)=> {
         e.preventDefault()
         setOpenPopUp(true)
@@ -28,7 +31,7 @@ function Header(){
             <div className="search-container">
                 <Searchbar />
             </div>
-                <p className = "login-text">Log In</p>
+                <p className = "login-text" onClick={onClickHandlerLogin}>Log In</p>
                 <img onClick = {onClickHandlerCart} className = "cartLogo" alt="cart logo" src={cartLogo}/>
             </div> 
         </div>
