@@ -23,7 +23,9 @@ const passwordHash = async (password, saltRounds) => {
 //register a new user
 
 const createUser = async (req, res) => {
-    const {first_name, last_name, email, password} = req.query
+    const {first_name, last_name, email, password} = req.body
+   
+   
 
     //hash password before inserting into database and add 3 salts
     const hashedPassword = await passwordHash(password, 3)
