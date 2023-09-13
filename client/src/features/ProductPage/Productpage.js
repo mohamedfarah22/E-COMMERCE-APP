@@ -8,7 +8,7 @@ import { useSelectedProduct } from '../Products/ProductsContext';
 import { useParams } from 'react-router-dom';
 import { usePopup } from '../Cart/CartPopUpContext';
 import { useCart } from '../Cart/CartContext';
-function ProductPage({filterCategory, setFilterCategory, userId}){
+function ProductPage({filterCategory, setFilterCategory, userId, loggedIn, setLoggedIn, setUserId}){
     const {cart, setCart} = useCart()
     const {openPopUp, setOpenPopUp} = usePopup()
     const { selectedProduct, setSelectedProduct } = useSelectedProduct();
@@ -56,7 +56,7 @@ function ProductPage({filterCategory, setFilterCategory, userId}){
    
     return(
     <div>
-        <Header setOpenPopUp = {setOpenPopUp}/>
+        <Header setOpenPopUp = {setOpenPopUp} loggedIn = {loggedIn} setLoggedIn = {setLoggedIn} setUserId = {setUserId}/>
         <Categories filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} />
         {openPopUp ?
         <div className="cart-container">

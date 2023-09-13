@@ -3,11 +3,22 @@ import Categories from "../Categories/Categories";
 import Products from "../Products/Products";
 import CartPopUp from "../Cart/Cart";
 import { usePopup } from '../Cart/CartPopUpContext';
-function MainLayout({filterCategory,  setFilterCategory, userId}){
+import { useEffect } from "react";
+function MainLayout({filterCategory,  setFilterCategory, userId, loggedIn, setLoggedIn, setUserId}){
     const {openPopUp, setOpenPopUp }= usePopup();
+    useEffect(() =>{
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        
+        setLoggedIn(isLoggedIn)
+
+        if(isLoggedIn){
+           setUserId(localStorage.getItem('userId'))
+        }
+    
+    }, [])
     return(
     <div classname="main-layout-container">
-        <Header setOpenPopup = {setOpenPopUp} />
+        <Header setOpenPopup = {setOpenPopUp} loggedIn = {loggedIn} setLoggedIn = {setLoggedIn} setUserId = {setUserId} />
         <Categories filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} />
         {openPopUp ?
         <div className="cart-container">

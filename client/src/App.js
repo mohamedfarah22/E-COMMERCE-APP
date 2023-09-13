@@ -16,17 +16,15 @@ function App() {
   
   
  useEffect(() => {
-  if(loggedIn){
-    //set user Id to the ID of loggd in user
-  } else{
-    const storedUserId = localStorage.getItem('userId');
-    if (storedUserId) {
-      setUserId(storedUserId)
-    } else {
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+  if(loggedIn || isLoggedIn){
+ setUserId(localStorage.getItem('userId'))
+  }
+  else {
       const newUserId = uuidv4();
       localStorage.setItem('userId', newUserId);
       setUserId(newUserId)
-    }
+    
     
   }
  }, [loggedIn])
@@ -37,10 +35,10 @@ function App() {
       <CartProvider>
   <Router>
     <Routes>
-      <Route path="/:product_id/:product_name" element={<ProductPage filterCategory = {filterCategory} setFilterCategory = {setFilterCategory}  userId = {userId}/>} />
-      <Route path="/login" element={<Login ilterCategory = {filterCategory} setFilterCategory = {setFilterCategory} />} />
-      <Route path="/sign-up" element={<SignUp ilterCategory = {filterCategory} setFilterCategory = {setFilterCategory} />} />
-      <Route path="/" element={<MainLayout filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} userId = {userId}/>}/>
+      <Route path="/:product_id/:product_name" element={<ProductPage filterCategory = {filterCategory} setFilterCategory = {setFilterCategory}  userId = {userId} loggedIn = {loggedIn} setLoggedIn = {setLoggedIn}/>} />
+      <Route path="/login" element={<Login filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} setLoggedIn = {setLoggedIn} setUserId = {setUserId} loggedIn = {loggedIn}/>} />
+      <Route path="/sign-up" element={<SignUp filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} />} />
+      <Route path="/" element={<MainLayout filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} userId = {userId} loggedIn = {loggedIn} setLoggedIn = {setLoggedIn} setUserId = {setUserId}/>}/>
     </Routes>
     </Router>
     </CartProvider>

@@ -3,15 +3,29 @@ import cartLogo from "../../images/market.png"
 import "./Header.css"
 import { useNavigate } from "react-router-dom";
 import { usePopup } from '../Cart/CartPopUpContext';
-function Header(){
+import axios from "axios";
+import { useEffect } from "react";
+function Header({loggedIn, setLoggedIn, setUserId}){
     const navigate = useNavigate()
     const {setOpenPopUp} = usePopup()
 
     const onClickHandler = (e) => {
+        e.preventDefault()
         navigate('/')
     }
     const onClickHandlerLogin = (e) => {
+        e.preventDefault()
         navigate('/login')
+    }
+    const onClickHandlerLogOut = async (e) => {
+        e.preventDefault()
+        localStorage.removeItem('isLoggedIn');
+        const response  = await axios.post("http://localhost:4000/auth/logout");
+        if(response.status === 200){
+        setLoggedIn(false);
+        localStorage.removeItem('isLoggedIn');
+        navigate('/login')
+        }
     }
     const onClickHandlerCart = (e)=> {
         e.preventDefault()
@@ -31,7 +45,10 @@ function Header(){
             <div className="search-container">
                 <Searchbar />
             </div>
-                <p className = "login-text" onClick={onClickHandlerLogin}>Log In</p>
+            {loggedIn ?
+                <p className = "login-text" onClick={onClickHandlerLogOut}>Log Out</p>
+                :  <p className = "login-text" onClick={onClickHandlerLogin}>Log In</p>
+            }
                 <img onClick = {onClickHandlerCart} className = "cartLogo" alt="cart logo" src={cartLogo}/>
             </div> 
         </div>

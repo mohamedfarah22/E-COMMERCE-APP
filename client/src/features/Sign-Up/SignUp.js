@@ -3,9 +3,11 @@ import Categories from "../Categories/Categories";
 import { usePopup } from "../Cart/CartPopUpContext";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "./SignUp.css"
 function SignUp({filterCategory, setFilterCategory}){
     const {setOpenPopUp} = usePopup;
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         first_name: '',
         last_name: '',
@@ -20,6 +22,7 @@ function SignUp({filterCategory, setFilterCategory}){
       
           if (response.status === 201) {
             console.log('Form submission successful');
+            navigate('/login')
           } else {
             console.log('Form submission failed');
           }

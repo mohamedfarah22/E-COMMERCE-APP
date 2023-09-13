@@ -45,7 +45,7 @@ useEffect(()=>{
 
  })
   
-}, [openPopUp])
+}, [openPopUp, userId])
 
 
   
