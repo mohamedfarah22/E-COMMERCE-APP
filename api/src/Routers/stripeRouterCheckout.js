@@ -49,7 +49,7 @@ lineItems = await Promise.all(lineItemPromises);
     line_items: lineItems,
     mode: 'payment',
     success_url: `${YOUR_DOMAIN}?success=true`,
-    cancel_url: `${YOUR_DOMAIN}?canceled=true`,
+    cancel_url: `${YOUR_DOMAIN}`,
   });
 
   res.json({url: session.url})

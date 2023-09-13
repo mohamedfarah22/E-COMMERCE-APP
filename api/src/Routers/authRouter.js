@@ -55,10 +55,12 @@ async function( email, password, done){
 
 
 
-router.post('/login', passport.authenticate('local', {
-    successRedirect: '/dashboard', // Redirect on successful authentication
-    failureRedirect: '/login' // Redirect on failed authentication
-}));
+router.post('/login', passport.authenticate('local'), (req, res) => {
+
+    const authenticatedUser = req.user.id;
+    res.status(200).json({ user: authenticatedUser });
+
+});
 
 passport.serializeUser((user, done) => {
     done(null, user.id)
@@ -72,6 +74,18 @@ passport.deserializeUser(async (id, done) => {
         done(error, null)
     }
    
+})
+
+//log out
+router.post('/logout', (req, res, next) => {
+    req.logout((err) => {
+        if(err){
+            return next(err)
+        }
+        res.status(200).json({message:"user successfully loggged out"})
+    });
+
+    
 })
 
 
