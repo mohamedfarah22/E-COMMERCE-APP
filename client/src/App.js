@@ -9,10 +9,12 @@ import { SelectedProductProvider } from './features/Products/ProductsContext';
 import { CartProvider } from './features/Cart/CartContext';
 import Login from './features/Login/Login';
 import SignUp from './features/Sign-Up/SignUp';
+import Chatbot from './features/Chatbot/Chatbot';
 function App() {
   const [filterCategory, setFilterCategory] = useState('All') //to filter products by category
   const [loggedIn, setLoggedIn]  =useState(false); //to be passed into login page to authenticate user
-  const [userId, setUserId] = useState(null)
+  const [userId, setUserId] = useState(null);
+
   
   
  useEffect(() => {
@@ -41,6 +43,7 @@ function App() {
       <Route path="/" element={<MainLayout filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} userId = {userId} loggedIn = {loggedIn} setLoggedIn = {setLoggedIn} setUserId = {setUserId}/>}/>
     </Routes>
     </Router>
+    <Chatbot/>
     </CartProvider>
     </SelectedProductProvider>
    </CartProviderPopUp>

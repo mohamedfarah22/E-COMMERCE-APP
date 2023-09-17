@@ -1,0 +1,68 @@
+/* Add this CSS to your stylesheet or component's CSS-in-JS */
+
+/* Style for the chatbot-container (outer container) */
+.chat-bot-container {
+    position: fixed; /* Fix the position */
+    right: 0; /* Position it on the left side */
+    bottom: 0; /* Position it at the bottom */
+    width: 20%; /* Adjust the width as needed */
+    height: 700px; /* Adjust the height as needed */
+    background-color: #fff; /* Add a background color if needed */
+    box-shadow: -5px 0 10px rgba(0, 0, 0, 0.2); /* Optional: Add shadow for separation */
+    display: flex; /* Use flexbox to stack message list and input */
+    flex-direction: column; /* Stack them vertically */
+    transition: height 0.3s ease-in-out; 
+  }
+  
+  /* Style for the MessageList (adjust as needed) */
+  .MessageList.open {
+    flex: 1; /* Grow to take available space */
+    overflow-y: auto; /* Enable vertical scrolling if needed */
+    padding: 10px; /* Add padding as needed */
+  }
+  
+  /* Style for the message-input-container (the fixed input area) */
+  .message-input-container.open {
+    padding: 10px; /* Add padding as needed */
+    border-top: 1px solid #ccc; /* Optional: Add a border if desired */
+  }
+  .chat-bot-header{
+    height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    background-color: #855dd5;
+  }
+.material-symbols-outlined.open{
+    padding-right: 20px;
+    padding-top: 5px;
+    color: white;
+}
+.material-symbols-outlined.closed{
+    padding-bottom: 20px;
+    padding-right: 20px;
+    color: white;
+}
+.chat-bot-header.closed{
+    position: fixed; /* Fix the position */
+    right: 0; /* Position it on the left side */
+    bottom: 5px;/* Position it at the bottom */
+    width: 20%; /* Adjust the width as needed */
+    height: 75px;
+    display: flex;
+    justify-content: flex-end;
+    background-color: #855dd5;
+
+ 
+
+}
+.material-symbols-outlined:hover{
+    cursor: pointer;
+}
+.messageInput.closed{
+    display: none;
+}
+.chat-bot-container.closed{
+    height: 40px;
+    background-color: #855dd5 !important;
+
+}

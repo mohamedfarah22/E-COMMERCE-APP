@@ -4,6 +4,7 @@ import Products from "../Products/Products";
 import CartPopUp from "../Cart/Cart";
 import { usePopup } from '../Cart/CartPopUpContext';
 import { useEffect } from "react";
+import Chatbot from "../Chatbot/Chatbot";
 function MainLayout({filterCategory,  setFilterCategory, userId, loggedIn, setLoggedIn, setUserId}){
     const {openPopUp, setOpenPopUp }= usePopup();
     useEffect(() =>{
@@ -24,6 +25,7 @@ function MainLayout({filterCategory,  setFilterCategory, userId, loggedIn, setLo
         <div className="cart-container">
          <CartPopUp userId={userId} /> 
         </div>: null}
+        <Chatbot/>
         <Products filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} />
     </div>
     )

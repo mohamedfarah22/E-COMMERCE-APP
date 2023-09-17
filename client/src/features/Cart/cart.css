@@ -26,12 +26,12 @@
     overflow-y: auto;
   }
   
-  span{
+  .material-icons{
      max-width: 10%;
      transition: transform 0.3s ease;
      margin-left: 320px;
   }
-  span:hover{
+  .material-icons:hover{
     transform: rotate(90deg);
     cursor: pointer;
   }
