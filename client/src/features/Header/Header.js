@@ -3,10 +3,14 @@ import cartLogo from "../../images/market.png"
 import "./Header.css"
 import { useNavigate } from "react-router-dom";
 import { usePopup } from '../Cart/CartPopUpContext';
+import { useCart } from "../Cart/CartContext";
 import axios from "axios";
+import { useEffect, useState } from "react";
 function Header({loggedIn, setLoggedIn, setUserId}){
     const navigate = useNavigate()
     const {setOpenPopUp} = usePopup()
+    const {cart} = useCart();
+    const [cartQuantity, setCartQuantity] = useState();
 
     const onClickHandler = (e) => {
         e.preventDefault()
@@ -31,6 +35,15 @@ function Header({loggedIn, setLoggedIn, setUserId}){
         setOpenPopUp(true)
 
     }
+    //function to calculate number of items in cart
+    const cartQuantityCalculator = (cart) => {
+        return cart.length;
+    }
+    useEffect(() => {
+       setCartQuantity(cartQuantityCalculator(cart))
+
+
+    }, [cart])
     return(
 
         <div className='header-container'>
@@ -48,7 +61,13 @@ function Header({loggedIn, setLoggedIn, setUserId}){
                 <p className = "login-text" onClick={onClickHandlerLogOut}>Log Out</p>
                 :  <p className = "login-text" onClick={onClickHandlerLogin}>Log In</p>
             }
-                <img onClick = {onClickHandlerCart} className = "cartLogo" alt="cart logo" src={cartLogo}/>
+                <button class="cart-button" onClick = {onClickHandlerCart}>
+                <span class="material-symbols-outlined">
+                shopping_bag
+                 </span>
+                <span class="cart-count">{cartQuantity}</span>
+                </button>
+
             </div> 
         </div>
     )

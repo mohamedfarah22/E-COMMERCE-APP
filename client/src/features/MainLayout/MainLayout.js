@@ -25,7 +25,6 @@ function MainLayout({filterCategory,  setFilterCategory, userId, loggedIn, setLo
         <div className="cart-container">
          <CartPopUp userId={userId} /> 
         </div>: null}
-        <Chatbot/>
         <Products filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} />
     </div>
     )

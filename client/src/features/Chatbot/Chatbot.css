@@ -36,10 +36,12 @@
     padding-right: 20px;
     padding-top: 5px;
     color: white;
+    font-size: 30px;
 }
 .material-symbols-outlined.closed{
-    padding-bottom: 20px;
+    padding-bottom: 30px;
     padding-right: 20px;
+    font-size: 30px;
     color: white;
 }
 .chat-bot-header.closed{
@@ -47,7 +49,7 @@
     right: 0; /* Position it on the left side */
     bottom: 5px;/* Position it at the bottom */
     width: 20%; /* Adjust the width as needed */
-    height: 75px;
+    height: 100px;
     display: flex;
     justify-content: flex-end;
     background-color: #855dd5;
