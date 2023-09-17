@@ -29,7 +29,7 @@ useEffect(() => {
     
     })
     
-}, [cartProducts])
+}, [cartProducts, userId])
   
   
   
@@ -86,7 +86,7 @@ useEffect(()=>{
         <div classname="popup-container">
         <div className="popup-body">
         <div classname="close-text-container">
-            <span class="material-icons" onClick = {onClickHandler}>
+            <span className="material-icons" onClick = {onClickHandler}>
             close
              </span>
             <h4 className="cart-heading">Cart</h4>

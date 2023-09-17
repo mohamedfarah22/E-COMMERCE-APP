@@ -4,7 +4,6 @@ import "./Header.css"
 import { useNavigate } from "react-router-dom";
 import { usePopup } from '../Cart/CartPopUpContext';
 import axios from "axios";
-import { useEffect } from "react";
 function Header({loggedIn, setLoggedIn, setUserId}){
     const navigate = useNavigate()
     const {setOpenPopUp} = usePopup()
