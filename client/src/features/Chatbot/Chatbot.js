@@ -8,7 +8,7 @@ import {
   MessageInput,
   TypingIndicator
 } from "@chatscope/chat-ui-kit-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const API_KEY = "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";
 function Chatbot() {
@@ -101,7 +101,10 @@ function Chatbot() {
             setTyping(false);
           });
         }
-  
+  //useffect to re-render when openchatbot state changes
+  useEffect(() => {
+
+  }, [openChatBot])
     return (
       <div className={`chat-bot-container ${openChatBot ? "open" : "closed"}`}>
         <div className="chat-bot-header">
