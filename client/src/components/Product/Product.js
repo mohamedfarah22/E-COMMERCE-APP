@@ -1,7 +1,7 @@
 import './product.css';
 import { useNavigate } from 'react-router-dom';
 //import selectedProductProvider
-import { useSelectedProduct } from '../../features/Products/ProductsContext';
+import { useSelectedProduct } from '../../features/Products/SelectedProductContext';
 function Product({product}){
 const navigate = useNavigate()
 const {selectedProduct, setSelectedProduct} = useSelectedProduct();
