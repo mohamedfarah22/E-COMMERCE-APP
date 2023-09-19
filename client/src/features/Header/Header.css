@@ -45,7 +45,8 @@
 .login-text{
     padding: 0px;
     font-family: 'Open Sans', sans-serif;
-    padding-left: 50px;
+    margin-left: 70px;
+    width: 50px;
 }
 
 .login-text:hover{

@@ -5,11 +5,12 @@ import ProductPage from './features/ProductPage/Productpage';
 import MainLayout from './features/MainLayout/MainLayout';
 import {v4 as uuidv4} from 'uuid';
 import { CartProviderPopUp } from './features/Cart/CartPopUpContext';
-import { SelectedProductProvider } from './features/Products/ProductsContext';
+import { SelectedProductProvider } from './features/Products/SelectedProductContext';
 import { CartProvider } from './features/Cart/CartContext';
 import Login from './features/Login/Login';
 import SignUp from './features/Sign-Up/SignUp';
 import Chatbot from './features/Chatbot/Chatbot';
+import { ProductsProvider } from './features/Products/ProductsContext';
 function App() {
   const [filterCategory, setFilterCategory] = useState('All') //to filter products by category
   const [loggedIn, setLoggedIn]  =useState(false); //to be passed into login page to authenticate user
@@ -35,6 +36,7 @@ function App() {
   <CartProviderPopUp>
     <SelectedProductProvider>
       <CartProvider>
+        <ProductsProvider>
   <Router>
     <Routes>
       <Route path="/:product_id/:product_name" element={<ProductPage filterCategory = {filterCategory} setFilterCategory = {setFilterCategory}  userId = {userId} loggedIn = {loggedIn} setLoggedIn = {setLoggedIn}/>} />
@@ -44,6 +46,7 @@ function App() {
     </Routes>
     </Router>
     <Chatbot/>
+    </ProductsProvider>
     </CartProvider>
     </SelectedProductProvider>
    </CartProviderPopUp>

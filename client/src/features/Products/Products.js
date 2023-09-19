@@ -1,9 +1,10 @@
 import {useEffect, useState} from 'react';
 import Product from '../../components/Product/Product';
 import axios from 'axios';
-import './products.css'
+import './products.css';
+import { useProducts } from './ProductsContext';
 function Products({filterCategory}){
-    const [products, setProducts] = useState([])
+    const {products, setProducts} = useProducts()
 
     useEffect(() => {
         if(filterCategory==='All'){
@@ -20,14 +21,18 @@ function Products({filterCategory}){
             setProducts(products)
         })  
     }
-    }, [filterCategory])
+    }, [filterCategory, setProducts])
+ 
     return (
         <div className="products">
-            {products.map((product) => {
-                return <Product product={product}/>
-            })}
-
-        </div>
+      {products === null ? (
+        <p>Loading...</p> // Display a loading message until products are fetched
+      ) : (
+        products.map((product) => (
+          <Product key={product.id} product={product} />
+        ))
+      )}
+    </div>
 
     )
 }
