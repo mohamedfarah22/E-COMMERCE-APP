@@ -1,17 +1,17 @@
 import React, { createContext, useContext, useState } from 'react';
 
-const SelectedProductContext = createContext();
+const ProductsContext= createContext();
 
-export function useSelectedProduct() {
-  return useContext(SelectedProductContext);
+export function useProducts() {
+  return useContext(ProductsContext);
 }
 
-export function SelectedProductProvider({ children }) {
-  const [selectedProduct, setSelectedProduct] = useState(null);
+export function ProductsProvider({ children }) {
+  const [products, setProducts] = useState([]);
 
   return (
-    <SelectedProductContext.Provider value={{ selectedProduct, setSelectedProduct }}>
+    <ProductsContext.Provider value={{ products, setProducts }}>
       {children}
-    </SelectedProductContext.Provider>
+    </ProductsContext.Provider>
   );
 }
