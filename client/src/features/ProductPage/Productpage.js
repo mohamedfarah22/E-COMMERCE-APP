@@ -4,7 +4,7 @@ import Categories from '../Categories/Categories';
 import CartPopUp from '../Cart/Cart';
 import { useState, useEffect} from 'react';
 import axios from 'axios';
-import { useSelectedProduct } from '../Products/ProductsContext';
+import { useSelectedProduct } from '../Products/SelectedProductContext';
 import { useParams } from 'react-router-dom';
 import { usePopup } from '../Cart/CartPopUpContext';
 import { useCart } from '../Cart/CartContext';
