@@ -23,6 +23,7 @@ services:
       - "4000:4000"
     depends_on:
       - database
+      - elastic-search
   image-server: 
     container_name: image-container_name
     build:
@@ -30,3 +31,17 @@ services:
       dockerfile: dockerfile
     ports:
       - "8080:80"
+  elastic-search: 
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.15.1
+    container_name: elasticsearch-container
+    environment:
+      - discovery.type=single-node
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    depends_on:
+      - database
+volumes:
+  esdata:
