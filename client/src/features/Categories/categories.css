@@ -13,3 +13,11 @@
 .all-category{
     font-size: 90%;
 }
+@media only screen and (min-width: 550px){
+  .categories{
+    margin-top: 20%;
+  }
+  .all-category{
+    font-size: 100%;
+  }
+}

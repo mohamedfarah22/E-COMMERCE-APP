@@ -23,4 +23,17 @@
     font-weight: bold;
     font-family: 'Open Sans', sans-serif;
 }
-
+@media only screen and (min-width: 550px){
+    .product-image{
+        width: 60%;
+        height: 60%;
+     
+}
+.product-container{
+    margin: 20px 20px;
+    padding: 20px 20px;
+    max-width: 30%;
+    justify-content:center;
+    align-items: center;
+}
+}

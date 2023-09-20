@@ -3,7 +3,7 @@
     display:grid;
     grid-template-columns: 1fr 1fr;
     width: 100%;
-    
+    margin-right: 20%;
 }
 .product-page{
     max-width: 100%;
@@ -18,7 +18,7 @@
     justify-content: center;
     margin-top: 100px;
     margin-left: 20%;
-    margin-right: 30%;
+    margin-right: 10%;
 
 }
 
@@ -76,5 +76,24 @@
     margin-top: 0px;
     font-size: 80%;
     max-width: 100%;
+    display: flex;
+    justify-self: flex-start;
 }
-
+@media only screen and (min-width: 550px){
+    .product-description-text{
+        font-size: 80%;
+    }
+    .add-to-cart-button{
+        font-size: 80%;
+    }
+    .price-text{
+        font-size: 90%;
+    }
+    .description-header{
+        font-size: 80%;
+    }
+    .add-to-cart-button{
+        padding-bottom: 3%;
+        padding-top: 3%;
+    }
+  }
