@@ -79,3 +79,18 @@
     width: 50%;
    }
 }
+@media only screen and (min-width: 900px){
+  .popup-body{
+    width: 40%;
+   }
+}
+@media only screen and (min-width:1224px){
+  .popup-body{
+    width: 30%;
+   }
+}
+@media only screen and (min-width: 1610px){
+  .popup-body{
+    width: 20%;
+   }
+}

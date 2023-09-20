@@ -100,6 +100,7 @@
         padding-left: 0;
        
     }
+  
   }
   @media only screen and (min-width: 760px){
     .search-container{
@@ -113,4 +114,26 @@
   .cart-count{
     right: 0px;
   }
-}
+}  @media only screen and (min-width: 1224px){
+    .cart-count{
+      right: 10px;
+      top: 7px;
+    }
+    .search-container{
+        padding-right: 18%; 
+    }
+  }
+  @media only screen and (min-width: 1610px){
+    .cart-count{
+      right: 29px;
+
+    }
+    .search-container{
+        
+      padding-right: 22%; 
+      
+    }
+    .login-text{
+        font-size: 20px;
+    }
+  }

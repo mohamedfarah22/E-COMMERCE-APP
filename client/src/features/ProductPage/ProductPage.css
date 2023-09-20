@@ -102,4 +102,52 @@
         width: 200px;
         height: 200px;
     }
+    .product-description-text{
+        font-size: 12px
+    }
+    .add-to-cart-button{
+        font-size: 80%;
+    }
+    .price-text{
+        font-size: 16px;
+    }
+    .description-header{
+        font-size:16px;;
+    }
+  }
+  @media only screen and (min-width: 1224px){
+    .product-container-page{
+        width: 60%;
+        padding-left: 20%;
+        padding-top: 10%;
+    }
+    .image-container{
+     
+        margin-left:40%;
+     
+    
+    }
+    .product-name-page{
+        
+        font-size: 26px;
+    } 
+    .price-text{
+        font-size:24px;
+    }
+
+  }
+  @media only screen and (min-width: 1610px){
+  
+    .product-description-text{
+        font-size: 16px;
+    }
+    .add-to-cart-button{
+        font-size: 80%;
+    }
+    .price-text{
+        font-size:26px;
+    }
+    .description-header{
+        font-size:20px;;
+    }   
   }

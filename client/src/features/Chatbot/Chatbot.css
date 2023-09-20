@@ -85,3 +85,28 @@
     width: 50%;
   }
  }
+
+@media only screen and (min-width:760px){
+  .chat-bot-container.open{
+    width: 40%;
+  }
+  .chat-bot-container.closed{
+    width: 40%;
+  }
+ }
+ @media only screen and (min-width:1224px){
+  .chat-bot-container.open{
+    width: 30%;
+  }
+  .chat-bot-container.closed{
+    width: 30%;
+  }
+ }
+ @media only screen and (min-width: 1610px){
+  .chat-bot-container.open{
+    width: 20%;
+  }
+  .chat-bot-container.closed{
+    width: 20%;
+  }
+ }
