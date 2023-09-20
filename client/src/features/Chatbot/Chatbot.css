@@ -1,36 +1,41 @@
 /* Add this CSS to your stylesheet or component's CSS-in-JS */
 
 /* Style for the chatbot-container (outer container) */
-.chat-bot-container {
+.chat-bot-container.open {
     position: fixed; /* Fix the position */
     right: 0; /* Position it on the left side */
     bottom: 0; /* Position it at the bottom */
-    width: 20%; /* Adjust the width as needed */
-    height: 700px; /* Adjust the height as needed */
+    left: 0;
+    max-width: 100%; /* Adjust the width as needed */
+    height:100%; /* Adjust the height as needed */
     background-color: #fff; /* Add a background color if needed */
     box-shadow: -5px 0 10px rgba(0, 0, 0, 0.2); /* Optional: Add shadow for separation */
     display: flex; /* Use flexbox to stack message list and input */
     flex-direction: column; /* Stack them vertically */
     transition: height 0.3s ease-in-out; 
   }
+
   
   /* Style for the MessageList (adjust as needed) */
   .MessageList.open {
     flex: 1; /* Grow to take available space */
     overflow-y: auto; /* Enable vertical scrolling if needed */
     padding: 10px; /* Add padding as needed */
+    max-width: 100%;
   }
   
   /* Style for the message-input-container (the fixed input area) */
   .message-input-container.open {
     padding: 10px; /* Add padding as needed */
     border-top: 1px solid #ccc; /* Optional: Add a border if desired */
+    min-width: 100%;
   }
   .chat-bot-header{
     height: 50px;
     display: flex;
     justify-content: flex-end;
     background-color: #855dd5;
+    max-width: 100%;
   }
 .material-symbols-outlined.open{
     padding-right: 20px;
@@ -64,7 +69,12 @@
     display: none;
 }
 .chat-bot-container.closed{
-    height: 40px;
+    height: 35px;
     background-color: #855dd5 !important;
+    position: fixed; /* Fix the position */
+    right: 0; /* Position it on the left side */
+    bottom: 0; /* Position it at the bottom */
+    left: 0;
+    max-width: 100%;
 
 }

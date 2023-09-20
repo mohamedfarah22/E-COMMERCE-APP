@@ -2,8 +2,9 @@
     display: flex;
     max-width: 100%;
     justify-content: center;
-    align-items: center;;
+    align-items: center;
     flex-direction: column;
+    flex-flow: nowrap;
     
 
 }
@@ -15,9 +16,14 @@
     background-color: #855dd5;
     border: none;
     color: white;
+    margin-bottom: 40%;
+    width: 100%;
 
 }
 
 .create-account-button:hover{
     cursor: pointer;
+}
+.sign-up-form{
+    max-width: 50%;
 }

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 .product-image{
-    width: 300px;
-    height: 250px;
+    width: 70%;
+    height:70%;
     
 }
 .product-container{
@@ -9,6 +9,9 @@
     padding: 40px 40px;
     background-color:#FDF5E6;
     border-style: solid;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
     
     
 }

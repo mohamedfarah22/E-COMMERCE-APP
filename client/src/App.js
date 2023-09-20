@@ -46,6 +46,7 @@ function App() {
     </Routes>
     </Router>
     <Chatbot/>
+ 
     </ProductsProvider>
     </CartProvider>
     </SelectedProductProvider>

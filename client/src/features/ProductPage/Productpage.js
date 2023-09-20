@@ -55,7 +55,7 @@ function ProductPage({filterCategory, setFilterCategory, userId, loggedIn, setLo
       }
    
     return(
-    <div>
+    <div className = "product-page">
         <Header setOpenPopUp = {setOpenPopUp} loggedIn = {loggedIn} setLoggedIn = {setLoggedIn} setUserId = {setUserId}/>
         <Categories filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} />
         {openPopUp ?
