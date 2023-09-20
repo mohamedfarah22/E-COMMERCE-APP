@@ -97,3 +97,9 @@
         padding-top: 3%;
     }
   }
+  @media only screen and (min-width: 760px){
+    .image-container img{
+        width: 200px;
+        height: 200px;
+    }
+  }

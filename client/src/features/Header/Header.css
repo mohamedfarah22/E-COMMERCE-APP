@@ -101,3 +101,16 @@
        
     }
   }
+  @media only screen and (min-width: 760px){
+    .search-container{
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 13%;
+    }
+    
+  }
+  @media only screen and (min-width: 900px){
+  .cart-count{
+    right: 0px;
+  }
+}
