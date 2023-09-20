@@ -93,4 +93,11 @@
     width: 20px;
     text-align: center;
   }
-  
+  @media only screen and (min-width: 550px){
+    .login-text{
+        font-size: 95%;
+        margin-right: 3%;
+        padding-left: 0;
+       
+    }
+  }

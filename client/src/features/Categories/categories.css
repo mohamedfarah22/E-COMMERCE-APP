@@ -21,3 +21,11 @@
     font-size: 100%;
   }
 }
+@media only screen and (min-width: 850px){
+    .categories{
+      margin-top: 15%;
+    }
+    .all-category{
+      font-size: 100%;
+    }
+  }
