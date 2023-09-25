@@ -3,10 +3,11 @@ import Categories from "../Categories/Categories";
 import { usePopup } from "../Cart/CartPopUpContext";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import CartPopUp from "../Cart/Cart";
 import axios from "axios";
 import "./login.css"
-function Login({filterCategory, setFilterCategory, setUserId, setLoggedIn}){
-    const {setOpenPopUp} = usePopup()
+function Login({filterCategory, setFilterCategory, userId, setLoggedIn}){
+    const {openPopUp, setOpenPopUp} = usePopup()
 
     const [formData, setFormData] = useState({
         email: '',
@@ -50,6 +51,10 @@ function Login({filterCategory, setFilterCategory, setUserId, setLoggedIn}){
         <div className="login-page">
              <Header setOpenPopUp = {setOpenPopUp} setLoggedIn = {setLoggedIn}/>
              <Categories filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} />
+             {openPopUp ?
+        <div className="cart-container">
+         <CartPopUp userId={userId} /> 
+        </div>: null}
         <div className="login-container">
             <h1 className="login-header">Login</h1>
             <form className="login-form" onSubmit = {handleSubmit}>

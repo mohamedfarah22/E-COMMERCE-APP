@@ -1,11 +1,11 @@
 import React from 'react';
-import { render, screen} from '@testing-library/react';
+import { render, screen, waitFor} from '@testing-library/react';
 import Login from './Login';
 import { MemoryRouter } from 'react-router-dom';
 import { CartProvider } from '../Cart/CartContext';
 import { CartProviderPopUp } from '../Cart/CartPopUpContext';
 import { ProductsProvider } from '../Products/ProductsContext';
-
+import userEvent from '@testing-library/user-event';
 describe('test if login form and buttons render correctly', () => {
     test("if login header is rendered", () => {
         render(
@@ -69,6 +69,36 @@ describe('test if login form and buttons render correctly', () => {
 
 
     })
+
+
+})
+
+test("if cart component is opened when cart icon is clicked", async() => {
+    render(
+        <ProductsProvider>
+        <CartProviderPopUp>
+            <CartProvider>
+        <MemoryRouter>
+            <Login/>
+        </MemoryRouter>
+        </CartProvider>
+    </CartProviderPopUp>
+    </ProductsProvider>
+        )
+        //set up userEvent
+    const user = userEvent.setup();
+
+        //find cart icon;
+        const cartIcon = screen.getByRole('button', {name:/shopping_bag/});
+        waitFor(() => {
+            user.click(cartIcon) 
+            //check if cart component is open
+            const cartComponent = screen.getByRole('heading', {name: 'Cart'});
+            expect(cartComponent).toBeInTheDocument()
+        })
+    
+
+
 
 
 })
