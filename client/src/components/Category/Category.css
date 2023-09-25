@@ -8,7 +8,19 @@ p{
 
 .category-text{
     text-transform: capitalize;
+    font-size: 90%;
 }
 .category-text:hover{
     cursor: pointer;
 }
+@media only screen and (min-width: 550px){
+    .category-text{
+     font-size: 100%;
+    }
+  }
+
+@media only screen and (min-width: 1224px){
+    .category-text{
+     font-size: 24px;
+    }
+  }

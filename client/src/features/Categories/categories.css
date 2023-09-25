@@ -1,13 +1,49 @@
 .categories{
-    margin-top: 70px;
+    margin-top: 30%;
     display:flex;
-    flex-direction: row;
+    flex-direction: row nowrap;
     justify-content: space-around;
-    margin-bottom: 50px;
-    max-width: 80%;
-    margin-left: 150px;
+    margin-bottom: 5%;
+    width: 100%;
 
 }
 .all-category:hover{
     cursor: pointer;
 }
+.all-category{
+    font-size: 90%;
+}
+@media only screen and (min-width: 550px){
+  .categories{
+    margin-top: 20%;
+  }
+  .all-category{
+    font-size: 100%;
+  }
+}
+@media only screen and (min-width: 850px){
+    .categories{
+      margin-top: 15%;
+    }
+    .all-category{
+      font-size: 100%;
+    }
+  }
+  @media only screen and (min-width: 1224px){
+    .categories{
+      margin-top: 12%;
+      margin-bottom: 2%;
+    }
+    .all-category{
+        font-size: 24px;
+    }
+  }
+  @media only screen and (min-width: 1610px){
+    .categories{
+      margin-top: 8%;
+      margin-bottom: 2%;
+    }
+    .all-category{
+      font-size: 24px;
+    }
+  }

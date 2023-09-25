@@ -1,9 +1,10 @@
 .sign-up-container{
     display: flex;
-    max-width: 100%;
+    width: 100%;
     justify-content: center;
-    align-items: center;;
+    align-items: center;
     flex-direction: column;
+    flex-flow: nowrap;
     
 
 }
@@ -15,9 +16,33 @@
     background-color: #855dd5;
     border: none;
     color: white;
+    margin-bottom: 40%;
+    width: 100%;
 
 }
 
 .create-account-button:hover{
     cursor: pointer;
 }
+.sign-up-form{
+    width: 50%;
+}
+@media only screen and (min-width: 760px){
+    .sign-up-container{
+        width: 100%;
+      }
+        
+      .sign-up-form{
+        width: 30%;
+    }
+    }
+  
+  @media only screen and (min-width: 1224px){
+      .sign-up-container{
+        width: 100%;
+      }
+        
+      .sign-up-form{
+        width: 20%;
+    }
+    }

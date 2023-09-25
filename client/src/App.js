@@ -40,12 +40,13 @@ function App() {
   <Router>
     <Routes>
       <Route path="/:product_id/:product_name" element={<ProductPage filterCategory = {filterCategory} setFilterCategory = {setFilterCategory}  userId = {userId} loggedIn = {loggedIn} setLoggedIn = {setLoggedIn}/>} />
-      <Route path="/login" element={<Login filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} setLoggedIn = {setLoggedIn} setUserId = {setUserId} loggedIn = {loggedIn}/>} />
-      <Route path="/sign-up" element={<SignUp filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} />} />
+      <Route path="/login" element={<Login filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} setLoggedIn = {setLoggedIn} userId={userId} loggedIn = {loggedIn}/>} />
+      <Route path="/sign-up" element={<SignUp filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} userId={userId}/>} />
       <Route path="/" element={<MainLayout filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} userId = {userId} loggedIn = {loggedIn} setLoggedIn = {setLoggedIn} setUserId = {setUserId}/>}/>
     </Routes>
     </Router>
     <Chatbot/>
+ 
     </ProductsProvider>
     </CartProvider>
     </SelectedProductProvider>
