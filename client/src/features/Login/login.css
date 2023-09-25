@@ -77,5 +77,8 @@
       }
       .create-account-button-container{
         width:40%;
-      }
+      }.login-header{
+       
+        font-size: 28px; 
+    }
   }

@@ -6,7 +6,7 @@ import { useState } from "react";
 import axios from "axios";
 import "./login.css"
 function Login({filterCategory, setFilterCategory, setUserId, setLoggedIn}){
-    const {setOpenPopUp} = usePopup
+    const {setOpenPopUp} = usePopup()
 
     const [formData, setFormData] = useState({
         email: '',
@@ -48,15 +48,15 @@ function Login({filterCategory, setFilterCategory, setUserId, setLoggedIn}){
           }
     return(
         <div className="login-page">
-             <Header setOpenPopUp = {setOpenPopUp} setLoggedin = {setLoggedIn}/>
+             <Header setOpenPopUp = {setOpenPopUp} setLoggedIn = {setLoggedIn}/>
              <Categories filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} />
         <div className="login-container">
             <h1 className="login-header">Login</h1>
             <form className="login-form" onSubmit = {handleSubmit}>
                 <label className = "label" htmlFor="email">Email</label>
-                <input className= "text" type="text" id = "email" name = "email" required value={formData.email} onChange = {handleChange}/>
+                <input className= "text" type="text" id = "email" name = "email" required value={formData.email} onChange = {handleChange} placeholder="Email..."/>
                 <label className = "label" htmlFor="email">Password</label>
-                <input className= "text" type="password" id = "password" name = "password" required value={formData.password} onChange = {handleChange} />
+                <input className= "text" type="password" id = "password" name = "password" required value={formData.password} onChange = {handleChange} placeholder="Password..."/>
                 <button className="sign-in-button" >Sign In</button>
             </form>
         <div className="create-account-button-container">
