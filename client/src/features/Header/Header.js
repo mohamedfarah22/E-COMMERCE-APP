@@ -1,11 +1,11 @@
 import Searchbar from "../../components/Searchbar/Searchbar";
-import cartLogo from "../../images/market.png"
 import "./Header.css"
 import { useNavigate } from "react-router-dom";
 import { usePopup } from '../Cart/CartPopUpContext';
 import { useCart } from "../Cart/CartContext";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import {cartQuantityCalculator}from "./HeaderHelperFunctions";
 function Header({loggedIn, setLoggedIn, setUserId}){
     const navigate = useNavigate()
     const {setOpenPopUp} = usePopup()
@@ -35,10 +35,7 @@ function Header({loggedIn, setLoggedIn, setUserId}){
         setOpenPopUp(true)
 
     }
-    //function to calculate number of items in cart
-    const cartQuantityCalculator = (cart) => {
-        return cart.length;
-    }
+
     useEffect(() => {
        setCartQuantity(cartQuantityCalculator(cart))
 
@@ -61,11 +58,11 @@ function Header({loggedIn, setLoggedIn, setUserId}){
                 <p className = "login-text" onClick={onClickHandlerLogOut}>Log Out</p>
                 :  <p className = "login-text" onClick={onClickHandlerLogin}>Log In</p>
             }
-                <button class="cart-button" onClick = {onClickHandlerCart}>
-                <span class="material-symbols-outlined">
+                <button className="cart-button" onClick = {onClickHandlerCart}>
+                <span className="material-symbols-outlined">
                 shopping_bag
                  </span>
-                <span class="cart-count">{cartQuantity}</span>
+                <span className="cart-count">{cartQuantity}</span>
                 </button>
 
             </div> 
