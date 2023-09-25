@@ -5,8 +5,9 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./SignUp.css"
-function SignUp({filterCategory, setFilterCategory}){
-    const {setOpenPopUp} = usePopup;
+import CartPopUp from "../Cart/Cart";
+function SignUp({filterCategory, setFilterCategory, userId}){
+    const {openPopUp, setOpenPopUp} = usePopup();
     const navigate = useNavigate()
     const [formData, setFormData] = useState({
         first_name: '',
@@ -42,16 +43,20 @@ function SignUp({filterCategory, setFilterCategory}){
         <div className="sign-up-page">
              <Header setOpenPopUp = {setOpenPopUp}/>
              <Categories filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} />
+             {openPopUp ?
+        <div className="cart-container">
+         <CartPopUp userId={userId} /> 
+        </div>: null}
         <div className="sign-up-container">
             <form className="sign-up-form" onSubmit = {handleSubmit}>
                 <label className = "label" htmlFor="first_name">First Name</label>
-                <input className= "text" type="text" id = "first_name" name = "first_name" required value={formData.first_name} onChange = {handleChange}/>
+                <input className= "text" type="text" id = "first_name" name = "first_name" required value={formData.first_name} onChange = {handleChange} placeholder="First Name..."/>
                 <label className = "label" htmlFor="last_name">Last Name</label>
-                <input className= "text" type="text" id = "last_name" name = "last_name" required value={formData.last_name} onChange = {handleChange}/>
+                <input className= "text" type="text" id = "last_name" name = "last_name" required value={formData.last_name} onChange = {handleChange} placeholder="Last Name..."/>
                 <label className = "label" htmlFor="email">Email</label>
-                <input className= "text" type="text" id = "email" name = "email" required value={formData.email} onChange = {handleChange}/>
+                <input className= "text" type="text" id = "email" name = "email" required value={formData.email} onChange = {handleChange}  placeholder="Email..."/>
                 <label className = "label" htmlFor="password">Password</label>
-                <input className= "text" type="password" id = "password" name = "password" required value={formData.password} onChange = {handleChange}/>
+                <input className= "text" type="password" id = "password" name = "password" required value={formData.password} onChange = {handleChange} placeholder="Password..."/>
                 <button type="submit" className="create-account-button" >Create Account</button>
             </form>
 
