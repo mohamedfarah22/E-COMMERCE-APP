@@ -9,6 +9,7 @@ import {setupServer} from 'msw/node';
 import {rest} from 'msw';
 import { ProductsProvider } from "../features/Products/ProductsContext";
 import userEvent from '@testing-library/user-event';
+import Login from "../features/Login/Login";
 //first intercept on mount call with msw to se selected product
 const server = setupServer(
     // Define mock responses for your API endpoints
@@ -130,6 +131,7 @@ test('cart opened when clicked' , async () => {
                     <MemoryRouter initialEntries = {["/1/Elelgant-Gold-Bangle"]}>
                         <Routes>
                         <Route path="/:product_id/:product_name"  element={<ProductPage userId = {1}/> }/>
+                        <Route path="/"  element={<Login/> }/>
                         </Routes>
                     </MemoryRouter>
                 </SelectedProductProvider>
@@ -149,3 +151,37 @@ test('cart opened when clicked' , async () => {
         
 })
 
+//test route to login page
+
+test('test route to login page', async () => {
+    render(
+        <CartProvider>
+            <CartProviderPopUp>
+                <ProductsProvider>
+                <SelectedProductProvider>
+                    <MemoryRouter initialEntries = {["/1/Elelgant-Gold-Bangle"]}>
+                        <Routes>
+                        <Route path="/:product_id/:product_name"  element={<ProductPage userId = {1}/> }/>
+                        <Route path="/login"  element={<Login/> }/>
+                        </Routes>
+                    </MemoryRouter>
+                </SelectedProductProvider>
+                </ProductsProvider>
+        
+            </CartProviderPopUp>
+        </CartProvider>
+        )
+        const user = userEvent.setup();
+        await waitFor(() => {
+            //get login text
+            const logInText = screen.getByText('Log In');
+            expect(logInText).toBeInTheDocument();
+            
+            //click on login text
+            user.click(logInText);
+            const logInHeading = screen.getByRole('heading', {name: 'Login'})
+            expect(logInHeading).toBeInTheDocument();
+            
+
+        })
+    })
