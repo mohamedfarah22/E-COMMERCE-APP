@@ -6,7 +6,7 @@ import axios from 'axios';
 function Categories({filterCategory, setFilterCategory}) {
     const [categories, setCategories] = useState([])
     const navigate = useNavigate()
-
+    let key;
     useEffect(() => {
         axios.get("http://localhost:4000/products/categories").then(res => {
             const categories = res.data
@@ -27,7 +27,8 @@ function Categories({filterCategory, setFilterCategory}) {
       <div className="categories">
         <h3 className = "all-category" onClick = {onClickHandler}>All</h3>
         {categories.map((category) => {
-            return <Category category = {category} setFilterCategory = {setFilterCategory}/>
+        
+            return <Category key = {key+=1} category = {category} setFilterCategory = {setFilterCategory}/>
         })}
         
         
