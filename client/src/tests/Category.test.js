@@ -9,4 +9,8 @@ test('category component renders', () => {
     <Category category = {category} />
 </MemoryRouter>
     )
+    const categoryText = screen.getByText('category');
+
+    expect(categoryText).toBeInTheDocument();
+   
 })

@@ -91,7 +91,7 @@ test('renders Header with correct text in banner, company name and log in text',
 
           expect(divContainer).toHaveStyle('background-color: rgb(133, 93, 213,1)')
          })
-         test("if cart quantity calculator helper function", () => {
+         test("if cart quantity calculator helper function works correctly", () => {
           const cartQuantity  = cartQuantityCalculator([{id: 1, product: 'product 1'}, {id: 2, product: 'product 3'}, {id: 3, product: 'product 4'}])
 
           expect(cartQuantity).toBe(cartQuantity)
@@ -99,3 +99,5 @@ test('renders Header with correct text in banner, company name and log in text',
          })
          
         }) 
+
+     
