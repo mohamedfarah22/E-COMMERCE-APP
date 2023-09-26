@@ -1,11 +1,11 @@
 import React from 'react';
 import { render, screen} from '@testing-library/react';
-import Header from './Header.js';
+import Header from '../features/Header/Header.js';
 import { MemoryRouter } from 'react-router-dom';
-import { CartProviderPopUp } from '../Cart/CartPopUpContext.js';
-import { CartProvider } from '../Cart/CartContext.js';
-import { ProductsProvider } from '../Products/ProductsContext.js';
-import { cartQuantityCalculator } from './HeaderHelperFunctions.js';
+import { CartProviderPopUp } from '../features/Cart/CartPopUpContext.js';
+import { CartProvider } from '../features/Cart/CartContext.js';
+import { ProductsProvider } from '../features/Products/ProductsContext.js';
+import { cartQuantityCalculator } from '../features/Header/HeaderHelperFunctions.js';
 
 
 describe('Header component initial render' , () =>{

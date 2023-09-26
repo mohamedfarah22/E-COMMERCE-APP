@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, waitFor} from '@testing-library/react';
-import Searchbar from './Searchbar';
-import { ProductsProvider } from '../../features/Products/ProductsContext';
+import Searchbar from '../components/Searchbar/Searchbar';
+import { ProductsProvider } from '../features/Products/ProductsContext';
 import userEvent from '@testing-library/user-event';
 describe('tests if search bar component renders correctly', () =>{
     test('if text input renders correctly', ()=>{
