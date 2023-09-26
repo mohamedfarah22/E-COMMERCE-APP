@@ -22,7 +22,6 @@ function CartPopUp({ userId}){
 //get running total
 useEffect(() => {
     axios.get(`http://localhost:4000/carts/cart-total?user_id=${userId}`).then((response) => {
-        console.log(response.data)
          setTotals(roundUpToTwoDecimalPlaces(response.data.total_cost))
         
 
@@ -64,7 +63,7 @@ useEffect(()=>{
   
         // Now you have product data for each item in the cart
         setCartProducts(productData);
-        console.log(productData);
+    
       })
       .catch((error) => {
         console.error('Error fetching product data:', error);
@@ -83,9 +82,9 @@ useEffect(()=>{
   
 
     return (
-        <div classname="popup-container">
+        <div className="popup-container">
         <div className="popup-body">
-        <div classname="close-text-container">
+        <div className="close-text-container">
             <span className="material-icons" onClick = {onClickHandler}>
             close
              </span>

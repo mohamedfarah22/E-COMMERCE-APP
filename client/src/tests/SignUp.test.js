@@ -1,10 +1,10 @@
 import React from 'react';
 import { render, screen, waitFor} from '@testing-library/react';
-import SignUp from './SignUp';
+import SignUp from '../features/Sign-Up/SignUp';
 import { MemoryRouter } from 'react-router-dom';
-import { CartProviderPopUp } from '../Cart/CartPopUpContext';
-import { CartProvider } from '../Cart/CartContext';
-import { ProductsProvider } from '../Products/ProductsContext';
+import { CartProviderPopUp } from '../features/Cart/CartPopUpContext';
+import { CartProvider } from '../features/Cart/CartContext';
+import { ProductsProvider } from '../features/Products/ProductsContext';
 import userEvent from '@testing-library/user-event';
 test("sign up form rendered correctly", () => {
 
@@ -75,7 +75,7 @@ test("cart pop up is open when cart icon is clicked on", async() => {
 
         //find cart icon;
         const cartIcon = screen.getByRole('button', {name:/shopping_bag/});
-        waitFor(() => {
+        await waitFor(() => {
             user.click(cartIcon) 
             //check if cart component is open
             const cartComponent = screen.getByRole('heading', {name: 'Cart'});

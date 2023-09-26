@@ -1,11 +1,11 @@
 import React from 'react';
 import { render, screen} from '@testing-library/react';
-import Header from './Header.js';
+import Header from '../features/Header/Header.js';
 import { MemoryRouter } from 'react-router-dom';
-import { CartProviderPopUp } from '../Cart/CartPopUpContext.js';
-import { CartProvider } from '../Cart/CartContext.js';
-import { ProductsProvider } from '../Products/ProductsContext.js';
-import { cartQuantityCalculator } from './HeaderHelperFunctions.js';
+import { CartProviderPopUp } from '../features/Cart/CartPopUpContext.js';
+import { CartProvider } from '../features/Cart/CartContext.js';
+import { ProductsProvider } from '../features/Products/ProductsContext.js';
+import { cartQuantityCalculator } from '../features/Header/HeaderHelperFunctions.js';
 
 
 describe('Header component initial render' , () =>{
@@ -91,7 +91,7 @@ test('renders Header with correct text in banner, company name and log in text',
 
           expect(divContainer).toHaveStyle('background-color: rgb(133, 93, 213,1)')
          })
-         test("if cart quantity calculator helper function", () => {
+         test("if cart quantity calculator helper function works correctly", () => {
           const cartQuantity  = cartQuantityCalculator([{id: 1, product: 'product 1'}, {id: 2, product: 'product 3'}, {id: 3, product: 'product 4'}])
 
           expect(cartQuantity).toBe(cartQuantity)
@@ -99,3 +99,5 @@ test('renders Header with correct text in banner, company name and log in text',
          })
          
         }) 
+
+     

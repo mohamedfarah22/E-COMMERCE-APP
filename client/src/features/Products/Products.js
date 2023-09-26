@@ -24,7 +24,7 @@ function Products({filterCategory}){
     }, [filterCategory, setProducts])
  
     return (
-        <div className="products">
+    <div  className="products">
       {products === null ? (
         <p>Loading...</p> // Display a loading message until products are fetched
       ) : (
