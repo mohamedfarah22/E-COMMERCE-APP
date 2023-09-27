@@ -18,7 +18,7 @@ jobs:
       with:
         node-version: 18.16.0
     - name: Navigate to the src directory
-      run: cd ../../client
+      run: cd e-commerce-app/client
     - name: Install dependencies
       run: npm install  # or yarn install, depending on your project
 
