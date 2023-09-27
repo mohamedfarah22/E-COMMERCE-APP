@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelectedProduct } from '../../features/Products/SelectedProductContext';
 function Product({product}){
 const navigate = useNavigate()
-const {selectedProduct, setSelectedProduct} = useSelectedProduct();
+const { setSelectedProduct} = useSelectedProduct();
 const onClickHandler = (e)=>{
     e.preventDefault()
     setSelectedProduct([product])
