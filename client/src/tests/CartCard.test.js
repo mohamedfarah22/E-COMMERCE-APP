@@ -1,6 +1,6 @@
 import CartCard from "../components/CartCards/CartCard";
 import { screen, render, waitFor} from "@testing-library/react";
-import { setupServer } from "msw/lib/node";
+import { setupServer } from "msw/node";
 import { rest } from "msw";
 import userEvent from "@testing-library/user-event";
 //set up server to intercept calls
@@ -9,7 +9,7 @@ const server = setupServer(
     rest.put('http://localhost:4000/carts', (req, res, ctx) => {
         const userId = req.url.searchParams.get('user_id');
         const productId = req.url.searchParams.get('product_id');
-        const quantity = req.url.searchParams('quantity');
+        const quantity = req.url.searchParams.get('quantity');
         if (userId === '1' && productId === '1' && quantity==='1') {
             return res(
               ctx.status(200),
@@ -19,7 +19,18 @@ const server = setupServer(
                 }
               ])
             );
-          } else {
+          } 
+          if (userId === '1' && productId === '1' && quantity==='2') {
+            return res(
+              ctx.status(200),
+              ctx.json([
+                {
+                  quantity: 2
+                }
+              ])
+            );
+          } 
+          else {
            
             return res(ctx.status(404));
           }
@@ -45,9 +56,25 @@ const server = setupServer(
           // Return an error response for other cases
           return res(ctx.status(404));
         }
-      })
+      }),
+      rest.get('http://localhost:4000/carts/1', (req, res, ctx) => {
+
+                return res (
+                 ctx.status(200),
+                   ctx.json([
+                     {id: 1, product_id: 1, quantity: 1, user_id: 1}
+                   ])
+                 );
+               } 
+    
+        )
       
 )
+//start msw server
+beforeAll(() => server.listen());
+
+// Stop the MSW server after the tests
+afterAll(() => server.close());
 test('cart item renders with correct passed down prop and initial quantity of 1', async() => {
     render(<CartCard cartProduct = {[{
         id: 1,
