@@ -64,6 +64,87 @@ const handlers = [
                } 
     
         ),
+        rest.get('http://localhost:4000/products', (req, res, ctx) => {
+          if (req.url.searchParams.get('category') === 'bangles') {
+            return res(
+              ctx.status(200),
+              ctx.json([
+                {
+                  id: 1,
+                  product_name: 'Elegant Gold Bangle',
+                  image_url: 'http://localhost:4001/elegant-gold-bangle'
+                }
+              ])
+            );
+          }
+        
+         if (req.url.searchParams.get('category') === 'earrings') {
+            return res(
+              ctx.status(200),
+              ctx.json([
+                {
+                    id: 2,
+                    product_name: 'Elegant Gold Earrings',
+                    image_url: 'http://localhost:4001/elegant-gold-earrings'
+                }
+              ])
+            );
+          }
+          if (req.url.searchParams.get('category') === 'necklaces') {
+            return res(
+              ctx.status(200),
+              ctx.json([
+                {
+                    id: 3,
+                    product_name: 'Classic Gold Chain Necklace',
+                    image_url: 'http://localhost:4001/classic-gold-chain-necklace'
+                  }
+              ])
+            );
+          }
+        
+          if (req.url.searchParams.get('category') === 'rings') {
+            return res(
+              ctx.status(200),
+              ctx.json([
+                {
+                    id: 4,
+                    product_name: 'Classic Gold Band Ring',
+                    image_url: 'http://localhost:4001/classic-gold-band-ring'
+                  }
+              ])
+            );
+          }
+          if (req.url.searchParams.get('category') === 'All'){
+          return  res(
+            ctx.delay(2000),
+            ctx.status(200),
+            ctx.json([
+                {
+                    id: 1,
+                    product_name: 'Elegant Gold Bangle',
+                    image_url: 'http://localhost:4001/elegant-gold-bangle'
+                  },
+              {
+                id: 2,
+                product_name: 'Elegant Gold Earrings',
+                image_url: 'http://localhost:4001/elegant-gold-earrings'
+              },
+              {
+                id: 3,
+                product_name: 'Classic Gold Chain Necklace',
+                image_url: 'http://localhost:4001/classic-gold-chain-necklace'
+              },
+              {
+                id: 4,
+                product_name: 'Classic Gold Band Ring',
+                image_url: 'http://localhost:4001/classic-gold-band-ring'
+              }
+            ])
+          )};
+      }
+        ),
+  
         rest.get('http://localhost:4000/products/1', (req, res, ctx) => {
           return res(
             ctx.status(200),
@@ -108,89 +189,8 @@ const handlers = [
             );
           } 
         }),
-        rest.get('http://localhost:4000/products', (req, res, ctx) => {
-          if (req.url.searchParams.get('category') === 'bangles') {
-            return res(
-              ctx.status(200),
-              ctx.json([
-                {
-                  id: 1,
-                  product_name: 'Elegant Gold Bangle',
-                  image_url: 'http://localhost:4001/elegant-gold-bangle'
-                }
-              ])
-            );
-          }
         
-         if (req.url.searchParams.get('category') === 'earrings') {
-            return res(
-              ctx.status(200),
-              ctx.json([
-                {
-                    id: 2,
-                    product_name: 'Elegant Gold Earrings',
-                    image_url: 'http://localhost:4001/elegant-gold-earrings'
-                }
-              ])
-            );
-          }
-          if (req.url.searchParams.get('category') === 'necklaces') {
-            return res(
-              ctx.status(200),
-              ctx.json([
-                {
-                    id: 3,
-                    product_name: 'Classic Gold Chain Necklace',
-                    image_url: 'http://localhost:4001/classic-gold-chain-necklace'
-                  }
-              ])
-            );
-          }
-          if (req.url.searchParams.get('category') === 'null') {
-            return res(
-              ctx.status(200),
-              ctx.json(null)
-            );
-          }
-          if (req.url.searchParams.get('category') === 'rings') {
-            return res(
-              ctx.status(200),
-              ctx.json([
-                {
-                    id: 4,
-                    product_name: 'Classic Gold Band Ring',
-                    image_url: 'http://localhost:4001/classic-gold-band-ring'
-                  }
-              ])
-            );
-          }
-          
-          return res(
-            ctx.status(200),
-            ctx.json([
-                {
-                    id: 1,
-                    product_name: 'Elegant Gold Bangle',
-                    image_url: 'http://localhost:4001/elegant-gold-bangle'
-                  },
-              {
-                id: 2,
-                product_name: 'Elegant Gold Earrings',
-                image_url: 'http://localhost:4001/elegant-gold-earrings'
-              },
-              {
-                id: 3,
-                product_name: 'Classic Gold Chain Necklace',
-                image_url: 'http://localhost:4001/classic-gold-chain-necklace'
-              },
-              {
-                id: 4,
-                product_name: 'Classic Gold Band Ring',
-                image_url: 'http://localhost:4001/classic-gold-band-ring'
-              }
-            ])
-          );
-        })
+  
 ];
 
 export { handlers };
