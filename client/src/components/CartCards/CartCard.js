@@ -35,7 +35,7 @@ const increment = (e) => {
     setNumberOfItems(updatedQuantity)
     setLoading(true)
     axios.put(`http://localhost:4000/carts?user_id=${userId}&product_id=${cartProduct[0].id}&quantity=${updatedQuantity}`).then((response) => {
-                console.log("response: ", response)
+                
                 
             }).catch((error) => {
                 console.log('Error',  error)
@@ -55,7 +55,7 @@ const increment = (e) => {
             //remove cart item from db
             axios.delete(`http://localhost:4000/carts?user_id=${userId}&product_id=${cartProduct[0].id}`).then((response) => {
                 //remove item from running total
-                console.log('Response:', response.data);
+               
                 
                 setNumberOfItems(numberOfItems - 1)
                 //remove from cartProducts
@@ -70,7 +70,6 @@ const increment = (e) => {
             //change quantity of item in db
             axios.put(`http://localhost:4000/carts?user_id=${userId}&product_id=${cartProduct[0].id}&quantity=${newQuantity}`).then((response) => {
                 setNumberOfItems(newQuantity)
-                console.log("response: ", response)
             }).catch((error) => {
                 console.log('Error',  error)
             })
@@ -86,9 +85,9 @@ const increment = (e) => {
         axios
           .get(`http://localhost:4000/carts/user-product-queries?user_id=${userId}&product_id=${cartProduct[0].id}`)
           .then((response) => {
-            console.log(response.data)
+           
             const quantity = response.data[0].quantity;
-            console.log(quantity)
+          
             setNumberOfItems(quantity); // Update the state with the fetched quantity
           })
           .catch((error) => {
@@ -99,7 +98,7 @@ const increment = (e) => {
        <div> 
         <div className = 'card-cart-container'>
         <div className = "cart-product-image-container" >
-            <img src={cartProduct[0].image_url} />
+            <img alt = {cartProduct[0].product_name} src={cartProduct[0].image_url} />
         </div>
         <div className="cart-item-description">
             <p className="cart-product-name">{cartProduct[0].product_name}</p>
