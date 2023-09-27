@@ -19,6 +19,8 @@ jobs:
         node-version: 18.16.0
     - name: Navigate to the src directory
       run: cd client
+    - name: debugging
+      run: pwd
     - name: Install dependencies
       run: npm install  # or yarn install, depending on your project
 
