@@ -9,6 +9,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: ./client
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -17,8 +20,6 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: 18.16.0
-    - name: Navigate to the src directory
-      run: cd client
     - name: debugging
       run: pwd
     - name: Install dependencies
