@@ -117,7 +117,6 @@ const handlers = [
           }
           if (req.url.searchParams.get('category') === 'All'){
           return  res(
-            ctx.delay(2000),
             ctx.status(200),
             ctx.json([
                 {
