@@ -148,7 +148,7 @@ test('cart opened when clicked' , async () => {
             const cartComponent = screen.getByRole('heading', {name: 'Cart'});
             expect(cartComponent).toBeInTheDocument()
          })
-        
+         screen.debug()
 })
 
 //test route to login page
@@ -181,7 +181,7 @@ test('test route to login page', async () => {
             user.click(logInText);
             const logInHeading = screen.getByRole('heading', {name: 'Login'})
             expect(logInHeading).toBeInTheDocument();
-            
+            screen.debug()
 
         })
     })
