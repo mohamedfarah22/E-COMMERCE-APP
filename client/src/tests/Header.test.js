@@ -6,7 +6,7 @@ import { CartProviderPopUp } from '../features/Cart/CartPopUpContext.js';
 import { CartProvider } from '../features/Cart/CartContext.js';
 import { ProductsProvider } from '../features/Products/ProductsContext.js';
 import { cartQuantityCalculator } from '../features/Header/HeaderHelperFunctions.js';
-
+import '@testing-library/jest-dom';
 
 describe('Header component initial render' , () =>{
 

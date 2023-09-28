@@ -1,11 +1,9 @@
 import {render, screen, waitFor} from '@testing-library/react';
-import {setupServer} from 'msw/node';
-import {rest} from 'msw';
 import Products from '../features/Products/Products';
 import { ProductsProvider } from '../features/Products/ProductsContext';
 import { MemoryRouter } from 'react-router-dom';
 import { SelectedProductProvider } from '../features/Products/SelectedProductContext';
-
+import '@testing-library/jest-dom';
 
 //tests
 test("when category is all, products of all category should be rendered in the DOM", async()=> {
@@ -48,7 +46,7 @@ const ringProductImage= screen.getByText('Classic Gold Band Ring');
 
 expect(ringProductName).toBeInTheDocument();
 expect(ringProductImage).toBeInTheDocument();
-
+screen.debug()
 
 })
 })
@@ -92,7 +90,7 @@ test("when category is bangles, only bangle products should be rendered", async(
     
     expect(ringProductName).not.toBeInTheDocument();
     expect(ringProductImage).not.toBeInTheDocument();
-    
+    screen.debug()
     })
     })
     test("when category is earrings, only earring products should be rendered", async()=> {
@@ -135,7 +133,7 @@ test("when category is bangles, only bangle products should be rendered", async(
         
         expect(ringProductName).not.toBeInTheDocument();
         expect(ringProductImage).not.toBeInTheDocument();
-        
+        screen.debug()
         })
         })
 
@@ -179,40 +177,13 @@ test("when category is bangles, only bangle products should be rendered", async(
             
             expect(ringProductName).not.toBeInTheDocument();
             expect(ringProductImage).not.toBeInTheDocument();
-
+            screen.debug()
             
             })
             
-            await waitFor(() => {
-                const bandgleProductName = screen.queryByText('Elegant Gold Bangle');
-                const bangleImage = screen.queryByAltText('Elegant Gold Bangle');
+          
                 
-                expect(bandgleProductName).not.toBeInTheDocument();
-                expect(bangleImage).not.toBeInTheDocument();
-                
-                //check earrings is rendered
-                const earringProductName = screen.queryByText('Elegant Gold Earrings');
-                const earringImage = screen.queryByAltText('Elegant Gold Earrings');
-                
-                expect(earringProductName).not.toBeInTheDocument();
-                expect(earringImage).not.toBeInTheDocument();
-                
-                //check for necklace product
-                const necklaceProductName = screen.getByText('Classic Gold Chain Necklace');
-                const necklaceImage = screen.getByText('Classic Gold Chain Necklace');
-                
-                expect(necklaceProductName).toBeInTheDocument();
-                expect(necklaceImage).toBeInTheDocument();
-                
-                //check for ring product
-                const ringProductName = screen.queryByText('Classic Gold Band Ring');
-                const ringProductImage= screen.queryByText('Classic Gold Band Ring');
-                
-                expect(ringProductName).not.toBeInTheDocument();
-                expect(ringProductImage).not.toBeInTheDocument();
-    
-                
-                })
+              
         })
 
 
@@ -228,38 +199,7 @@ test("when category is bangles, only bangle products should be rendered", async(
             )
             
             
-            //check bangles are not rendered 
-            await waitFor(() => {
-            const bandgleProductName = screen.queryByText('Elegant Gold Bangle');
-            const bangleImage = screen.queryByAltText('Elegant Gold Bangle');
-            
-            expect(bandgleProductName).not.toBeInTheDocument();
-            expect(bangleImage).not.toBeInTheDocument();
-            
-            //check earrings is rendered
-            const earringProductName = screen.queryByText('Elegant Gold Earrings');
-            const earringImage = screen.queryByAltText('Elegant Gold Earrings');
-            
-            expect(earringProductName).not.toBeInTheDocument();
-            expect(earringImage).not.toBeInTheDocument();
-            
-            //check for necklace product
-            const necklaceProductName = screen.queryByText('Classic Gold Chain Necklace');
-            const necklaceImage = screen.queryByText('Classic Gold Chain Necklace');
-            
-            expect(necklaceProductName).not.toBeInTheDocument();
-            expect(necklaceImage).not.toBeInTheDocument();
-            
-            //check for ring product
-            const ringProductName = screen.queryByText('Classic Gold Band Ring');
-            const ringProductImage= screen.queryByText('Classic Gold Band Ring');
-            
-            expect(ringProductName).not.toBeInTheDocument();
-            expect(ringProductImage).not.toBeInTheDocument();
-
-            
-            })
-            
+        
             await waitFor(() => {
                 const bandgleProductName = screen.queryByText('Elegant Gold Bangle');
                 const bangleImage = screen.queryByAltText('Elegant Gold Bangle');
@@ -288,7 +228,7 @@ test("when category is bangles, only bangle products should be rendered", async(
                 expect(ringProductName).toBeInTheDocument();
                 expect(ringProductImage).toBeInTheDocument();
     
-                
+                screen.debug()
                 })
         })
 

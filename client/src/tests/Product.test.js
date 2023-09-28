@@ -3,6 +3,7 @@ import { render, screen} from '@testing-library/react';
 import Product from '../components/Product/Product';
 import { MemoryRouter } from 'react-router-dom';
 import { SelectedProductProvider } from '../features/Products/SelectedProductContext';
+import '@testing-library/jest-dom';
 describe('check if passed down prroduct prop is rendered in product component', () => {
     test("product name is rendered", () => {
         const product = {product_name: 'Elegant Gold Bangle', image_url:'http://localhost:4000/elegant-gold-bangle'}

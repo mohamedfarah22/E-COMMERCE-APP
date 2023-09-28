@@ -5,7 +5,7 @@ import { MemoryRouter, Route, Routes} from 'react-router-dom';
 import { CartProvider} from "../features/Cart/CartContext";
 import { CartProviderPopUp } from "../features/Cart/CartPopUpContext";
 import { SelectedProductProvider } from "../features/Products/SelectedProductContext";
-
+import '@testing-library/jest-dom';
 import { ProductsProvider } from "../features/Products/ProductsContext";
 import userEvent from '@testing-library/user-event';
 import Login from "../features/Login/Login";
@@ -82,7 +82,7 @@ test('cart opened when clicked' , async () => {
             const cartComponent = screen.getByRole('heading', {name: 'Cart'});
             expect(cartComponent).toBeInTheDocument()
          })
-      
+         screen.debug()
 })
 
 //test route to login page
@@ -115,6 +115,7 @@ test('test route to login page', async () => {
             user.click(logInText);
             const logInHeading = screen.getByRole('heading', {name: 'Login'})
             expect(logInHeading).toBeInTheDocument();
-            
+            screen.debug()
+
         })
     })

@@ -6,6 +6,7 @@ import { CartProvider } from '../features/Cart/CartContext';
 import { CartProviderPopUp } from '../features/Cart/CartPopUpContext';
 import { ProductsProvider } from '../features/Products/ProductsContext';
 import userEvent from '@testing-library/user-event';
+import '@testing-library/jest-dom';
 describe('test if login form and buttons render correctly', () => {
     test("if login header is rendered", () => {
         render(

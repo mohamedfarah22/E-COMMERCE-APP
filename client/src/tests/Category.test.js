@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen} from '@testing-library/react';
 import Category from '../components/Category/Category';
 import { MemoryRouter } from 'react-router-dom';
+import '@testing-library/jest-dom';
 test('category component renders', () => {
     const category = {category: 'category'}
     render(

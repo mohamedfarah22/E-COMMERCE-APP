@@ -1,6 +1,6 @@
 import CartCard from "../components/CartCards/CartCard";
 import { screen, render, waitFor} from "@testing-library/react";
-
+import '@testing-library/jest-dom';
 import userEvent from "@testing-library/user-event";
 
 test('cart item renders with correct passed down prop and initial quantity of 1', async() => {
