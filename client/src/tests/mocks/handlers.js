@@ -115,7 +115,7 @@ const handlers = [
               ])
             );
           }
-          if (req.url.searchParams.get('category') === 'All'){
+         else{
           return  res(
             ctx.status(200),
             ctx.json([
@@ -140,7 +140,8 @@ const handlers = [
                 image_url: 'http://localhost:4001/classic-gold-band-ring'
               }
             ])
-          )};
+          )}
+          
       }
         ),
   

@@ -4,8 +4,16 @@ import { ProductsProvider } from '../features/Products/ProductsContext';
 import { MemoryRouter } from 'react-router-dom';
 import { SelectedProductProvider } from '../features/Products/SelectedProductContext';
 import '@testing-library/jest-dom';
-
+import { server } from './mocks/server';
 //tests
+beforeAll(() => server.listen());
+
+// Reset any request handlers that we may add during the tests,
+// so they don't affect other tests.
+afterEach(() => server.resetHandlers());
+
+// Clean up after the tests are finished.
+afterAll(() => server.close());
 test("when category is all, products of all category should be rendered in the DOM", async()=> {
 render(
 <MemoryRouter>

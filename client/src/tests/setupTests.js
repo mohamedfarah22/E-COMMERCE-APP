@@ -1,10 +1,12 @@
-// jest-dom adds custom jest matchers for asserting on DOM nodes.
-// allows you to do things like:
-// expect(element).toHaveTextContent(/react/i)
-// learn more: https://github.com/testing-library/jest-dom
-import '@testing-library/jest-dom';
-// src/setupTests.js
+// Import Axios and any other necessary dependencies.
+import axios from 'axios';
+
+// Set the base URL for Axios requests.
+axios.defaults.baseURL = 'http://localhost:4000';
+
+// Import and configure MSW as you've already done.
 import { server } from './mocks/server';
+
 // Establish API mocking before all tests.
 beforeAll(() => server.listen());
 
@@ -14,3 +16,6 @@ afterEach(() => server.resetHandlers());
 
 // Clean up after the tests are finished.
 afterAll(() => server.close());
+
+// Import and configure Jest DOM if needed.
+import '@testing-library/jest-dom';

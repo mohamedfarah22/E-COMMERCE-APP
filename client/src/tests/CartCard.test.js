@@ -2,7 +2,15 @@ import CartCard from "../components/CartCards/CartCard";
 import { screen, render, waitFor} from "@testing-library/react";
 import '@testing-library/jest-dom';
 import userEvent from "@testing-library/user-event";
+import { server } from './mocks/server';
+beforeAll(() => server.listen());
 
+// Reset any request handlers that we may add during the tests,
+// so they don't affect other tests.
+afterEach(() => server.resetHandlers());
+
+// Clean up after the tests are finished.
+afterAll(() => server.close());
 test('cart item renders with correct passed down prop and initial quantity of 1', async() => {
     render(<CartCard cartProduct = {[{
         id: 1,

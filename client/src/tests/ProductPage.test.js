@@ -9,9 +9,17 @@ import '@testing-library/jest-dom';
 import { ProductsProvider } from "../features/Products/ProductsContext";
 import userEvent from '@testing-library/user-event';
 import Login from "../features/Login/Login";
+import { server } from './mocks/server';
 //first intercept on mount call with msw to se selected product
 
+beforeAll(() => server.listen());
 
+// Reset any request handlers that we may add during the tests,
+// so they don't affect other tests.
+afterEach(() => server.resetHandlers());
+
+// Clean up after the tests are finished.
+afterAll(() => server.close());
 test('renders selected product information correctly', async() =>{
     render(
 <CartProvider>

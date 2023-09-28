@@ -7,7 +7,15 @@ import { CartProvider } from '../features/Cart/CartContext.js';
 import { ProductsProvider } from '../features/Products/ProductsContext.js';
 import { cartQuantityCalculator } from '../features/Header/HeaderHelperFunctions.js';
 import '@testing-library/jest-dom';
+import { server } from './mocks/server';
+beforeAll(() => server.listen());
 
+// Reset any request handlers that we may add during the tests,
+// so they don't affect other tests.
+afterEach(() => server.resetHandlers());
+
+// Clean up after the tests are finished.
+afterAll(() => server.close());
 describe('Header component initial render' , () =>{
 
 test('renders Header with correct text in banner, company name and log in text', () => {
