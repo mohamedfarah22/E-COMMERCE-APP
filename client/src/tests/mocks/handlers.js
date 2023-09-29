@@ -163,11 +163,9 @@ const handlers = [
         rest.get('http://localhost:4000/products/categories', (req, res, ctx) => {
           return res(
             ctx.status(200),
-            ctx.json([
-              {
-                categories: 'bangles'
-              }
-            ])
+            ctx.json(
+              [{category: 'rings'}, {category: 'bangles'}, {category: 'necklaces'}, {category: 'earrings'}]
+            )
           );
         }),
       
@@ -189,8 +187,6 @@ const handlers = [
             );
           } 
         }),
-        
-  
-];
+      ];   
 
 export { handlers };
