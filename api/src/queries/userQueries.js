@@ -1,4 +1,4 @@
-const { get } = require('../Routers/authRouter');
+
 
 const Pool = require('pg').Pool;
 
