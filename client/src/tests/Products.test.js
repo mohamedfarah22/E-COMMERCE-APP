@@ -54,7 +54,7 @@ const ringProductImage= screen.getByText('Classic Gold Band Ring');
 
 expect(ringProductName).toBeInTheDocument();
 expect(ringProductImage).toBeInTheDocument();
-screen.debug()
+
 
 })
 })
@@ -98,7 +98,7 @@ test("when category is bangles, only bangle products should be rendered", async(
     
     expect(ringProductName).not.toBeInTheDocument();
     expect(ringProductImage).not.toBeInTheDocument();
-    screen.debug()
+    
     })
     })
     test("when category is earrings, only earring products should be rendered", async()=> {
@@ -141,7 +141,7 @@ test("when category is bangles, only bangle products should be rendered", async(
         
         expect(ringProductName).not.toBeInTheDocument();
         expect(ringProductImage).not.toBeInTheDocument();
-        screen.debug()
+       
         })
         })
 
@@ -185,7 +185,7 @@ test("when category is bangles, only bangle products should be rendered", async(
             
             expect(ringProductName).not.toBeInTheDocument();
             expect(ringProductImage).not.toBeInTheDocument();
-            screen.debug()
+           
             
             })
             
@@ -236,7 +236,7 @@ test("when category is bangles, only bangle products should be rendered", async(
                 expect(ringProductName).toBeInTheDocument();
                 expect(ringProductImage).toBeInTheDocument();
     
-                screen.debug()
+               
                 })
         })
 
