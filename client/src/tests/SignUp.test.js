@@ -8,6 +8,7 @@ import { ProductsProvider } from '../features/Products/ProductsContext';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { server } from './mocks/server';
+import { rest } from 'msw';
 beforeAll(() => server.listen());
 
 // Reset any request handlers that we may add during the tests,
@@ -16,6 +17,11 @@ afterEach(() => server.resetHandlers());
 
 // Clean up after the tests are finished.
 afterAll(() => server.close());
+//mock navigte
+jest.mock('react-router-dom', () => ({
+    ...jest.requireActual('react-router-dom'), // Use the actual module except for useNavigate
+    useNavigate: jest.fn(), // Mock useNavigate
+  }));
 test("sign up form rendered correctly", () => {
 
     render(
@@ -94,3 +100,75 @@ test("cart pop up is open when cart icon is clicked on", async() => {
        
 
 })
+
+
+
+
+
+
+test('navigate called on sign up form after successful registration', async() => {
+    server.use(
+        rest.post('http://localhost:4000/auth/register', (req, res, ctx) => {
+            return res(ctx.status(201))
+        })
+    )
+    const navigateMock = jest.fn();
+    
+require('react-router-dom').useNavigate.mockReturnValue(navigateMock);
+   render(
+    <ProductsProvider>
+    <CartProvider>
+    <CartProviderPopUp>
+    <MemoryRouter>
+        <SignUp userId = {'1'}/>
+    </MemoryRouter>
+    </CartProviderPopUp>
+    </CartProvider>
+    </ProductsProvider>)
+
+
+const user = userEvent.setup()
+
+
+await waitFor(() => {
+    const signUpButton  = screen.getByRole('button', {name: 'Create Account'})
+    user.click(signUpButton)
+    expect(navigateMock).toHaveBeenCalledWith('/login')
+})
+
+})
+
+//test navigate not called on sign up for failed registration
+test('navigate not called on sign up form after failed registration', async() => {
+    server.use(
+        rest.post('http://localhost:4000/auth/register', (req, res, ctx) => {
+            return res(ctx.status(404))
+        })
+    )
+    const navigateMock = jest.fn();
+    
+require('react-router-dom').useNavigate.mockReturnValue(navigateMock);
+   render(
+    <ProductsProvider>
+    <CartProvider>
+    <CartProviderPopUp>
+    <MemoryRouter>
+        <SignUp userId = {'1'}/>
+    </MemoryRouter>
+    </CartProviderPopUp>
+    </CartProvider>
+    </ProductsProvider>)
+
+
+const user = userEvent.setup()
+
+
+await waitFor(() => {
+    const signUpButton  = screen.getByRole('button', {name: 'Create Account'})
+    user.click(signUpButton)
+    expect(navigateMock).not.toHaveBeenCalled()
+})
+
+})
+
+//test all textboxes have style when create account button is clicked 

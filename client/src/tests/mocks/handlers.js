@@ -187,6 +187,22 @@ const handlers = [
             );
           } 
         }),
+        rest.get('http://localhost:4000/carts/cart-total', (req, res, ctx) => {
+          // Access query parameters using req.url.searchParams
+          const userId = req.url.searchParams.get('user_id');
+          
+          // Return the response based on the userId
+          if (userId === '1') {
+            return res(
+              ctx.status(200),
+              ctx.json([
+                {
+                  total_cost: 1100
+                }
+              ])
+            );
+          } 
+        })
       ];   
 
 export { handlers };
