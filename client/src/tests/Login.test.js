@@ -95,7 +95,7 @@ test("if cart component is opened when cart icon is clicked", async() => {
         <CartProviderPopUp>
             <CartProvider>
         <MemoryRouter>
-            <Login/>
+            <Login userId = {'1'}/>
         </MemoryRouter>
         </CartProvider>
     </CartProviderPopUp>
@@ -104,14 +104,33 @@ test("if cart component is opened when cart icon is clicked", async() => {
         //set up userEvent
     const user = userEvent.setup();
 
-        //find cart icon;
-        const cartIcon = screen.getByRole('button', {name:/shopping_bag/});
-        waitFor(() => {
-            user.click(cartIcon) 
-            //check if cart component is open
-            const cartComponent = screen.getByRole('heading', {name: 'Cart'});
-            expect(cartComponent).toBeInTheDocument()
-        })
+       // Wait for any asynchronous actions to complete
+       await waitFor(() => {
+        // Initially, the cart should not be in the document
+        const cartHeading = screen.queryByText('Cart');
+        expect(cartHeading).not.toBeInTheDocument();
+    
+        // Get cart logo
+        const cartLogo = screen.getByText('shopping_bag');
+    
+        // Click cart logo to open the cart
+        user.click(cartLogo);
+        
+        
+      });
+      await waitFor(() => {
+          const cartHeading = screen.getByText('Cart');
+          expect(cartHeading).toBeInTheDocument();
+          //find close button
+          const closeButton  = screen.getByText('close');
+          user.click(closeButton)
+      })
+      
+      await waitFor(() => {
+          const cartHeading = screen.queryByText('Cart');
+          expect(cartHeading).not.toBeInTheDocument();
+          
+      })
     
 })
 

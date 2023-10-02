@@ -72,7 +72,7 @@ test("sign up form rendered correctly", () => {
 
 })
 
-test("cart pop up is open when cart icon is clicked on", async() => {
+test("cart pop up is open when cart icon is clicked and closed when closed icon is clicked", async() => {
     //render
 
     render(
@@ -88,14 +88,33 @@ test("cart pop up is open when cart icon is clicked on", async() => {
 
         //set up user event to simulate user action
         const user = userEvent.setup();
-
-        //find cart icon;
-        const cartIcon = screen.getByRole('button', {name:/shopping_bag/});
-        await waitFor(() => {
-            user.click(cartIcon) 
-            //check if cart component is open
-            const cartComponent = screen.getByRole('heading', {name: 'Cart'});
-            expect(cartComponent).toBeInTheDocument()
+          
+            // Wait for any asynchronous actions to complete
+            await waitFor(() => {
+              // Initially, the cart should not be in the document
+              const cartHeading = screen.queryByText('Cart');
+              expect(cartHeading).not.toBeInTheDocument();
+          
+              // Get cart logo
+              const cartLogo = screen.getByText('shopping_bag');
+          
+              // Click cart logo to open the cart
+              user.click(cartLogo);
+              
+              
+            });
+            await waitFor(() => {
+                const cartHeading = screen.getByText('Cart');
+                expect(cartHeading).toBeInTheDocument();
+                //find close button
+                const closeButton  = screen.getByText('close');
+                user.click(closeButton)
+            })
+            
+            await waitFor(() => {
+                const cartHeading = screen.queryByText('Cart');
+                expect(cartHeading).not.toBeInTheDocument();
+                
         })
        
 
