@@ -22,7 +22,6 @@ function SignUp({filterCategory, setFilterCategory, userId}){
           const response = await axios.post('http://localhost:4000/auth/register', formData);
       
           if (response.status === 201) {
-            console.log('Form submission successful');
             navigate('/login')
           } else {
             console.log('Form submission failed');
