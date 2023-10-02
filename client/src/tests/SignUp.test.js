@@ -171,4 +171,3 @@ await waitFor(() => {
 
 })
 
-//test all textboxes have style when create account button is clicked 

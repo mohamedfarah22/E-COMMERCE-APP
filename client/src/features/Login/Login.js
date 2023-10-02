@@ -31,7 +31,6 @@ function Login({filterCategory, setFilterCategory, userId, setLoggedIn}){
              setLoggedIn(true);
              localStorage.setItem('isLoggedIn', 'true');
              navigate('/')
-              console.log('login successful');
             } else {
               console.log('login failed');
             }
