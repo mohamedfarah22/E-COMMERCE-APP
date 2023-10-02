@@ -1,7 +1,7 @@
 
 import React, { createContext, useContext, useState } from 'react';
 
-const PopupContext = createContext();
+export const PopupContext = createContext();
 
 export function usePopup() {
   return useContext(PopupContext);

@@ -227,6 +227,14 @@ const handlers = [
               )
             );
           } 
+        }),
+        rest.post('http://localhost:4000/check-out', (req, res, ctx) => {
+          return res(
+            ctx.status(201),
+            ctx.json({
+              url: 'http://stripe-checkout.com'
+            })
+          )
         })
       ];   
 

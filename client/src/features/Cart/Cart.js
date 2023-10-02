@@ -5,12 +5,13 @@ import axios from 'axios';
 import { usePopup } from '../Cart/CartPopUpContext';
 import { useCart } from './CartContext';
 import { roundUpToTwoDecimalPlaces } from './CartHelperFunctions';
+import { useNavigate} from 'react-router-dom';
 function CartPopUp({ userId}){
     const [cartProducts, setCartProducts] = useState([]);
    const [totals, setTotals] = useState(0)
    const {openPopUp, setOpenPopUp} = usePopup()
    const {cart, setCart} = useCart();
-    
+    const navigate = useNavigate()
     const onClickHandler = (e) => {
         e.preventDefault();
         setOpenPopUp(false)
@@ -72,7 +73,7 @@ useEffect(()=>{
   const onClickHandlerCheckout = (e) =>{
     e.preventDefault();
     axios.post('http://localhost:4000/check-out', cart).then((response) => {
-     window.location.href = response.data.url
+     navigate(response.data.url)
     }).catch((error) => {
       console.log('Error ', error);
     })

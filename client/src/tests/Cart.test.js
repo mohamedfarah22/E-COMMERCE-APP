@@ -1,13 +1,17 @@
 import React from 'react';
 import { render, screen, waitFor} from '@testing-library/react';
 import CartPopUp from '../features/Cart/Cart';
-import { CartProviderPopUp } from '../features/Cart/CartPopUpContext.js';
+import { CartProviderPopUp, PopupContext } from '../features/Cart/CartPopUpContext.js';
 import { CartProvider } from '../features/Cart/CartContext.js';
 import { roundUpToTwoDecimalPlaces } from '../features/Cart/CartHelperFunctions';
 import '@testing-library/jest-dom';
 import { server } from './mocks/server';
 import userEvent from "@testing-library/user-event";
+import { MemoryRouter } from 'react-router-dom';
+
+
 //test helper function
+
 test('test round up 2 decimals helper function', () => {
     const num = 123.4567;
     const roundedNum = roundUpToTwoDecimalPlaces(num);
@@ -22,15 +26,22 @@ afterEach(() => server.resetHandlers());
 
 // Clean up after the tests are finished.
 afterAll(() => server.close());
+//mock navigte
+jest.mock('react-router-dom', () => ({
+...jest.requireActual('react-router-dom'), // Use the actual module except for useNavigate
+     useNavigate: jest.fn(), // Mock useNavigate
+ }));
 describe('testing that cart products and fixed cart elements rendered in cart pop' , () => {
     test('that fixed elements rendered in cart', async ()=> {
         render(
+    <MemoryRouter>
     <CartProviderPopUp>
         <CartProvider>
             <CartPopUp userId={'1'}/>
         </CartProvider>
     
     </CartProviderPopUp>
+    </MemoryRouter>
         )
 await waitFor(() => {
 
@@ -56,11 +67,13 @@ await waitFor(() => {
     })
     test('test your cart is empty text appears when cart is empty', async() => {
         render(
+            <MemoryRouter>
             <CartProviderPopUp>
                 <CartProvider>
                     <CartPopUp userId={'1'}/>
                 </CartProvider>
             </CartProviderPopUp>
+            </MemoryRouter>
         )
         await waitFor(() => {
             const cartEmptyText = screen.getByText('Your cart is empty');
@@ -70,11 +83,13 @@ await waitFor(() => {
     })
     test('first cart product is rendered correctly', async () => {
         render(
+            <MemoryRouter>
             <CartProviderPopUp>
                 <CartProvider>
                     <CartPopUp userId={'1'}/>
                 </CartProvider>
             </CartProviderPopUp>
+            </MemoryRouter>
         )
         await waitFor(() => {
             const productName = screen.getByText('Elegant Gold Bangle');
@@ -91,11 +106,13 @@ await waitFor(() => {
     })
     test('second cart product is rendered correctly', async () => {
         render(
+            <MemoryRouter>
             <CartProviderPopUp>
                 <CartProvider>
                     <CartPopUp userId={'1'}/>
                 </CartProvider>
             </CartProviderPopUp>
+            </MemoryRouter>
         )
         await waitFor(() => {
             const productName = screen.getByText('Boho Beaded Gold Necklace');
@@ -112,51 +129,54 @@ await waitFor(() => {
     })
     test('total cost is correct', async () => {
         render(
+            <MemoryRouter>
             <CartProviderPopUp>
                 <CartProvider>
                     <CartPopUp userId={'1'}/>
                 </CartProvider>
             </CartProviderPopUp>
+            </MemoryRouter>
         )
         await waitFor(() => {
             const totalAmount = screen.getByText('$2299.98')
             expect(totalAmount).toBeInTheDocument();
-            screen.debug()
+          
         })
         
     })
 })
   
-describe('test checkout button when clicked and close button when clicked', () => {
+describe('test checkout button', () => {
   
 
-    /*test('close button when clicked should close cart', async () => {
-        // Create a custom context provider with the desired values
-        const customPopUpProvider = {
-          openPopUp: true,
-          setOpenPopUp: jest.fn(),
-        };
-      
+test('checkout button navigates to provided stripe url', async () => {
+ 
+  const navigateMock = jest.fn();
+    
+  require('react-router-dom').useNavigate.mockReturnValue(navigateMock);
+        
         // Render the CartPopUp component wrapped with the custom context provider
         render(
-          <CartProviderPopUp value={customPopUpProvider}>
+        <MemoryRouter>
+          <CartProviderPopUp>
             <CartProvider>
               <CartPopUp userId={'1'} />
             </CartProvider>
           </CartProviderPopUp>
+          </MemoryRouter>
         );
       
         const user = userEvent.setup();
-      
+        
+        
+       
         // Wait for any async operations to complete
-        await waitFor(() => {
-          const closeButton = screen.getByText('close');
-         user.click(closeButton);
+      await waitFor(() => {
+        const checkOutButton  = screen.getByRole('button', {name: 'Check Out'})
+        user.click(checkOutButton)
+        expect(navigateMock).toHaveBeenCalledWith('http://stripe-checkout.com')
+      })
       
-          // Expect that the setOpenPopUp function was called with false
-          expect(customPopUpProvider.setOpenPopUp).toHaveBeenCalledWith(false);
-        });
-      });*/
-      //test checkout button url redirect works
-
+       
+})
 })
