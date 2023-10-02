@@ -4,6 +4,7 @@ import CartCard from '../../components/CartCards/CartCard';
 import axios from 'axios';
 import { usePopup } from '../Cart/CartPopUpContext';
 import { useCart } from './CartContext';
+import { roundUpToTwoDecimalPlaces } from './CartHelperFunctions';
 function CartPopUp({ userId}){
     const [cartProducts, setCartProducts] = useState([]);
    const [totals, setTotals] = useState(0)
@@ -14,10 +15,7 @@ function CartPopUp({ userId}){
         e.preventDefault();
         setOpenPopUp(false)
 }
- //round total to 2 decimal places
- function roundUpToTwoDecimalPlaces(number) {
-    return Math.ceil(number * 100) / 100;
-  }
+ 
 
 //get running total
 useEffect(() => {
@@ -84,7 +82,7 @@ useEffect(()=>{
     return (
         <div className="popup-container">
         <div className="popup-body">
-        <div className="close-text-container">
+        <div className="close-text-container" >
             <span className="material-icons" onClick = {onClickHandler}>
             close
              </span>
@@ -93,7 +91,7 @@ useEffect(()=>{
         </div>
         <div className="cart-items-container">
             {cartProducts.map((cartProduct) => {
-                    return <CartCard cart = {cart} cartProducts = {cartProducts} cartProduct={cartProduct}  setCart = {setCart} setCartProducts={setCartProducts} userId = {userId}  />
+                    return <CartCard key = {cartProduct[0].product_name} cart = {cart} cartProducts = {cartProducts} cartProduct={cartProduct}  setCart = {setCart} setCartProducts={setCartProducts} userId = {userId}  />
             })}
         </div>
 

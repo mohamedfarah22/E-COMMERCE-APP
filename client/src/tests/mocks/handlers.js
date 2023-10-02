@@ -48,7 +48,17 @@ const handlers = [
               }
             ])
           );
-        } else {
+        } if(userId === '1' && productId === '31'){
+          return res(
+            ctx.status(200),
+            ctx.json([
+              {
+                quantity: 3, 
+              }
+            ])
+          )
+        }
+         else {
           // Return an error response for other cases
           return res(ctx.status(404));
         }
@@ -58,7 +68,8 @@ const handlers = [
                 return res (
                  ctx.status(200),
                    ctx.json([
-                     {id: 1, product_id: 1, quantity: 1, user_id: 1}
+                     {id: 1, product_id: 1, quantity: 1, user_id: 1},
+                     {id: 2, product_id: 31, quantity: 3, user_id: 1 }
                    ])
                  );
                } 
@@ -145,6 +156,20 @@ const handlers = [
       }
         ),
   
+        rest.get('http://localhost:4000/products/31', (req, res, ctx) => {
+          return res(
+            ctx.status(200),
+            ctx.json([
+              {
+                id: 31,
+                product_name: 'Boho Beaded Gold Necklace',
+                image_url: 'http://localhost:4001/images/necklaces.jpeg',
+                product_description: 'Channel bohemian vibes with this beaded gold necklace, weighing 10 grams. The colorful beads and eclectic design create a playful accessory that complements your free-spirited style.',
+                price: 349.99
+              }
+            ])
+          );
+        }),
         rest.get('http://localhost:4000/products/1', (req, res, ctx) => {
           return res(
             ctx.status(200),
@@ -179,11 +204,11 @@ const handlers = [
           if (userId === '1') {
             return res(
               ctx.status(200),
-              ctx.json([
+              ctx.json(
                 {
-                  total_cost: 1100
+                  total_cost: 2299.977
                 }
-              ])
+              )
             );
           } 
         }),
@@ -195,11 +220,11 @@ const handlers = [
           if (userId === '1') {
             return res(
               ctx.status(200),
-              ctx.json([
+              ctx.json(
                 {
                   total_cost: 1100
                 }
-              ])
+              )
             );
           } 
         })
