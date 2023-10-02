@@ -64,7 +64,7 @@ await waitFor(() => {
 })
 
 //test cart opens
-test('cart opened when clicked' , async () => {
+test('cart opened when clicked and closed when clicked' , async () => {
     render(
         <CartProvider>
             <CartProviderPopUp>
@@ -81,16 +81,38 @@ test('cart opened when clicked' , async () => {
         
             </CartProviderPopUp>
         </CartProvider>)
-         //set up user event to simulate user action
-         const user = userEvent.setup();
-
-         await waitFor(() => {
-            const cartIcon = screen.getByRole('button', {name:/shopping_bag/});
-            user.click(cartIcon) 
-            const cartComponent = screen.getByRole('heading', {name: 'Cart'});
-            expect(cartComponent).toBeInTheDocument()
-         })
-      
+   
+         
+            // Set up user event
+            const user = userEvent.setup();
+          
+            // Wait for any asynchronous actions to complete
+            await waitFor(() => {
+              // Initially, the cart should not be in the document
+              const cartHeading = screen.queryByText('Cart');
+              expect(cartHeading).not.toBeInTheDocument();
+          
+              // Get cart logo
+              const cartLogo = screen.getByText('shopping_bag');
+          
+              // Click cart logo to open the cart
+              user.click(cartLogo);
+              
+              
+            });
+            await waitFor(() => {
+                const cartHeading = screen.getByText('Cart');
+                expect(cartHeading).toBeInTheDocument();
+                //find close button
+                const closeButton  = screen.getByText('close');
+                user.click(closeButton)
+            })
+            
+            await waitFor(() => {
+                const cartHeading = screen.queryByText('Cart');
+                expect(cartHeading).not.toBeInTheDocument();
+                
+            })
 })
 
 //test route to login page
