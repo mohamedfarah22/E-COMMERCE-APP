@@ -61,3 +61,7 @@ app.use('/search', searchRouter)
 app.listen(port, () => {
   console.log(`E-commerce app listening on ${port}`)
 })
+
+//export app 
+
+module.exports = app;
