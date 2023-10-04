@@ -15,6 +15,5 @@ const getUserByIdHelper = (id) => {
 
 
 module.exports = {
-    getUsers, 
     getUserByIdHelper
 }
