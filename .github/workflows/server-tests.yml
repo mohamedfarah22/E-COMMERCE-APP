@@ -34,14 +34,6 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
-
-      - name: Set Up Environment Variables
-        env:
-          DB_USER: admin
-          DB_PASSWORD: ecommdbtest
-          DB_HOST: localhost
-          DB_NAME: ecommercedatabasetest
-          DB_PORT: 5433
-      
+        
       - name: Run Tests
         run: npm test -- --testPathPattern=api/src/tests
