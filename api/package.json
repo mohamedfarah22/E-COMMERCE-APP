@@ -4,7 +4,7 @@
   "description": "API for an e-commerce website",
   "main": "server.js",
   "scripts": {
-    "test": "NODE_ENV=test jest",
+    "test": "jest",
     "start": "node server.js"
   },
   "author": "",
