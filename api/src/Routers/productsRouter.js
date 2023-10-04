@@ -12,7 +12,6 @@ router.get('/', (req, res, next) => {
       pool.query('SELECT * FROM products WHERE category= $1', [category], (error, results) => {
           if(error){
             res.status(500).json({ error: "Internal server error" });
-            console.log(error)
           } else{
           res.status(200).json(results.rows)
           }
