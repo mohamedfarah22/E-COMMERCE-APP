@@ -4,7 +4,7 @@
   "description": "API for an e-commerce website",
   "main": "server.js",
   "scripts": {
-    "test": "test",
+    "test": "NODE_ENV=test jest",
     "start": "node server.js"
   },
   "author": "",
@@ -20,5 +20,11 @@
     "passport-local": "^1.0.0",
     "pg": "^8.11.2",
     "stripe": "^13.5.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "pg-mem": "^2.7.1",
+    "pg-pool": "^3.6.1",
+    "supertest": "^6.3.3"
   }
 }
