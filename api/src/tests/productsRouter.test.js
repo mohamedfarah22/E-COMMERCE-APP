@@ -2,6 +2,13 @@
 const pool = require('../../dbConfig')
 const app = require('../../server')
 const request  = require('supertest')
+//create mock pool to simulate db errors
+const createMockPool = () => {
+    return {
+        query: jest.fn(),
+        // Add other methods or properties needed for testing
+    };
+};
 //import clean up function
 
 
@@ -263,13 +270,140 @@ it('returns 404 error message when product ID is invalid' , async() => {
 
 })
 
-
-    afterAll(() => {
+afterAll(() => {
         
     pool.end()
     
     })
+})
+//describe('Test products router failure paths')
+describe('Test products router server errors', () => {
+    
+    it('should return a server error when there is a database error in get products', async () => {
+        // Mock database query function to simulate an error
+        const mockPool = createMockPool();
+        mockPool.query.mockImplementation((query, callback) => {
+            callback(new Error('Database connection issue'), null);
+        });
+
+        // Replace the actual pool with the mock pool
+        require('../../dbConfig').pool = mockPool;
+
+        // Send a GET request to the /products route
+        const response = await request(app).get('/products');
+
+        // Expect a 500 status code in the response
+        expect(response.status).toBe(500);
+
+        // Optionally, check the response body for an error message
+        expect(response.body).toEqual({ error: "Internal server error" });
+    });
+    it('should return a server error when there is a database error in get products by category', async () => {
+        // Mock database query function to simulate an error
+        const mockPool = createMockPool();
+        mockPool.query.mockImplementation((query, callback) => {
+            callback(new Error('Database connection issue'), null);
+        });
+
+        // Replace the actual pool with the mock pool
+        require('../../dbConfig').pool = mockPool;
+
+        // Send a GET request to the /products route
+        const response = await request(app).get('/products?category=bangles');
+
+        // Expect a 500 status code in the response
+        expect(response.status).toBe(500);
+
+        // Optionally, check the response body for an error message
+        expect(response.body).toEqual({ error: "Internal server error" });
+    });
+    it('should return a server error when there is a database error in get product categories', async () => {
+        // Mock database query function to simulate an error
+        const mockPool = createMockPool();
+        mockPool.query.mockImplementation((query, callback) => {
+            callback(new Error('Database connection issue'), null);
+        });
+
+        // Replace the actual pool with the mock pool
+        require('../../dbConfig').pool = mockPool;
+
+        // Send a GET request to the /products route
+        const response = await request(app).get('/products/categories');
+
+        // Expect a 500 status code in the response
+        expect(response.status).toBe(500);
+
+        // Optionally, check the response body for an error message
+        expect(response.body).toEqual({ error: "Internal server error" });
+    });
+    it('should return a server error when there is a database error in get product by ID', async () => {
+        // Mock database query function to simulate an error
+        const mockPool = createMockPool();
+        mockPool.query.mockImplementation((query, callback) => {
+            callback(new Error('Database connection issue'), null);
+        });
+
+        // Replace the actual pool with the mock pool
+        require('../../dbConfig').pool = mockPool;
+
+        // Send a GET request to the /products route
+        const response = await request(app).get('/products/1');
+
+        // Expect a 500 status code in the response
+        expect(response.status).toBe(500);
+
+        // Optionally, check the response body for an error message
+        expect(response.body).toEqual({ error: "Internal server error" });
+    });
+    it('should return a server error when there is a database error in create new product', async () => {
+        // Mock database query function to simulate an error
+        const mockPool = createMockPool();
+        mockPool.query.mockImplementation((query, callback) => {
+            callback(new Error('Database connection issue'), null);
+        });
+
+        // Replace the actual pool with the mock pool
+        require('../../dbConfig').pool = mockPool;
+
+        //product data to be sent in post request
+    const productData= {
+        id: 5,
+        product_name:'Dainty Gold Bangle',
+        product_description:  `Embrace subtle luxury with this dainty gold bangle, weighing just 15 grams. Its lightweight charm and delicate craftsmanship ensure it''s perfect for everyday wear.`,
+        category: 'bangles',
+        price: 99.99,
+        available_quantity: 12,
+        image_url: 'http://localhost:8080/images/bangle.jpeg'
+
+    }
+    //get products from router
+    const response= await request(app).post('/products').send(productData);
+        // Expect a 500 status code in the response
+        expect(response.status).toBe(500);
+
+        // Optionally, check the response body for an error message
+        expect(response.body).toEqual({ error: "Internal server error" });
+    });
+    it('should return a server error when there is a database error in delete product', async () => {
+        // Mock database query function to simulate an error
+        const mockPool = createMockPool();
+        mockPool.query.mockImplementation((query, callback) => {
+            callback(new Error('Database connection issue'), null);
+        });
+
+        // Replace the actual pool with the mock pool
+        require('../../dbConfig').pool = mockPool;
+        
+        const productIdToDelete= 1;
+  
+        //get products from router
+        const response= await request(app).delete(`/products/${productIdToDelete}`);
+        // Expect a 500 status code in the response
+        expect(response.status).toBe(500);
+
+        // Optionally, check the response body for an error message
+        expect(response.body).toEqual({ error: "Internal server error" });
+    });
 
 });
 
-//describe('Test products router failure paths')
