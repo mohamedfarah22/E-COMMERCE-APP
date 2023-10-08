@@ -3,7 +3,7 @@ name: Run React Testing Library Tests on Main
 on:
   pull_request:
     branches:
-      - main
+      - test-branch
 
 jobs:
   test:
