@@ -12,11 +12,11 @@ const elasticSearch = require('./src/queries/elasticSearch')
 //require products router
 
 const productsRouter = require('./src/Routers/productsRouter.js')(pool)
-const authRouter = require('./src/Routers/authRouter.js')(pool)
+const authRouter = require('./src/Routers/authRouter.js')
 const usersRouter = require('./src/Routers/usersRouter.js')(pool)
-const cartsRouter = require('./src/Routers/cartRouter.js')(pool)
-const stripeRouter = require('./src/Routers/stripeRouterCheckout.js')(pool)
-const searchRouter = require('./src/Routers/searchRouter.js')(pool)
+const cartsRouter = require('./src/Routers/cartRouter.js')
+const stripeRouter = require('./src/Routers/stripeRouterCheckout.js')
+const searchRouter = require('./src/Routers/searchRouter.js')
 //use cors
 app.use(cors());
 //use body parser
