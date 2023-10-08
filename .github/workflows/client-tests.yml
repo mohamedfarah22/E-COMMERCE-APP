@@ -1,7 +1,7 @@
 name: Run React Testing Library Tests on Main
 
 on:
-  merge:
+  pull_request:
     branches:
       - test
 

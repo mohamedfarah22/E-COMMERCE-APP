@@ -1,7 +1,7 @@
 name: Run server tests with jest and supertest
 
 on: 
-  merge:
+  pull_request:
     branches:
       - main
 
