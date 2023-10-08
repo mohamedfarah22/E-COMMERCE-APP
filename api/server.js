@@ -64,7 +64,7 @@ app.use('/check-out', stripeRouter)
 //mount search router
 app.use('/search', searchRouter)
 //make sure node_env is not test before allowing express to listen
-if (process.env['NODE_ENV'] !== 'test') {
+if (process.env['NODE_ENV'] !== 'test' || process.env['NODE_ENV'] !== 'render-deployment') {
   app.listen(port, () => {
     console.log(`E-commerce app listening on ${port}`)
   })

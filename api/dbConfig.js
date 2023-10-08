@@ -18,6 +18,14 @@ else if(process.env.NODE_ENV === 'pg-test-error'){
         callback(new Error('Database connection issue'), null);
       });
 }
+else if(process.env.NODE_ENV === 'render-deployment'){
+    pool = new Pool({
+        user: "ecomm_database_user",
+        password: "RJ6FqIo1vd0kq9LwmdebNympIyEteJsg",
+        host: "postgres://ecomm_database_user:RJ6FqIo1vd0kq9LwmdebNympIyEteJsg@dpg-ckh33u6afg7c73fmoqug-a/ecomm_database",
+        port: 5432
+    })
+}
 else{
     //use product database
     pool = new Pool({
