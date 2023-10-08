@@ -4,20 +4,19 @@ import CartCard from '../../components/CartCards/CartCard';
 import axios from 'axios';
 import { usePopup } from '../Cart/CartPopUpContext';
 import { useCart } from './CartContext';
+import { roundUpToTwoDecimalPlaces } from './CartHelperFunctions';
+import { useNavigate} from 'react-router-dom';
 function CartPopUp({ userId}){
     const [cartProducts, setCartProducts] = useState([]);
    const [totals, setTotals] = useState(0)
    const {openPopUp, setOpenPopUp} = usePopup()
    const {cart, setCart} = useCart();
-    
+    const navigate = useNavigate()
     const onClickHandler = (e) => {
         e.preventDefault();
         setOpenPopUp(false)
 }
- //round total to 2 decimal places
- function roundUpToTwoDecimalPlaces(number) {
-    return Math.ceil(number * 100) / 100;
-  }
+ 
 
 //get running total
 useEffect(() => {
@@ -74,7 +73,7 @@ useEffect(()=>{
   const onClickHandlerCheckout = (e) =>{
     e.preventDefault();
     axios.post('http://localhost:4000/check-out', cart).then((response) => {
-     window.location.href = response.data.url
+     navigate(response.data.url)
     }).catch((error) => {
       console.log('Error ', error);
     })
@@ -84,7 +83,7 @@ useEffect(()=>{
     return (
         <div className="popup-container">
         <div className="popup-body">
-        <div className="close-text-container">
+        <div className="close-text-container" >
             <span className="material-icons" onClick = {onClickHandler}>
             close
              </span>
@@ -93,7 +92,7 @@ useEffect(()=>{
         </div>
         <div className="cart-items-container">
             {cartProducts.map((cartProduct) => {
-                    return <CartCard cart = {cart} cartProducts = {cartProducts} cartProduct={cartProduct}  setCart = {setCart} setCartProducts={setCartProducts} userId = {userId}  />
+                    return <CartCard key = {cartProduct[0].product_name} cart = {cart} cartProducts = {cartProducts} cartProduct={cartProduct}  setCart = {setCart} setCartProducts={setCartProducts} userId = {userId}  />
             })}
         </div>
 

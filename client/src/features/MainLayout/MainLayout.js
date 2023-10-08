@@ -18,7 +18,7 @@ function MainLayout({filterCategory,  setFilterCategory, userId, loggedIn, setLo
     
     }, [])
     return(
-    <div classname="main-layout-container">
+    <div className="main-layout-container">
         <Header setOpenPopup = {setOpenPopUp} loggedIn = {loggedIn} setLoggedIn = {setLoggedIn} setUserId = {setUserId} />
         <Categories filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} />
         {openPopUp ?

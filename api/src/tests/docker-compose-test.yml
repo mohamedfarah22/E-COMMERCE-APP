@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  database: 
+      container_name: ecomm-database-postgres-test
+      image: postgres:16beta2-alpine
+      environment:
+        POSTGRES_DB: ecommercedatabasetest
+        POSTGRES_USER: admin
+        POSTGRES_PASSWORD: ecommdbtest
+      ports:
+        - "5433:5432"
+    

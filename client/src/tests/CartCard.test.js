@@ -1,53 +1,16 @@
 import CartCard from "../components/CartCards/CartCard";
 import { screen, render, waitFor} from "@testing-library/react";
-import { setupServer } from "msw/lib/node";
-import { rest } from "msw";
+import '@testing-library/jest-dom';
 import userEvent from "@testing-library/user-event";
-//set up server to intercept calls
-const server = setupServer(
-    // Define mock responses for your API endpoints
-    rest.put('http://localhost:4000/carts', (req, res, ctx) => {
-        const userId = req.url.searchParams.get('user_id');
-        const productId = req.url.searchParams.get('product_id');
-        const quantity = req.url.searchParams('quantity');
-        if (userId === '1' && productId === '1' && quantity==='1') {
-            return res(
-              ctx.status(200),
-              ctx.json([
-                {
-                  quantity: 1
-                }
-              ])
-            );
-          } else {
-           
-            return res(ctx.status(404));
-          }
-        }),
-    
+import { server } from './mocks/server';
+beforeAll(() => server.listen());
 
-    rest.get('http://localhost:4000/carts/user-product-queries', (req, res, ctx) => {
-        // Access query parameters using req.url.searchParams
-        const userId = req.url.searchParams.get('user_id');
-        const productId = req.url.searchParams.get('product_id');
-      
-        // Return the response based on the query parameters
-        if (userId === '1' && productId === '1') {
-          return res(
-            ctx.status(200),
-            ctx.json([
-              {
-                quantity: 1, 
-              }
-            ])
-          );
-        } else {
-          // Return an error response for other cases
-          return res(ctx.status(404));
-        }
-      })
-      
-)
+// Reset any request handlers that we may add during the tests,
+// so they don't affect other tests.
+afterEach(() => server.resetHandlers());
+
+// Clean up after the tests are finished.
+afterAll(() => server.close());
 test('cart item renders with correct passed down prop and initial quantity of 1', async() => {
     render(<CartCard cartProduct = {[{
         id: 1,
