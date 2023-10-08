@@ -264,9 +264,9 @@ it('returns 404 error message when product ID is invalid' , async() => {
 })
 
 afterAll(() => {
-        
+   
     pool.end()
-    
+   
     })
 })
 //describe('Test products router failure paths')
