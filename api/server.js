@@ -39,7 +39,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 //create index and bulk updated index in elasticsearch with product data
 //do not index products to elastic search if node_env is test
-if (process.env['NODE_ENV'] !== 'test') {
+console.log(process.env.NODE_ENV);
+
+if (process.env.NODE_ENV !== 'test'  && process.env.NODE_ENV !== 'render-deployment') {
 elasticSearch.createIndex().then(() => elasticSearch.indexProductData()).catch(error => console.error("Error: ", error));
 }
 
@@ -64,7 +66,7 @@ app.use('/check-out', stripeRouter)
 //mount search router
 app.use('/search', searchRouter)
 //make sure node_env is not test before allowing express to listen
-if (process.env['NODE_ENV'] !== 'test' || process.env['NODE_ENV'] !== 'render-deployment') {
+if (process.env['NODE_ENV'] !== 'test') {
   app.listen(port, () => {
     console.log(`E-commerce app listening on ${port}`)
   })

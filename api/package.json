@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "jest",
-    "start": "node server.js NODE_ENV=render-deployment"
+    "start": "NODE_ENV=render-deployment node server.js"
+    
   },
   "author": "",
   "license": "ISC",
