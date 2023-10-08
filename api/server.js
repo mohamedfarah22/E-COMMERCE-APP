@@ -23,7 +23,7 @@ app.use(cors());
 app.use(bodyParser.json())
 //attach db to psql db
 const dbProductIniti = async () => {
-await pool.query(`GRANT ALL PRIVILEGES ON DATABASE ecommercedatabasetest TO admin`)
+await pool.query(`GRANT ALL PRIVILEGES ON DATABASE ecomm_database TO ecomm_database_user`)
 await pool.query('DROP TABLE IF EXISTS products');
 await pool.query(`CREATE TABLE products (
     id SERIAL PRIMARY KEY,
