@@ -12,11 +12,11 @@ const elasticSearch = require('./src/queries/elasticSearch')
 //require products router
 
 const productsRouter = require('./src/Routers/productsRouter.js')(pool)
-const authRouter = require('./src/Routers/authRouter.js')
+const authRouter = require('./src/Routers/authRouter.js')(pool)
 const usersRouter = require('./src/Routers/usersRouter.js')(pool)
-const cartsRouter = require('./src/Routers/cartRouter.js')
-const stripeRouter = require('./src/Routers/stripeRouterCheckout.js')
-const searchRouter = require('./src/Routers/searchRouter.js')
+const cartsRouter = require('./src/Routers/cartRouter.js')(pool)
+const stripeRouter = require('./src/Routers/stripeRouterCheckout.js')(pool)
+const searchRouter = require('./src/Routers/searchRouter.js')(pool)
 //use cors
 app.use(cors());
 //use body parser
@@ -43,12 +43,12 @@ VALUES
 ('Luxurious Gold Bangle', 'Indulge in opulence with this luxurious gold bangle, weighing a lavish 20 grams. The gleaming gold and ornate detailing create a statement piece that exudes grandeur.', 'bangles', 2250, 15, ,'./bangle.jpeg'),
 ('Elegant Gold Earrings', 'Elevate your elegance with these elegant gold earrings, each weighing a dainty 5 grams. Their intricate design and lightweight feel make them perfect for adding a touch of sophistication to any outfit.', 'earrings', 350, 10, './earrings.jpeg'),
 ('Dazzling Gold Earrings', 'Indulge in luxury with these dazzling diamond earrings, weighing a glamorous 10 grams. The sparkling diamonds and exquisite craftsmanship create a statement piece that captures attention.', 'earrings', 1499.99, 15, './earrings.jpeg'),
-('Charming Gold Earrings', 'Embrace classic charm with these charming pearl earrings, each weighing a delicate 3 grams. The lustrous pearls and timeless design make them an ideal accessory for both casual and formal occasions.', 'earrings', 299.99, 25, './earrings.jpeg')
+('Charming Gold Earrings', 'Embrace classic charm with these charming pearl earrings, each weighing a delicate 3 grams. The lustrous pearls and timeless design make them an ideal accessory for both casual and formal occasions.', 'earrings', 299.99, 25, './earrings.jpeg'),
 ('Classic Gold Chain Necklace', 'Elevate your style with this classic gold chain necklace, weighing a substantial 15 grams. Its timeless design and durable construction make it a versatile accessory for any occasion.', 'necklaces', 899.99, 10, './necklaces.jpeg'),
 ('Glamorous Gold Pendant Necklace', 'Make a statement with this glamorous pendant necklace, weighing 8 grams. The intricate pendant and shimmering chain create a stunning focal point for your ensemble.', 'necklaces', 599.99, 12, './necklaces.jpeg'),
-('Chic Gold Choker Necklace', 'Elevate your neckline with this chic gold choker necklace, weighing 6 grams. Its modern design and comfortable fit make it an ideal accessory for both casual and formal looks.', 'necklaces', 449.99, 15, './necklaces.jpeg')
-('Classic Gold Band Ring', 'Embrace timeless elegance with this classic gold band ring, weighing 6 grams. Its simple yet sophisticated design makes it a versatile accessory for any occasion.', 'rings', 499.99, 15, './rings.jpeg');
-('Sparkling Gold Halo Ring', 'Radiate brilliance with this diamond halo ring, weighing 4.5 grams. The dazzling center diamond is surrounded by a halo of smaller diamonds for maximum sparkle.', 'rings', 899.99, 8, './rings.jpeg')
+('Chic Gold Choker Necklace', 'Elevate your neckline with this chic gold choker necklace, weighing 6 grams. Its modern design and comfortable fit make it an ideal accessory for both casual and formal looks.', 'necklaces', 449.99, 15, './necklaces.jpeg'),
+('Classic Gold Band Ring', 'Embrace timeless elegance with this classic gold band ring, weighing 6 grams. Its simple yet sophisticated design makes it a versatile accessory for any occasion.', 'rings', 499.99, 15, './rings.jpeg'),
+('Sparkling Gold Halo Ring', 'Radiate brilliance with this diamond halo ring, weighing 4.5 grams. The dazzling center diamond is surrounded by a halo of smaller diamonds for maximum sparkle.', 'rings', 899.99, 8, './rings.jpeg'),
 ('Delicate Gold Stackable Ring', 'Create your own unique stack with this delicate gold ring, weighing 2 grams. Its slim design allows you to mix and match for a personalized look.', 'rings', 249.99, 20, './rings.jpeg')
 `)
 }
