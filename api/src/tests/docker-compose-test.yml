@@ -9,7 +9,7 @@ services:
         POSTGRES_PASSWORD: ecommdbtest
       ports:
         - "5433:5432"
-  elastic-search: 
+  elasticsearch: 
     image: docker.elastic.co/elasticsearch/elasticsearch:7.15.1
     container_name: elasticsearch-container
     environment:
