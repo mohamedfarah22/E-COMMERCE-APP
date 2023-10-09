@@ -110,10 +110,21 @@ async function searchProducts(searchPhrase){
       await esClient.indices.create({
         index: indexName,
         body: {
-          // Define index mappings and settings here
-        },
-      });
+          mappings:{
+              properties:{
+                  product_name: {type: 'text'},
+                  product_description: {type: 'text'},
+                  category: {type: 'keyword'},
+                  price: {type: 'float'}, 
+                  available_quantities: {type: 'integer'},
+                  image_url: {type: 'text'}
+              }
+          },
+      }
+    });
       console.log(`Index '${indexName}' created successfully.`);
+      //bulk update index
+      await indexProductData(pool)
     }
     const body = await esClient.search({
       index: 'product_index',
