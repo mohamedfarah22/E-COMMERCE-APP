@@ -27,6 +27,7 @@ jobs:
         image: docker.elastic.co/elasticsearch/elasticsearch:7.15.1
         env:
           discovery.type: single-node
+          ELASTICSEARCH_URL: http://elasticsearch:9200
         ports:
           - "9200:9200"
           - "9300:9300"
@@ -47,4 +48,6 @@ jobs:
         run: npm install
 
       - name: Run Tests
+        env:
+            ELASTICSEARCH_URL: ${{ job.services.elasticsearch.ELASTICSEARCH_URL }}
         run: npm test -- --testPathPattern=api/src/tests
