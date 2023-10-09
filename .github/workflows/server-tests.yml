@@ -32,7 +32,7 @@ jobs:
           - "9300:9300"
         volumes:
           - esdata:/usr/share/elasticsearch/data
-        options: --health-cmd "curl -f http://localhost:9200" --health-interval 10s --health-timeout 5s --health-retries 5
+        options: --health-cmd "curl -f http://elasticsearch:9200" --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
