@@ -2,7 +2,10 @@
 const pool = require('../../dbConfig')
 const app = require('../../server')
 const request  = require('supertest')
-//create mock pool to simulate db errors
+
+
+
+
 
 
 //set as test incaase 
@@ -81,6 +84,39 @@ describe('test users router success path', () =>{
         
             expect(response.body).toStrictEqual({ error: 'User not found' })
       })
+      it('successfully registers a new user returning 200 and user email', async () => {
+        const response  = await request(app).post('/auth/register').send({
+            first_name: 'Mohamed',
+            last_name:'Farah',
+            email: 'mohamed.farah9820@gmail.com',
+            password: 'registerTest'
+        })
+        expect(response.status).toBe(200);
+        expect(response.type).toBe('application/json');
+        expect(typeof response.body).toBe('object');
+        expect(response.body).toStrictEqual({email: 'mohamed.farah9820@gmail.com'})
+    })
+    it('successfully logs a user in and returns status ccode of 200 and the logged in user', async () => {
+        const response = await request(app).post('/auth/login').send({
+            email: 'mohamed.farah9820@gmail.com',
+            password: 'registerTest'
+        })
+        expect(response.status).toBe(200);
+        expect(response.type).toBe('application/json');
+        expect(typeof response.body).toBe('object');
+        expect(response.body).toStrictEqual({user: 3})
+       
+    })
+
+    it('successfully logs out user returns status of 200 and json messgae object', async() => {
+        const response = await request(app).post('/auth/logout')
+        expect(response.status).toBe(200);
+        expect(response.type).toBe('application/json');
+        expect(typeof response.body).toBe('object');
+        expect(response.body).toStrictEqual({message: "user successfully loggged out"})
+    })
+  
+
 
     afterAll(() => {
         
@@ -89,9 +125,10 @@ describe('test users router success path', () =>{
         })
     })
     process.env.NODE_ENV ='pg-test-error'
+
     describe('test user endpoint when user db error occurs', () =>{
         it('returns 500 with internal server error when db query error', async () => {
-
+          
         const response= await request(app).get('/users');
         expect(response.status).toBe(500);
         expect(response.type).toBe('application/json');
@@ -110,4 +147,4 @@ describe('test users router success path', () =>{
           
               expect(response.body).toStrictEqual({ error: "Internal server error" })
             })
-    })
+          })

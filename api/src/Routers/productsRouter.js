@@ -6,6 +6,7 @@ const router = express.Router();
 //get all products
 module.exports = (pool) => {
 router.get('/', (req, res, next) => {
+  //put this in a function
     if (req.query.category) {
       // Handle getting products by category these functions work better within the router not sure why
       const category = req.query.category
