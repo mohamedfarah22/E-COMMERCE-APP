@@ -12,7 +12,7 @@ const elasticSearch = require('./src/queries/elasticSearch')
 //require products router
 
 const productsRouter = require('./src/Routers/productsRouter.js')(pool)
-const authRouter = require('./src/Routers/authRouter.js')
+const authRouter = require('./src/Routers/authRouter.js')(pool)
 const usersRouter = require('./src/Routers/usersRouter.js')(pool)
 const cartsRouter = require('./src/Routers/cartRouter.js')(pool)
 const stripeRouter = require('./src/Routers/stripeRouterCheckout.js')
