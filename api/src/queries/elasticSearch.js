@@ -101,6 +101,20 @@ async function indexProductData(pool){
 //search function
 async function searchProducts(searchPhrase){
   try{
+    const indexName = 'product_index';
+    const existsResponse = await esClient.indices.exists({
+      index: indexName,
+    });
+    if (!existsResponse) {
+      // Index does not exist; create it
+      await esClient.indices.create({
+        index: indexName,
+        body: {
+          // Define index mappings and settings here
+        },
+      });
+      console.log(`Index '${indexName}' created successfully.`);
+    }
     const body = await esClient.search({
       index: 'product_index',
       body: {
