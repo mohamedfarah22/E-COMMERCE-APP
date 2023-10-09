@@ -2,7 +2,7 @@ const Pool = require('pg').Pool;
 
 let pool;
 
-if(process.env.NODE_ENV === 'test') {
+if(process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'search-router-test') {
     //use test database
     pool =  new Pool({
         user:"admin",
