@@ -27,13 +27,12 @@ jobs:
         image: docker.elastic.co/elasticsearch/elasticsearch:7.15.1
         env:
           discovery.type: single-node
-          ELASTICSEARCH_URL: http://elasticsearch:9200
         ports:
           - "9200:9200"
           - "9300:9300"
         volumes:
           - esdata:/usr/share/elasticsearch/data
-        options: --health-cmd "curl -f http://elasticsearch:9200" --health-interval 10s --health-timeout 5s --health-retries 5
+        options: --health-cmd "curl -f http://localhost:9200" --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -48,6 +47,4 @@ jobs:
         run: npm install
 
       - name: Run Tests
-        env:
-            ELASTICSEARCH_URL: ${{ job.services.elasticsearch.ELASTICSEARCH_URL }}
         run: npm test -- --testPathPattern=api/src/tests
