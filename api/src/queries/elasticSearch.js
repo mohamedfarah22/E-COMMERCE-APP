@@ -2,6 +2,7 @@
 const {Client} = require('@elastic/elasticsearch')
 //create an elasticsearch client instance
 const esClient = new Client({node: 'http://localhost:9200'})
+const pool = require('../../dbConfig')
 //check if index exists then drop index
 async function checkAndDropIndex(indexName) {
   try {
