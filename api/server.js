@@ -11,6 +11,7 @@ const elasticSearch = require('./src/queries/elasticSearch')
 
 //require products router
 
+
 const productsRouter = require('./src/Routers/productsRouter.js')(pool)
 const authRouter = require('./src/Routers/authRouter.js')(pool)
 const usersRouter = require('./src/Routers/usersRouter.js')(pool)
@@ -39,9 +40,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 //create index and bulk updated index in elasticsearch with product data
 //do not index products to elastic search if node_env is test
-if (process.env['NODE_ENV'] !== 'test') {
+if (process.env['NODE_ENV'] !== 'test' && process.env['NODE_ENV'] !== 'render-deployment' && process.env['NODE_ENV'] !== 'pg-test-error') {
 elasticSearch.createIndex().then(() => elasticSearch.indexProductData()).catch(error => console.error("Error: ", error));
 }
+//run elastic search when testing search router
+
+
+
+
 
 //Mount the router at products path
 
