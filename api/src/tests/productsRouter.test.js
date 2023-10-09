@@ -7,7 +7,7 @@ const request  = require('supertest')
 
 //set as test incaase 
 process.env.NODE_ENV = 'test';
-describe('Test Products router success path', () => {
+describe('Test Products router success path and search router', () => {
    
 
     beforeAll(async () => {
@@ -262,13 +262,29 @@ it('returns 404 error message when product ID is invalid' , async() => {
    expect(response.body).toStrictEqual({ error: "Product not found" })
 
 })
-
+it('search router should return status code of 200 and products matching on product name and query', async() => {
+    process.env['NODE_ENV'] = 'search-router-test'
+    const response = await request(app).get('/search?q=Elegant')
+    expect(response.status).toBe(200);
+    expect(response.type).toBe('application/json');
+    expect(Array.isArray(response.body)).toBe(true);
+     expect(response.body[0]._source.product_name).toBe('Elegant Gold Earrings')
+})
+it('search router should return status code of 200 and products matching on product description and query', async() => {
+    process.env['NODE_ENV'] = 'search-router-test'
+    const response = await request(app).get('/search?q=Elevate')
+    expect(response.status).toBe(200);
+    expect(response.type).toBe('application/json');
+    expect(Array.isArray(response.body)).toBe(true);
+     expect(response.body[0]._source.product_description).toBe('Elevate your style with this classic gold chain necklace, weighing a substantial 15 grams. Its timeless design and durable construction make it a versatile accessory for any occasion.')
+})
 afterAll(() => {
    
     pool.end()
    
     })
 })
+
 //describe('Test products router failure paths')
 process.env.NODE_ENV ='pg-test-error'
 describe('Test products router server errors', () => {
