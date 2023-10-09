@@ -28,8 +28,7 @@ jobs:
         env:
           discovery.type: single-node
         ports:
-          - "9200:9200"
-          - "9300:9300"
+          - 9200/tcp
         volumes:
           - esdata:/usr/share/elasticsearch/data
         options: --health-cmd "curl -f http://localhost:9200" --health-interval 10s --health-timeout 5s --health-retries 5
