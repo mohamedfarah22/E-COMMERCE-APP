@@ -1,49 +1,41 @@
 //import elasticsearch client
-const {Client} = require('@elastic/elasticsearch');
-const Pool = require('pg').Pool;
-const pool = new Pool({
-    user:"admin",
-    password: "ecommdb",
-    host: "ecomm-database-postgres",
-    database: "ecommercedatabase",
-    port: 5432
-});
+const {Client} = require('@elastic/elasticsearch')
 //create an elasticsearch client instance
-const esClient = new Client({node: 'http://elastic-search:9200'})
+const esClient = new Client({node: 'http://localhost:9200'})
 //check if index exists then drop index
 async function checkAndDropIndex(indexName) {
-    try {
-      // Check if the index exists
-      const { body: existsResponse } = await esClient.indices.exists({
+  try {
+    // Check if the index exists
+    const existsResponse = await esClient.indices.exists({
+      index: indexName,
+    });
+  
+    if (existsResponse === true) {
+      // Index exists; drop (delete) it
+      const dropResponse = await esClient.indices.delete({
         index: indexName,
       });
-  
-      if (existsResponse) {
-        // Index exists; drop (delete) it
-        const { body: dropResponse } = await esClient.indices.delete({
-          index: indexName,
-        });
-  
-        if (dropResponse.acknowledged) {
-          console.log(`Index '${indexName}' deleted successfully.`);
-        } else {
-          console.error(`Failed to delete index '${indexName}'.`);
-        }
+
+      if (dropResponse.acknowledged) {
+        console.log(`Index '${indexName}' deleted successfully.`);
       } else {
-        console.log(`Index '${indexName}' does not exist.`);
+        console.error(`Failed to delete index '${indexName}'.`);
       }
-    } catch (error) {
-      console.error(`Error checking and dropping index '${indexName}':`, error);
+    } else {
+      console.log(`Index '${indexName}' does not exist.`);
     }
+  } catch (error) {
+    console.error(`Error checking and dropping index '${indexName}':`, error);
   }
-  
+}
 
 
 //define products index in elastic search
 async function createIndex(){
     try{
         //delete index
-        await checkAndDropIndex('product_index')
+         await checkAndDropIndex('product_index')
+        
         await esClient.indices.create({
             index: 'product_index',
             body: {
@@ -67,7 +59,7 @@ async function createIndex(){
     }
 }
 //adds data from products table to elastic search
-async function indexProductData(){
+async function indexProductData(pool){
     try{
         const productData = await pool.query('SELECT * FROM products');
         const products = productData.rows;
