@@ -1,7 +1,7 @@
 //import elasticsearch client
 const {Client} = require('@elastic/elasticsearch')
 //create an elasticsearch client instance
-const esClient = new Client({node: 'http://elastic-search:9200'})
+const esClient = new Client({node: 'http://elasticsearch:9200'})
 //check if index exists then drop index
 async function checkAndDropIndex(indexName) {
   try {
