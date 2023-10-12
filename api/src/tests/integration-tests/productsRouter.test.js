@@ -1,12 +1,13 @@
 //import pg pool, router and express
-const pool = require('../../dbConfig')
-const app = require('../../server')
+process.env.NODE_ENV = 'test';
+const pool = require('../../../dbConfig')
+const app = require('../../../server')
 const request  = require('supertest')
 //create mock pool to simulate db errors
 
 
 //set as test incaase 
-process.env.NODE_ENV = 'test';
+
 describe('Test Products router success path and search router', () => {
    
 
