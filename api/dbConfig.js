@@ -18,7 +18,7 @@ else if(process.env.NODE_ENV === 'render-deployment'){
        connectionString: 'postgres://ecomm_database_user:RJ6FqIo1vd0kq9LwmdebNympIyEteJsg@dpg-ckh33u6afg7c73fmoqug-a/ecomm_database'
     })
 }
-if(process.env.NODE_ENV === 'unit-tests'){
+else if(process.env.NODE_ENV === 'unit-tests'){
 
  pool = new Pool({});
 

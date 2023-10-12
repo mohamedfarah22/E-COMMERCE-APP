@@ -1,4 +1,5 @@
 //import pg pool, router and express
+process.env.NODE_ENV = 'test';
 const pool = require('../../../dbConfig')
 const app = require('../../../server')
 const request  = require('supertest')
@@ -6,7 +7,7 @@ const request  = require('supertest')
 
 
 //set as test incaase 
-process.env.NODE_ENV = 'test';
+
 describe('Test Products router success path and search router', () => {
    
 
