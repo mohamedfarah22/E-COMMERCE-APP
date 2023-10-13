@@ -28,6 +28,7 @@ router.get('/user-product-queries', (req, res, next) => {
             res.status(404).json({ message: 'No matching rows found' });
         }
     });
+})
     router.post('/', (req, res, next) => {
         const { user_id, product_id, quantity} = req.body;
     
@@ -51,7 +52,7 @@ router.get('/user-product-queries', (req, res, next) => {
                 if(error){
                     res.status(500).json({ error: "Internal server error" });
                 }
-                res.status(200).json({newQuantity: "3"});
+                res.status(200).json({newQuantity: newQuantity});
             });
         }
     });
@@ -66,7 +67,7 @@ router.get('/user-product-queries', (req, res, next) => {
         res.status(200).send(results.rows)
     })
     })
-})
+
 router.delete('/', (req, res, next) => {
     const {user_id, product_id} = req.query
     pool.query('DELETE FROM carts WHERE user_id = $1 AND product_id = $2 RETURNING *', [user_id, product_id], (error, results) => {
@@ -77,6 +78,7 @@ router.delete('/', (req, res, next) => {
     })
 })
 router.put('/', (req, res, next) => {
+   
     const { user_id, product_id, quantity } = req.query;
 
     // Parse quantity and product_id to integers
@@ -98,10 +100,9 @@ router.put('/', (req, res, next) => {
         }
     });
 });
-//this router is not tested in integration testing
+
 router.get('/cart-total', (req, res, next) =>{
-    const { user_id, product_id } = req.query;
-  
+    const { user_id} = req.query;
     pool.query(
       'SELECT SUM(quantity * price) AS total_cost FROM carts JOIN products ON carts.product_id = products.id WHERE carts.user_id = $1',
       [user_id],
@@ -112,8 +113,7 @@ router.get('/cart-total', (req, res, next) =>{
           const totalCost = results.rows[0].total_cost;
           res.status(200).json({ total_cost: totalCost });
         }
-      }
-    );
+      });
 })
 
 
