@@ -93,6 +93,7 @@ if(query === 'SELECT * FROM products WHERE id=$1' ){
         ]
     })
 }
+
 if(query === 'INSERT INTO products (product_name, product_description, category, price, available_quantity, image_url) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *'){
     callback(null, {
         rows: [
@@ -142,6 +143,60 @@ if(query ==='DELETE FROM products WHERE id=$1 RETURNING *'){
             }
         ]
         
+    })
+}
+if(query === 'SELECT * FROM carts ORDER BY id ASC'){
+    callback(null, {
+        rows: [
+            {
+                id: 1,
+                user_id: "1",
+                product_id: 1,
+                quantity: 2
+            }
+        ]
+    })
+}
+if(query === 'SELECT * FROM carts WHERE user_id = $1 AND product_id = $2'){
+    callback(null, {
+        rows: [
+            {
+                id: 1,
+                user_id: "2",
+                product_id: 3,
+                quantity: 2
+            },
+            {
+                id: 2,
+                user_id: "2",
+                product_id:5,
+                quantity: 1
+            }
+        ]
+    })
+}
+
+if(query === 'INSERT INTO carts (user_id, product_id, quantity) VALUES ($1, $2, $3) RETURNING *'){
+    callback(null, {
+        rows: [
+            {
+                id: 1,
+                user_id: "2",
+                product_id: 3,
+                quantity: 2
+            }
+        ]
+    })
+}if(query === 'UPDATE carts SET quantity = $1 WHERE user_id = $2 AND product_id = $3'){
+    callback(null, {
+        rows: [
+            {
+                id: 1,
+                user_id: "2",
+                product_id: 3,
+                quantity: 2
+            }
+        ]
     })
 }
  })

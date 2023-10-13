@@ -6,7 +6,7 @@ const request  = require('supertest')
 
 //test get all products router
 
-describe('all products router', () => {
+describe('products router unit tests', () => {
    
     it('get all products returns status code of 200', async () => {
         
