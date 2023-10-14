@@ -82,7 +82,11 @@ await pool.query(`CREATE TABLE carts(
   FOREIGN KEY (product_id) REFERENCES products(id)
 )`)
 }
-sqlScripts(pool)
+//run on render deployment only
+if(process.env['NODE_ENV'] === 'render-deployment'){
+  sqlScripts(pool)
+}
+
 
 
 //Mount the router at products path
