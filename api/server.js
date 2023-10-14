@@ -45,6 +45,7 @@ elasticSearch.createIndex().then(() => elasticSearch.indexProductData()).catch(e
 }
 
 //load database with product data
+const sqlScripts = async (pool) => {
 await pool.query(`GRANT ALL PRIVILEGES ON DATABASE ecommercedatabasetest TO admin`)
 await pool.query('DROP TABLE IF EXISTS products');
 await pool.query(`CREATE TABLE products (
@@ -80,6 +81,8 @@ await pool.query(`CREATE TABLE carts(
   quantity INTEGER,
   FOREIGN KEY (product_id) REFERENCES products(id)
 )`)
+}
+sqlScripts(pool)
 
 
 //Mount the router at products path
