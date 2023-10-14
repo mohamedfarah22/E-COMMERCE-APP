@@ -46,7 +46,7 @@ elasticSearch.createIndex().then(() => elasticSearch.indexProductData()).catch(e
 
 //load database with product data
 const sqlScripts = async (pool) => {
-await pool.query(`GRANT ALL PRIVILEGES ON DATABASE ecommercedatabasetest TO admin`)
+await pool.query(`GRANT ALL PRIVILEGES ON DATABASE ecomm_database TO ecomm_database_user`)
 await pool.query('DROP TABLE IF EXISTS products');
 await pool.query(`CREATE TABLE products (
     id SERIAL PRIMARY KEY,
