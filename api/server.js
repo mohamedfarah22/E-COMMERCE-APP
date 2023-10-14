@@ -43,10 +43,27 @@ app.use(passport.session());
 if (process.env['NODE_ENV'] !== 'test' && process.env['NODE_ENV'] !== 'render-deployment' && process.env['NODE_ENV'] !== 'pg-test-error' && process.env['NODE_ENV'] !== 'unit-tests') {
 elasticSearch.createIndex().then(() => elasticSearch.indexProductData()).catch(error => console.error("Error: ", error));
 }
-//run elastic search when testing search router
 
-
-
+//load database with product data
+await pool.query(`GRANT ALL PRIVILEGES ON DATABASE ecommercedatabasetest TO admin`)
+await pool.query('DROP TABLE IF EXISTS products');
+await pool.query(`CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    product_name VARCHAR NOT NULL,
+    product_description TEXT NOT NULL,
+    category VARCHAR NOT NULL,
+    price FLOAT NOT NULL,
+    available_quantity INTEGER,
+    image_url VARCHAR
+)`)
+await pool.query(`
+        INSERT INTO products (product_name, product_description, category, price, available_quantity, image_url)
+        VALUES
+    ('Elegant Gold Bangle', 'Elevate your style with this exquisite gold bangle, weighing a delicate 10 grams. Its intricate design and comfortable fit make it a perfect accessory for any occasion.', 'bangles', 1100, 10, 'http://localhost:8080/images/bangle.jpeg'),
+    ('Elegant Gold Earrings', 'Elevate your elegance with these elegant gold earrings, each weighing a dainty 5 grams. Their intricate design and lightweight feel make them perfect for adding a touch of sophistication to any outfit.', 'earrings', 350, 10, 'http://localhost:8080/images/earrings.jpeg'),
+    ('Classic Gold Chain Necklace', 'Elevate your style with this classic gold chain necklace, weighing a substantial 15 grams. Its timeless design and durable construction make it a versatile accessory for any occasion.', 'necklaces', 899.99, 10, 'http://localhost:8080/images/necklaces.jpeg'),
+    ('Classic Gold Band Ring', 'Embrace timeless elegance with this classic gold band ring, weighing 6 grams. Its simple yet sophisticated design makes it a versatile accessory for any occasion.', 'rings', 499.99, 15, 'http://localhost:8080/images/rings.jpeg');`
+)
 
 
 //Mount the router at products path
@@ -68,7 +85,10 @@ app.use('/carts', cartsRouter)
 app.use('/check-out', stripeRouter)
 
 //mount search router
+//do not mount search router for render deployment
+if( process.env['NODE_ENV'] !== 'render-deployment' ){
 app.use('/search', searchRouter)
+}
 //make sure node_env is not test before allowing express to listen
 if (process.env['NODE_ENV'] !== 'test' && process.env['NODE_ENV'] !== 'unit-tests') {
   app.listen(port, () => {
