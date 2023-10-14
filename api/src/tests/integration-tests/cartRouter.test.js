@@ -82,7 +82,7 @@ describe('test carts router success path', () => {
         //assert
         expect(response.status).toBe(200);
         expect(response.type).toBe('application/json');
-        expect(response.body).toStrictEqual({newQuantity: "3"})
+        expect(response.body).toStrictEqual({newQuantity: 3})
 
     })
     it('get users cart items and send 200 status code', async () => {
