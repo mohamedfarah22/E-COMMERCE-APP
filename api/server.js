@@ -64,6 +64,22 @@ await pool.query(`
     ('Classic Gold Chain Necklace', 'Elevate your style with this classic gold chain necklace, weighing a substantial 15 grams. Its timeless design and durable construction make it a versatile accessory for any occasion.', 'necklaces', 899.99, 10, 'http://localhost:8080/images/necklaces.jpeg'),
     ('Classic Gold Band Ring', 'Embrace timeless elegance with this classic gold band ring, weighing 6 grams. Its simple yet sophisticated design makes it a versatile accessory for any occasion.', 'rings', 499.99, 15, 'http://localhost:8080/images/rings.jpeg');`
 )
+await pool.query('DROP TABLE IF EXISTS users');
+await pool.query(`CREATE TABLE users(
+  id SERIAL PRIMARY KEY,
+  first_name VARCHAR NOT NULL,
+  last_name VARCHAR NOT NULL,
+  email VARCHAR UNIQUE NOT NULL,
+  password VARCHAR NOT NULL
+)`)
+await pool.query('DROP TABLE IF EXISTS carts');
+await pool.query(`CREATE TABLE carts(
+  id SERIAL PRIMARY KEY,
+  user_id VARCHAR NOT NULL,
+  product_id INTEGER NOT NULL,
+  quantity INTEGER,
+  FOREIGN KEY (product_id) REFERENCES products(id)
+)`)
 
 
 //Mount the router at products path
