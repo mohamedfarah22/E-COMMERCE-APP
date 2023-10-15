@@ -82,6 +82,7 @@ await pool.query(`CREATE TABLE users(
   email VARCHAR UNIQUE NOT NULL,
   password VARCHAR NOT NULL
 )`)
+
 await pool.query(`CREATE TABLE carts(
   id SERIAL PRIMARY KEY,
   user_id VARCHAR NOT NULL,
