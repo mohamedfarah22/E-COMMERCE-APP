@@ -28,7 +28,7 @@ function Searchbar (){
 
     <div className="SearchBar">
         <input className="input" type="text" placeholder="Search..." aria-label="Search..." onChange = {handleChange}/>
-       <button onClick = {handleClick} className="search-button" ><img src={searchButton} alt="search button"className="search-image" /> </button>
+       <button  className="search-button" ><img src={searchButton} alt="search button"className="search-image" /> </button>
     </div>
 
     )
