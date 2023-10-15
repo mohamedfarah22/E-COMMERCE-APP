@@ -6,7 +6,7 @@ function CartCard({ cart, cartProduct, userId, setCart}){
     //create states t disable buttons
     const [loading, setLoading] = useState(false)
     const [numberOfItems, setNumberOfItems] = useState(null)
-    
+    const baseURL = process.env.REACT_APP_API_URL;
     //add cart object to total sate on mount
    useEffect(() => {
     cart.forEach((cartItem) => {

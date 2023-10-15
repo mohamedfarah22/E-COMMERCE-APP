@@ -5,17 +5,17 @@ import './products.css';
 import { useProducts } from './ProductsContext';
 function Products({filterCategory}){
     const {products, setProducts} = useProducts()
-
+    const baseURL = process.env.REACT_APP_API_URL;
     useEffect(() => {
         if(filterCategory==='All'){
-        axios.get("http://localhost:4000/products").then(res => {
+        axios.get(`${baseURL}products`).then(res => {
             const products = res.data;
 
             setProducts(products)
         })
     }
     else{
-        axios.get(`http://localhost:4000/products?category=${filterCategory}`).then(res => {
+        axios.get(`${baseURL}/products?category=${filterCategory}`).then(res => {
             const products = res.data;
 
             setProducts(products)
