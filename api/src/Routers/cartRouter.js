@@ -101,56 +101,20 @@ router.put('/', (req, res, next) => {
     });
 });
 
-router.get('/cart-total', (req, res, next) => {
-    const { user_id } = req.query;
-
-    // First, fetch the cart items for the user
+router.get('/cart-total', (req, res, next) =>{
+    const { user_id} = req.query;
     pool.query(
-        'SELECT product_id, quantity FROM carts WHERE user_id = $1',
-        [user_id],
-        (error, cartResults) => {
-            if (error) {
-                res.status(500).json({ error: "Internal server error" });
-            } else {
-                // Extract product IDs and quantities
-                const cartItems = cartResults.rows;
-
-                if (cartItems.length === 0) {
-                    res.status(200).json({ total_cost: 0 }); // Empty cart
-                } else {
-                    // Next, fetch the corresponding product prices
-                    const productIds = cartItems.map((item) => item.product_id);
-                    pool.query(
-                        'SELECT id, price FROM products WHERE id = ANY($1::int[])',
-                        [productIds],
-                        (error, productResults) => {
-                            if (error) {
-                                res.status(500).json({ error: "Internal server error" });
-                            } else {
-                                const productPrices = productResults.rows;
-
-                                // Calculate the total cost
-                                let totalCost = 0;
-                                for (const cartItem of cartItems) {
-                                    const productId = cartItem.product_id;
-                                    const quantity = cartItem.quantity;
-
-                                    // Find the corresponding product price
-                                    const product = productPrices.find((p) => p.id === productId);
-                                    if (product) {
-                                        totalCost += product.price * quantity;
-                                    }
-                                }
-
-                                res.status(200).json({ total_cost: totalCost });
-                            }
-                        }
-                    );
-                }
-            }
+      'SELECT SUM(quantity * price) AS total_cost FROM carts JOIN products ON carts.product_id = products.id WHERE carts.user_id = $1',
+      [user_id],
+      (error, results) => {
+        if(error){
+            res.status(500).json({ error: "Internal server error" });
+        }else {
+          const totalCost = results.rows[0].total_cost;
+          res.status(200).json({ total_cost: totalCost });
         }
-    );
-});
+      });
+})
 
 
 
