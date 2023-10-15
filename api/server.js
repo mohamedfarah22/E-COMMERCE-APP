@@ -47,7 +47,9 @@ elasticSearch.createIndex().then(() => elasticSearch.indexProductData()).catch(e
 //load database with product data
 const sqlScripts = async (pool) => {
 await pool.query(`GRANT ALL PRIVILEGES ON DATABASE ecomm_database TO ecomm_database_user`)
+await pool.query('DROP TABLE IF EXISTS carts');
 await pool.query('DROP TABLE IF EXISTS products');
+await pool.query('DROP TABLE IF EXISTS users');
 await pool.query(`CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     product_name VARCHAR NOT NULL,
@@ -71,9 +73,8 @@ await pool.query(`
     ('Chic Gold Choker Necklace', 'Elevate your neckline with this chic gold choker necklace, weighing 6 grams. Its modern design and comfortable fit make it an ideal accessory for both casual and formal looks.', 'necklaces', 449.99, 15, './necklaces.jpeg'),
     ('Classic Gold Band Ring', 'Embrace timeless elegance with this classic gold band ring, weighing 6 grams. Its simple yet sophisticated design makes it a versatile accessory for any occasion.', 'rings', 499.99, 15, './rings.jpeg'),
     ('Sparkling Gold Halo Ring', 'Radiate brilliance with this diamond halo ring, weighing 4.5 grams. The dazzling center diamond is surrounded by a halo of smaller diamonds for maximum sparkle.', 'rings', 899.99, 8, './rings.jpeg'),
-    ('Delicate Gold Stackable Ring', 'Create your own unique stack with this delicate gold ring, weighing 2 grams. Its slim design allows you to mix and match for a personalized look.', 'rings', 249.99, 20, 'http://localhost:8080/images/rings.jpeg');`
+    ('Delicate Gold Stackable Ring', 'Create your own unique stack with this delicate gold ring, weighing 2 grams. Its slim design allows you to mix and match for a personalized look.', 'rings', 249.99, 20, './rings.jpeg');`
 )
-await pool.query('DROP TABLE IF EXISTS users');
 await pool.query(`CREATE TABLE users(
   id SERIAL PRIMARY KEY,
   first_name VARCHAR NOT NULL,
@@ -81,7 +82,6 @@ await pool.query(`CREATE TABLE users(
   email VARCHAR UNIQUE NOT NULL,
   password VARCHAR NOT NULL
 )`)
-await pool.query('DROP TABLE IF EXISTS carts');
 await pool.query(`CREATE TABLE carts(
   id SERIAL PRIMARY KEY,
   user_id VARCHAR NOT NULL,
