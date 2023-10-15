@@ -8,7 +8,7 @@ function Products({filterCategory}){
     const baseURL = process.env.REACT_APP_API_URL;
     useEffect(() => {
         if(filterCategory==='All'){
-        axios.get(`${baseURL}products`).then(res => {
+        axios.get(`${baseURL}/products`).then(res => {
             const products = res.data;
 
             setProducts(products)
