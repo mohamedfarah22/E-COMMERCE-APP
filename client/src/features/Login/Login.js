@@ -8,7 +8,7 @@ import axios from "axios";
 import "./login.css"
 function Login({filterCategory, setFilterCategory, userId, setLoggedIn}){
     const {openPopUp, setOpenPopUp} = usePopup()
-
+    const baseURL = process.env.REACT_APP_API_URL;
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -23,7 +23,7 @@ function Login({filterCategory, setFilterCategory, userId, setLoggedIn}){
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:4000/auth/login', formData);
+            const response = await axios.post(`${baseURL}/auth/login`, formData);
         
             if (response.status === 200) {
              const userId = response.data.user;

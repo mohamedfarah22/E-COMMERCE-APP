@@ -11,6 +11,7 @@ function Searchbar (){
         setSearchPhrase(e.target.value)
 
     }
+    //not used in this deployment
     const handleClick = (e) => {
         e.preventDefault();
         axios.get(`http://localhost:4000/search?q=${searchPhrase}`)
