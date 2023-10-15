@@ -111,7 +111,7 @@ router.get('/cart-total', (req, res, next) =>{
             res.status(500).json({ error: "Internal server error" });
         }else {
           const totalCost = results.rows[0].total_cost;
-          res.status(200).json({ total_cost: totalCost });
+          res.status(200).json(results);
         }
       });
 })
