@@ -9,6 +9,7 @@ import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { server } from './mocks/server';
 import { rest } from 'msw';
+const baseURL = process.env.REACT_APP_API_URL
 beforeAll(() => server.listen());
 
 // Reset any request handlers that we may add during the tests,
@@ -127,7 +128,7 @@ test("cart pop up is open when cart icon is clicked and closed when closed icon 
 
 test('navigate called on sign up form after successful registration', async() => {
     server.use(
-        rest.post('http://localhost:4000/auth/register', (req, res, ctx) => {
+        rest.post(`${baseURL}/auth/register`, (req, res, ctx) => {
             return res(ctx.status(201))
         })
     )
@@ -160,7 +161,7 @@ await waitFor(() => {
 //test navigate not called on sign up for failed registration
 test('navigate not called on sign up form after failed registration', async() => {
     server.use(
-        rest.post('http://localhost:4000/auth/register', (req, res, ctx) => {
+        rest.post(`${baseURL}/auth/register`, (req, res, ctx) => {
             return res(ctx.status(404))
         })
     )
