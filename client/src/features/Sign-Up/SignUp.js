@@ -9,6 +9,7 @@ import CartPopUp from "../Cart/Cart";
 function SignUp({filterCategory, setFilterCategory, userId}){
     const {openPopUp, setOpenPopUp} = usePopup();
     const navigate = useNavigate()
+    const baseURL = process.env.REACT_APP_API_URL;
     const [formData, setFormData] = useState({
         first_name: '',
         last_name: '',
@@ -19,7 +20,7 @@ function SignUp({filterCategory, setFilterCategory, userId}){
         e.preventDefault();
       
         try {
-          const response = await axios.post('http://localhost:4000/auth/register', formData);
+          const response = await axios.post(`${baseURL}/auth/register`, formData);
       
           if (response.status === 201) {
             navigate('/login')

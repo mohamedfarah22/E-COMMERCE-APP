@@ -11,7 +11,7 @@ import {
 } from "@chatscope/chat-ui-kit-react";
 import { useState, useEffect } from "react";
 
-const API_KEY = "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";
+const API_KEY = process.env.REACT_APP_AI_KEY
 function Chatbot() {
     const [openChatBot, setOpenChatBot] = useState(false);
     const [typing, setTyping] = useState(false)

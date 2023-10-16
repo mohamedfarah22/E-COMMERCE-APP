@@ -15,7 +15,7 @@ const onClickHandler = (e)=>{
     return(
         <div className="product-container" onClick = {onClickHandler}>
             
-            <img className="product-image" alt={product.product_name} src={product.image_url}/>
+            <img className="product-image" alt={product.product_name} src={`images/${product.image_url}`}/>
             <p className= "product-name">{product.product_name}</p>
         </div>
     )

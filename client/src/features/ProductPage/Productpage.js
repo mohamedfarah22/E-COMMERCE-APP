@@ -14,9 +14,10 @@ function ProductPage({filterCategory, setFilterCategory, userId, loggedIn, setLo
     const { selectedProduct, setSelectedProduct } = useSelectedProduct();
     const {product_id} = useParams();
     const [loading, setLoading] = useState(false)
+    const baseURL = process.env.REACT_APP_API_URL;
     useEffect(() => {
       if(selectedProduct === null || selectedProduct === undefined){
-          axios.get(`http://localhost:4000/products/${product_id}`).then((response) => {
+          axios.get(`${baseURL}/products/${product_id}`).then((response) => {
                setLoading(true)
                 setSelectedProduct(response.data)
                 setLoading(false)
@@ -31,7 +32,7 @@ function ProductPage({filterCategory, setFilterCategory, userId, loggedIn, setLo
     const onClickHandler = (e) => {
         e.preventDefault();
     if(selectedProduct){
-        axios.post("http://localhost:4000/carts", {
+        axios.post(`${baseURL}/carts`, {
             user_id: userId,
             product_id: selectedProduct[0].id, quantity: 1
         }).then((response) => {
@@ -64,7 +65,7 @@ function ProductPage({filterCategory, setFilterCategory, userId, loggedIn, setLo
         </div>: null}
         <div className='grid-product-page-container'>
         <div className="image-container">
-            <img src= {selectedProduct[0].image_url} alt={selectedProduct[0].product_name}/>
+            <img src= {`../images/${selectedProduct[0].image_url}`} alt={selectedProduct[0].product_name}/>
         </div>
         <div className="product-container-page">
             <h3 className='product-name-page'>{selectedProduct[0].product_name}</h3>

@@ -9,6 +9,7 @@ import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { server } from './mocks/server';
 import { rest } from 'msw';
+const baseURL = process.env.REACT_APP_API_URL
 beforeAll(() => server.listen());
 
 // Reset any request handlers that we may add during the tests,
@@ -136,7 +137,7 @@ test("if cart component is opened when cart icon is clicked", async() => {
 
 test('navigation to / called when user successfully signs up', async () => {
     server.use(
-        rest.post('http://localhost:4000/auth/login', (req, res, ctx) => {
+        rest.post(`${baseURL}/auth/login`, (req, res, ctx) => {
             return res(ctx.status(200))
         })
     )

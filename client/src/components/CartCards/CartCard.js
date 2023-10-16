@@ -6,7 +6,7 @@ function CartCard({ cart, cartProduct, userId, setCart}){
     //create states t disable buttons
     const [loading, setLoading] = useState(false)
     const [numberOfItems, setNumberOfItems] = useState(null)
-    
+    const baseURL = process.env.REACT_APP_API_URL;
     //add cart object to total sate on mount
    useEffect(() => {
     cart.forEach((cartItem) => {
@@ -19,7 +19,7 @@ function CartCard({ cart, cartProduct, userId, setCart}){
     useEffect(()=>{
         //get new product
         
-        axios.get(`http://localhost:4000/carts/${userId}`).then((response) => {
+        axios.get(`${baseURL}/carts/${userId}`).then((response) => {
        const cart = response.data;
        setCart(cart);
        setLoading(false)
@@ -34,7 +34,7 @@ const increment = (e) => {
     const updatedQuantity = numberOfItems + 1
     setNumberOfItems(updatedQuantity)
     setLoading(true)
-    axios.put(`http://localhost:4000/carts?user_id=${userId}&product_id=${cartProduct[0].id}&quantity=${updatedQuantity}`).then((response) => {
+    axios.put(`${baseURL}/carts?user_id=${userId}&product_id=${cartProduct[0].id}&quantity=${updatedQuantity}`).then((response) => {
                 
                 
             }).catch((error) => {
@@ -53,7 +53,7 @@ const increment = (e) => {
             
                 
             //remove cart item from db
-            axios.delete(`http://localhost:4000/carts?user_id=${userId}&product_id=${cartProduct[0].id}`).then((response) => {
+            axios.delete(`${baseURL}/carts?user_id=${userId}&product_id=${cartProduct[0].id}`).then((response) => {
                 //remove item from running total
                
                 
@@ -68,7 +68,7 @@ const increment = (e) => {
             else{
             const newQuantity = numberOfItems-1
             //change quantity of item in db
-            axios.put(`http://localhost:4000/carts?user_id=${userId}&product_id=${cartProduct[0].id}&quantity=${newQuantity}`).then((response) => {
+            axios.put(`${baseURL}/carts?user_id=${userId}&product_id=${cartProduct[0].id}&quantity=${newQuantity}`).then((response) => {
                 setNumberOfItems(newQuantity)
             }).catch((error) => {
                 console.log('Error',  error)
@@ -83,7 +83,7 @@ const increment = (e) => {
 
     useEffect(() => {
         axios
-          .get(`http://localhost:4000/carts/user-product-queries?user_id=${userId}&product_id=${cartProduct[0].id}`)
+          .get(`${baseURL}/carts/user-product-queries?user_id=${userId}&product_id=${cartProduct[0].id}`)
           .then((response) => {
            
             const quantity = response.data[0].quantity;
@@ -98,7 +98,7 @@ const increment = (e) => {
        <div> 
         <div className = 'card-cart-container'>
         <div className = "cart-product-image-container" >
-            <img alt = {cartProduct[0].product_name} src={cartProduct[0].image_url} />
+            <img alt = {cartProduct[0].product_name} src={`../images/${cartProduct[0].image_url}`} />
         </div>
         <div className="cart-item-description">
             <p className="cart-product-name">{cartProduct[0].product_name}</p>

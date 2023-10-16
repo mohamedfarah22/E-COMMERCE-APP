@@ -11,6 +11,7 @@ function Searchbar (){
         setSearchPhrase(e.target.value)
 
     }
+    //not used in this deployment
     const handleClick = (e) => {
         e.preventDefault();
         axios.get(`http://localhost:4000/search?q=${searchPhrase}`)
@@ -28,7 +29,7 @@ function Searchbar (){
 
     <div className="SearchBar">
         <input className="input" type="text" placeholder="Search..." aria-label="Search..." onChange = {handleChange}/>
-       <button onClick = {handleClick} className="search-button" ><img src={searchButton} alt="search button"className="search-image" /> </button>
+       <button  className="search-button" ><img src={searchButton} alt="search button"className="search-image" /> </button>
     </div>
 
     )
