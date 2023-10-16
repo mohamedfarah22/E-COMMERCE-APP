@@ -76,7 +76,8 @@ useEffect(()=>{
   const onClickHandlerCheckout = (e) =>{
     e.preventDefault();
     axios.post(`${baseURL}/check-out`, cart).then((response) => {
-     navigate(response.data.url)
+     
+     window.open(response.data.url)
     }).catch((error) => {
       console.log('Error ', error);
     })
