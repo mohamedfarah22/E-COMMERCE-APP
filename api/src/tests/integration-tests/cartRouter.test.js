@@ -10,12 +10,15 @@ describe('test carts router success path', () => {
         
         //add sample cart data
         await pool.query('DROP TABLE IF EXISTS carts');
+        
         await pool.query(`CREATE TABLE carts(
             id SERIAL PRIMARY KEY,
             user_id VARCHAR NOT NULL,
             product_id INTEGER NOT NULL,
             quantity INTEGER
         )`)
+        //create products table and drop table if exists to create join
+
         //add sample user data
         await pool.query(`
         INSERT INTO carts(user_id, product_id, quantity)
@@ -135,7 +138,24 @@ describe('test carts router success path', () => {
             product_id: 1,
             quantity: 5
         }])
+        
+        
     })
+    
+    it('should return user cart total', async() => {
+        const response= await request(app).get('/carts/cart-total?user_id=1');
+        //assert
+       
+        expect(response.type).toBe('application/json');
+        expect(typeof response.body).toBe('object');
+        const expectedResult = {
+            total_cost: 1799.98
+        }
+        expect(response.body).toStrictEqual(expectedResult)
+    })
+   
+
+    
    
     afterAll(() => {
         
