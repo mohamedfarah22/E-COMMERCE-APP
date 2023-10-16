@@ -14,6 +14,7 @@ if(process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'search-router-te
 } 
 
 else if(process.env.NODE_ENV === 'render-deployment'){
+    //use render deployment pool
     pool = new Pool({
        connectionString: 'postgres://ecomm_database_user:RJ6FqIo1vd0kq9LwmdebNympIyEteJsg@dpg-ckh33u6afg7c73fmoqug-a/ecomm_database'
     })

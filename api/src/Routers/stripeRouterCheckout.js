@@ -3,55 +3,47 @@ const stripe = require('stripe')('sk_test_51Np5AOLxfJykJ5Q6fYJ4Amv6DmOwzyKOQMGot
 const express = require('express');
 const router= express.Router();
 router.use(express.static('public'));
-const Pool = require('pg').Pool;
-
-const pool = new Pool({
-    user:"admin",
-    password: "ecommdb",
-    host: "ecomm-database-postgres",
-    database: "ecommercedatabase",
-    port: 5432
-});
 
 
-const YOUR_DOMAIN = 'http://localhost:3000';
-
-router.post('/', async (req, res) => {
-  const cartItems = req.body
-  let lineItems = []; //array to be passed to checkout Session;
-const lineItemPromises = cartItems.map(async (item) => {
-    const product_id = parseInt(item.product_id); 
-    const quantity = parseInt(item.quantity)
-   const productData =  await pool.query(
-        'SELECT product_name, price FROM carts JOIN products ON carts.product_id = products.id WHERE product_id = $1',
-        [product_id]
-      );
+const YOUR_DOMAIN = 'https://ecommerce-client-wow7.onrender.com';
+module.exports = (pool) => {
+  router.post('/', async (req, res) => {
+    const cartItems = req.body
+    let lineItems = []; //array to be passed to checkout Session;
+  const lineItemPromises = cartItems.map(async (item) => {
+      const product_id = parseInt(item.product_id); 
+      const quantity = parseInt(item.quantity)
+     const productData =  await pool.query(
+          'SELECT product_name, price FROM carts JOIN products ON carts.product_id = products.id WHERE product_id = $1',
+          [product_id]
+        );
+        
+        const customAmount = productData.rows[0].price * 100;
+        const price = await stripe.prices.create({
+          unit_amount: customAmount,
+          currency: 'aud',
+          product_data: {
+            name: productData.rows[0].product_name,
+           
+          }
+      });
+      return {
+          price: price.id,
+          quantity: quantity,
+        };
       
-      const customAmount = productData.rows[0].price * 100;
-      const price = await stripe.prices.create({
-        unit_amount: customAmount,
-        currency: 'aud',
-        product_data: {
-          name: productData.rows[0].product_name,
-         
-        }
+  })
+  lineItems = await Promise.all(lineItemPromises);   
+  
+  
+    const session = await stripe.checkout.sessions.create({
+      line_items: lineItems,
+      mode: 'payment',
+      success_url: `${YOUR_DOMAIN}?success=true`,
+      cancel_url: `${YOUR_DOMAIN}`,
     });
-    return {
-        price: price.id,
-        quantity: quantity,
-      };
-    
-})
-lineItems = await Promise.all(lineItemPromises);   
-
-
-  const session = await stripe.checkout.sessions.create({
-    line_items: lineItems,
-    mode: 'payment',
-    success_url: `${YOUR_DOMAIN}?success=true`,
-    cancel_url: `${YOUR_DOMAIN}`,
+  
+    res.json({url: session.url})
   });
-
-  res.json({url: session.url})
-});
-module.exports = router;
+  return router
+}
