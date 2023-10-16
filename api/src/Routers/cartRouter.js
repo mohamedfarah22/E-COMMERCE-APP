@@ -13,7 +13,22 @@ module.exports = (pool) => {
         })
     })
   
-   
+    router.get('/cart-total', (req, res, next) =>{
+        const { user_id} = req.query;
+        
+        pool.query(
+          'SELECT SUM(quantity * price) AS total_cost FROM carts JOIN products ON carts.product_id = products.id WHERE carts.user_id = $1',
+          [user_id],
+          (error, results) => {
+            if(error){
+                res.status(500).json({ error: "Internal server error" });
+            }else {
+              const totalCost = results.rows[0].total_cost;
+              res.status(200).json({ total_cost: totalCost });
+            }
+          });
+    })
+    
 
 router.get('/user-product-queries', (req, res, next) => {
     const { user_id, product_id } = req.query;
@@ -101,20 +116,6 @@ router.put('/', (req, res, next) => {
     });
 });
 
-router.get('/cart-total', (req, res, next) =>{
-    const { user_id} = req.query;
-    pool.query(
-      'SELECT SUM(quantity * price) AS total_cost FROM carts JOIN products ON carts.product_id = products.id WHERE carts.user_id = $1',
-      [user_id],
-      (error, results) => {
-        if(error){
-            res.status(500).json({ error: "Internal server error" });
-        }else {
-          const totalCost = results.rows[0].total_cost;
-          res.status(200).json({ total_cost: totalCost });
-        }
-      });
-})
 
 
 

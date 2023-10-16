@@ -1,8 +1,8 @@
 import { rest } from 'msw';
-
+const baseURL = process.env.REACT_APP_API_URL
 // Define your handlers as an array of objects
 const handlers = [
-  rest.put('http://localhost:4000/carts', (req, res, ctx) => {
+  rest.put(`${baseURL}/carts`, (req, res, ctx) => {
         const userId = req.url.searchParams.get('user_id');
         const productId = req.url.searchParams.get('product_id');
         const quantity = req.url.searchParams.get('quantity');
@@ -33,7 +33,7 @@ const handlers = [
         }),
     
 
-    rest.get('http://localhost:4000/carts/user-product-queries', (req, res, ctx) => {
+    rest.get(`${baseURL}/carts/user-product-queries`, (req, res, ctx) => {
         // Access query parameters using req.url.searchParams
         const userId = req.url.searchParams.get('user_id');
         const productId = req.url.searchParams.get('product_id');
@@ -63,7 +63,7 @@ const handlers = [
           return res(ctx.status(404));
         }
       }),
-      rest.get('http://localhost:4000/carts/1', (req, res, ctx) => {
+      rest.get(`${baseURL}/carts/1`, (req, res, ctx) => {
 
                 return res (
                  ctx.status(200),
@@ -75,7 +75,7 @@ const handlers = [
                } 
     
         ),
-        rest.get('http://localhost:4000/products', (req, res, ctx) => {
+        rest.get(`${baseURL}/products`, (req, res, ctx) => {
           if (req.url.searchParams.get('category') === 'bangles') {
             return res(
               ctx.status(200),
@@ -156,7 +156,7 @@ const handlers = [
       }
         ),
   
-        rest.get('http://localhost:4000/products/31', (req, res, ctx) => {
+        rest.get(`${baseURL}/products/31`, (req, res, ctx) => {
           return res(
             ctx.status(200),
             ctx.json([
@@ -170,7 +170,7 @@ const handlers = [
             ])
           );
         }),
-        rest.get('http://localhost:4000/products/1', (req, res, ctx) => {
+        rest.get(`${baseURL}/products/1`, (req, res, ctx) => {
           return res(
             ctx.status(200),
             ctx.json([
@@ -185,7 +185,7 @@ const handlers = [
           );
         }),
       
-        rest.get('http://localhost:4000/products/categories', (req, res, ctx) => {
+        rest.get(`${baseURL}/products/categories`, (req, res, ctx) => {
           return res(
             ctx.status(200),
             ctx.json(
@@ -196,7 +196,7 @@ const handlers = [
       
       
       
-        rest.get('http://localhost:4000/carts/cart-total', (req, res, ctx) => {
+        rest.get(`${baseURL}/carts/cart-total`, (req, res, ctx) => {
           // Access query parameters using req.url.searchParams
           const userId = req.url.searchParams.get('user_id');
           
@@ -212,7 +212,7 @@ const handlers = [
             );
           } 
         }),
-        rest.get('http://localhost:4000/carts/cart-total', (req, res, ctx) => {
+        rest.get(`${baseURL}/carts/cart-total`, (req, res, ctx) => {
           // Access query parameters using req.url.searchParams
           const userId = req.url.searchParams.get('user_id');
           
@@ -228,7 +228,7 @@ const handlers = [
             );
           } 
         }),
-        rest.post('http://localhost:4000/check-out', (req, res, ctx) => {
+        rest.post(`${baseURL}/check-out`, (req, res, ctx) => {
           return res(
             ctx.status(201),
             ctx.json({
