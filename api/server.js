@@ -19,7 +19,12 @@ const cartsRouter = require('./src/Routers/cartRouter.js')(pool)
 const stripeRouter = require('./src/Routers/stripeRouterCheckout.js')
 const searchRouter = require('./src/Routers/searchRouter.js')
 //use cors
-app.use(cors());
+app.use(cors(
+  {
+origin: 'https://ecommerce-client-wow7.onrender.com',
+methods: 'GET,POST', // Add other allowed methods as needed
+allowedHeaders: 'Content-Type,Authorization'
+}));
 //use body parser
 app.use(bodyParser.json())
 //attach db to app
