@@ -11,7 +11,7 @@ function Header({loggedIn, setLoggedIn, setUserId}){
     const {setOpenPopUp} = usePopup()
     const {cart} = useCart();
     const [cartQuantity, setCartQuantity] = useState();
-
+    const baseURL = process.env.REACT_APP_API_URL;
     const onClickHandler = (e) => {
         e.preventDefault()
         navigate('/')
@@ -23,7 +23,7 @@ function Header({loggedIn, setLoggedIn, setUserId}){
     const onClickHandlerLogOut = async (e) => {
         e.preventDefault()
         localStorage.removeItem('isLoggedIn');
-        const response  = await axios.post("http://localhost:4000/auth/logout");
+        const response  = await axios.post(`${baseURL}/auth/logout`);
         if(response.status === 200){
         setLoggedIn(false);
         localStorage.removeItem('isLoggedIn');

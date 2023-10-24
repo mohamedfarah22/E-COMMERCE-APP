@@ -426,13 +426,13 @@ describe('carts router get cart total', () => {
     // Assert that the response matches your expectations
     expect(response.status).toBe(200);
     expect(response.type).toBe('application/json');
-    expect(Array.isArray(response.body)).toBe(true);
+    expect(typeof response.body).toBe('object');
     expect(response.body).toStrictEqual(
-        [
+        
         {
             "total_cost": 3000
         }
-    ]
+    
     )
 
     }

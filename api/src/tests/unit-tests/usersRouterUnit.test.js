@@ -207,7 +207,7 @@ describe('auth router login', () => {
             email: 'moahamed.farah9810@gmail.com',
             password: 'test-password'
         });
-        console.log(response)
+        
         expect(response.status).toBe(200);
         expect(response.type).toBe('application/json');
         expect(typeof response.body).toBe('object');

@@ -6,8 +6,9 @@ import axios from 'axios';
 function Categories({filterCategory, setFilterCategory}) {
     const [categories, setCategories] = useState([])
     const navigate = useNavigate()
+    const baseURL = process.env.REACT_APP_API_URL;
     useEffect(() => {
-        axios.get("http://localhost:4000/products/categories").then(res => {
+        axios.get(`${baseURL}/products/categories`).then(res => {
             const categories = res.data
 
             setCategories(categories)

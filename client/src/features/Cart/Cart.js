@@ -12,6 +12,7 @@ function CartPopUp({ userId}){
    const {openPopUp, setOpenPopUp} = usePopup()
    const {cart, setCart} = useCart();
     const navigate = useNavigate()
+    const baseURL = process.env.REACT_APP_API_URL;
     const onClickHandler = (e) => {
         e.preventDefault();
         setOpenPopUp(false)
@@ -20,7 +21,9 @@ function CartPopUp({ userId}){
 
 //get running total
 useEffect(() => {
-    axios.get(`http://localhost:4000/carts/cart-total?user_id=${userId}`).then((response) => {
+    axios.get(`${baseURL}/carts/cart-total?user_id=${userId}`).then((response) => {
+      console.log(response.data)
+      console.log(userId)
          setTotals(roundUpToTwoDecimalPlaces(response.data.total_cost))
         
 
@@ -36,7 +39,7 @@ useEffect(() => {
 //fetch cart for current user on mount with dependency of whether cart is open
 
 useEffect(()=>{
-    axios.get(`http://localhost:4000/carts/${userId}`).then((response) => {
+    axios.get(`${baseURL}/carts/${userId}`).then((response) => {
    const cart = response.data;
    setCart(cart);
 
@@ -50,7 +53,7 @@ useEffect(()=>{
   useEffect(() => {
     // Fetch product data for each item in the cart
     const productPromises = cart.map((item) => {
-      return axios.get(`http://localhost:4000/products/${item.product_id}`);
+      return axios.get(`${baseURL}/products/${item.product_id}`);
     });
   
     // Wait for all product requests to complete
@@ -72,8 +75,9 @@ useEffect(()=>{
   //redirect to checkout page after customer is happy with cart
   const onClickHandlerCheckout = (e) =>{
     e.preventDefault();
-    axios.post('http://localhost:4000/check-out', cart).then((response) => {
-     navigate(response.data.url)
+    axios.post(`${baseURL}/check-out`, cart).then((response) => {
+     
+     window.open(response.data.url)
     }).catch((error) => {
       console.log('Error ', error);
     })
