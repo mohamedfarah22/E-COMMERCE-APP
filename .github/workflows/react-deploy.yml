@@ -13,7 +13,8 @@ jobs:
         working-directory: ./client
     steps:
     - name: Set CI Environment Variable to false
-      run: echo 'export CI=false' >> $GITHUB_ENV
+      env:
+        CI: false
 
     - name: Checkout code
       uses: actions/checkout@v2
