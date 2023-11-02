@@ -1,0 +1,50 @@
+service: ecomm-app-api
+provider:
+  name: aws
+  region: ap-southeast-2
+  runtime: nodejs18.x
+functions:
+  dbInitLambdaFunction:
+    handler: handlers/dbinit.dbInitLambdaFunction
+  getProductsLambda:
+    handler: handlers/products.getProducts
+    events:
+    - http:
+       path: products
+       method: get
+       cors: true
+  getCategoriesLambda:
+    handler: handlers/products.getCategories
+    events:
+    - http:
+       path: products/categories
+       method: get
+       cors: true
+  getProductByIDLambda:
+    handler: handlers/products.getProductById
+    events:
+    - http:
+       path: products/{id}
+       method: get
+       cors: true
+  createNewProductLambda:
+    handler: handlers/products.post
+    events:
+    - http:
+       path: products
+       method: post
+       cors: true
+  updateProductLambda:
+    handler: handlers/products.put
+    events:
+      - http:
+         path: products/{id}
+         method: put
+         cors: true 
+  deleteProductLambda:
+    handler: handlers/products.delete
+    events:
+      - http:
+         path: products/{id}
+         method: delete
+         cors: true 

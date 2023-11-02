@@ -1,11 +1,11 @@
 {
-  "name": "e-commerce-api",
+  "name": "e-commerce-app",
   "version": "1.0.0",
-  "description": "API for an e-commerce website",
+  "description": "Jewellery e-commerce website",
   "main": "server.js",
   "scripts": {
     "test": "jest",
-    "start": "NODE_ENV=render-deployment node server.js"
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
