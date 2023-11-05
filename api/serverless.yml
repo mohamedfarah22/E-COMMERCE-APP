@@ -3,6 +3,8 @@ provider:
   name: aws
   region: ap-southeast-2
   runtime: nodejs18.x
+
+
 functions:
   dbInitLambdaFunction:
     handler: handlers/dbinit.dbInitLambdaFunction
@@ -48,3 +50,95 @@ functions:
          path: products/{id}
          method: delete
          cors: true 
+  getAllCartsLambda:
+    handler: handlers/carts.getAllCarts
+    events:
+      - http:
+         path: carts/all
+         method: get
+         cors: true 
+  getCartTotalLambda:
+    handler: handlers/carts.getCartTotal
+    events:
+      - http: 
+          path: carts/cart-total
+          method: get
+          cors: true
+  getUserProductQueriesLambda:
+    handler: handlers/carts.getUserProductQueries
+    events:
+      - http:
+          path: carts/user-product-queries
+          method: get
+          cors: true
+  createCartItemLambda:
+    handler: handlers/carts.post
+    events:
+      - http:
+         path: carts
+         method: post
+         cors: true 
+  getCartByUserIdLambda:
+    handler: handlers/carts.getCartByUserID
+    events:
+      - http:
+          path: carts/{user_id}
+          method: get
+          cors: true
+  deleteCartItemLambda:
+    handler: handlers/carts.deleteCartItem
+    events:
+      - http:
+          path: carts
+          method: delete
+          cors: true
+  putCartItemLamda: 
+    handler: handlers/carts.put
+    events: 
+      - http:
+          path: carts
+          method: delete
+          cors: true
+  getAllUsersLambda: 
+    handler: handlers/users.getAllUsers
+    events:
+      - http: 
+          path: users
+          method: get
+          cors: true
+  getUsersByIdLambda:
+    handler: handlers/users.getUserById
+    events: 
+      - http:
+          path: users/{id}
+          method: get
+          cors: true
+  registerUserLambda:
+    handler: handlers/auth.registerUser
+    events: 
+      - http: 
+          path: auth/register
+          method: post
+          cors: true
+  logInUserLambda:
+    handler: handlers/auth.logIn
+    events:
+      - http: 
+          path: auth/login
+          method: post
+          cors: true
+  logOutUserLambda: 
+    handler: handlers/auth.logOut
+    events:
+      - http: 
+          path: handlers/auth.logOut
+          method: post
+          cors: true
+  stripeCheckoutLambda:
+    handler: handlers/stripeRouterCheckout.stripeCheckOut
+    events:
+      - http:
+          path: check-out
+          method: get
+          cors: true 
+  
