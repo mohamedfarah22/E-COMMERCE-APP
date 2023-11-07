@@ -49,13 +49,20 @@ module.exports.getCartTotal = async (event) => {
     }
 }
 //get user's products
-module.exports.getUserProductQueries = async (event) => {
+module.exports.getUserCartProduct = async (event) => {
 
     try {
         const user_id = event.queryStringParameters && event.queryStringParameters.user_id;
         const product_id = event.queryStringParameters && event.queryStringParameters.product_id;
+        if(isNaN(product_id)){
+            return {
+                statusCode: 404,
+                body: JSON.stringify({message: 'invalid product ID, product Id must be a number'})
+
+            }
+        }
         const result  = await pool.query('SELECT * FROM carts WHERE user_id = $1 AND product_id = $2', [user_id, product_id])
-            if(result && result.rows){
+            if(result.rows.length > 0){
                 return {
                     statusCode: 200,
                     body: JSON.stringify(result.rows)
@@ -80,18 +87,20 @@ module.exports.getUserProductQueries = async (event) => {
 //create cart item (double check update quantity functionality)
 module.exports.post = async (event) => {
     try { 
-        const requestBody = JSON.parse(event.body);
-        if (!requestBody) {
+      
+        if (!event.body) {
             return {
                 statusCode: 400,
-                body: JSON.stringify({ msg: 'Please supply valid JSON data' })
+                body: JSON.stringify({ message: 'Please supply valid JSON data' })
             };
         }
         else {
+            const requestBody = JSON.parse(event.body);
             //get user id, product id and quantity from body
             const { user_id, product_id, quantity} = requestBody
             //check if cart item exists
             const result = await pool.query('SELECT * FROM carts WHERE user_id = $1 AND product_id = $2',[ user_id, product_id]);
+            
             if(result.rows.length === 0){
                 //cart does not exist in db so insert and return new cart row
                 const result = await pool.query('INSERT INTO carts (user_id, product_id, quantity) VALUES ($1, $2, $3) RETURNING *', [user_id, product_id, quantity])
@@ -102,7 +111,7 @@ module.exports.post = async (event) => {
             } else{
                 //cart exists so update quantity
                 const existingQuantity = result.rows[0].quantity;
-                const newQuantity = existingQuantity + quantity;
+                const newQuantity = existingQuantity + 1;
                 await pool.query('UPDATE carts SET quantity = $1 WHERE user_id = $2 AND product_id = $3', [newQuantity, user_id, product_id])
                 return {
                     statusCode: 200,
@@ -128,7 +137,8 @@ try{
             statusCode: 400,
             body: JSON.stringify({message: 'invalid user id'})
         }
-    } else{
+    } 
+  else{
     const response = await pool.query('SELECT * FROM carts WHERE user_id = $1', [userId]);
     return {
         statusCode: 200,
@@ -179,7 +189,7 @@ module.exports.put = async (event) => {
     if(!userId || !productId || !quantity){
         return{
             statusCode: 400,
-            body: JSON.stringify({message: 'invalid user id or product ID or ivalid quantity'})
+            body: JSON.stringify({message: 'invalid user id or product ID or invalid quantity'})
         }
     } 
     if(isNaN(parsedQuantity)){

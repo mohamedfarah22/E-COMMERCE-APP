@@ -20,6 +20,7 @@ try{
             body: JSON.stringify(result.rows)
         }
     } else{
+       
             const result = await pool.query('SELECT * FROM products ORDER BY id ASC')
             return {
                 statusCode: 200,
@@ -28,7 +29,6 @@ try{
     }
 
 } catch(error){
-    console.error(error)
     return {
         statusCode: 500,
         body: JSON.stringify({error: 'Internal server error'})
@@ -47,7 +47,6 @@ module.exports.getCategories = async (event) => {
             body: JSON.stringify(result.rows)
         }
     } catch(error){
-        console.error(error)
         return {
             statusCode: 500,
             body: JSON.stringify({error: 'Internal server error'})
@@ -80,7 +79,6 @@ module.exports.getProductById = async (event) => {
         }
     }
     }catch(error){
-        console.error(error)
         return {
             statusCode: 500,
             body: JSON.stringify({error: 'Internal server error'})
@@ -91,10 +89,8 @@ module.exports.getProductById = async (event) => {
 module.exports.post = async (event) => {
     
     try{
-    //if no body object is supplied
-        const requestBody = JSON.parse(event.body);
-        
-        if (!requestBody) {
+    
+        if (!event.body) {
             return {
                 statusCode: 400,
                 body: JSON.stringify({ msg: 'Please supply valid JSON data' })
@@ -102,7 +98,8 @@ module.exports.post = async (event) => {
         }
         
      else{
-        //access body object for product creation
+        //parse body
+       const requestBody = JSON.parse(event.body);
         const {product_name, product_description, category, price, available_quantity, image_url} = requestBody
         //insert product object into db
         const result = await pool.query('INSERT INTO products (product_name, product_description, category, price, available_quantity, image_url) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *', [product_name, product_description, category, price, available_quantity, image_url]);
@@ -123,11 +120,9 @@ module.exports.post = async (event) => {
 //update existing product
 module.exports.put = async (event) => {
 
-    try{
-    //if no body object is supplied
-     const requestBody = JSON.parse(event.body);
-        
-    if (!requestBody) {
+try{
+    
+    if (!event.body) {
      return {
          statusCode: 400,
          body: JSON.stringify({ msg: 'Please supply valid JSON data' })
@@ -140,6 +135,7 @@ module.exports.put = async (event) => {
             body: JSON.stringify({message: 'Invalid ID'}),
         };
     }
+    const requestBody = JSON.parse(event.body);
     const {product_name, product_description, price, available_quantity}  =requestBody
     const result = await pool.query('UPDATE products SET product_name=$1, product_description=$2, price=$3, available_quantity=$4 WHERE id=$5 RETURNING *', [product_name, product_description, price, available_quantity, id])
     if(result.rows.length === 0){

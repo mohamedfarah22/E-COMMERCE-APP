@@ -65,7 +65,7 @@ functions:
           method: get
           cors: true
   getUserProductQueriesLambda:
-    handler: handlers/carts.getUserProductQueries
+    handler: handlers/carts.getUserCartProduct
     events:
       - http:
           path: carts/user-product-queries
@@ -97,7 +97,7 @@ functions:
     events: 
       - http:
           path: carts
-          method: delete
+          method: put
           cors: true
   getAllUsersLambda: 
     handler: handlers/users.getAllUsers
@@ -141,4 +141,12 @@ functions:
           path: check-out
           method: get
           cors: true 
-  
+  indexProductsLambda:
+    handler: handlers/search.indexProductData
+  searchLambda:
+    handler: handlers/search.search
+    events:
+      - http: 
+          path: search
+          method: get
+          cors: true

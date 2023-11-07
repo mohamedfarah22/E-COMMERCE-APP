@@ -9,14 +9,14 @@ const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
 //create router to register user using aws cognito
 module.exports.registerUser = async (event) => {
     try {
-        const requestBody = JSON.parse(event.body);
-        if (!requestBody) {
+       
+        if (!event.body) {
             return {
                 statusCode: 400,
                 body: JSON.stringify({ msg: 'Please supply valid JSON data' })
             };
         }
-       
+        const requestBody = JSON.parse(event.body);
         const {first_name, last_name, email, password} = requestBody
          //attribute list for aws cognito
         const attributeList = [
