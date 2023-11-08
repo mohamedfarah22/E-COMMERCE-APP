@@ -131,9 +131,11 @@ functions:
     handler: handlers/auth.logOut
     events:
       - http: 
-          path: handlers/auth.logOut
+          path: auth/logout
           method: post
           cors: true
+  preSignUpLambda:
+    handler: handlers/auth.autoConfirmUsers
   stripeCheckoutLambda:
     handler: handlers/stripeRouterCheckout.stripeCheckOut
     events:
