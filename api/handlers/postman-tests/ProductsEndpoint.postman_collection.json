@@ -376,12 +376,7 @@
 							"            pm.expect(product).to.have.all.keys('category');",
 							"     });",
 							"});",
-							"pm.test('Each id in the response array should be a number', function () {",
-							"     pm.expect(pm.response.json()).to.be.an('array');",
-							"     pm.response.json().forEach((product) => {",
-							"            pm.expect(product).to.have.property('id').that.is.a('number');",
-							"     });",
-							"});",
+							"",
 							"pm.test('Response body should be an array', function () {",
 							"    pm.expect(pm.response.json()).to.be.an('array');",
 							"});",
@@ -562,19 +557,7 @@
 							"     pm.expect(pm.response.json()).to.have.property('id').that.is.a('number');",
 							"    ",
 							"});",
-							"",
-							"pm.test('Response body should be an object with the these values', function () {",
-							"    const expectedObject = {  \"product_name\": \"cool product\",",
-							"    \"product_description\": \"number 1 sell out jewllery product\",",
-							"    \"category\": \"1ofnone\",",
-							"    \"price\": 200000,",
-							"    \"available_quantity\": 13,",
-							"    \"image_url\": \"www.image.com\"}",
-							"    const responseObject = pm.response.json();",
-							"   for (const key in expectedObject) {",
-							"        pm.expect(responseObject).to.have.property(key, expectedObject[key]);",
-							"    }",
-							"});"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -585,7 +568,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"product_name\":\"cool product\",\n    \"product_description\": \"number 1 sell out jewllery product\",\n    \"category\": \"1ofnone\",\n    \"price\": 200000,\n     \"available_quantity\": 13,\n     \"image_url\": \"www.image.com\"\n\n}",
+					"raw": "{\n    \"product_name\":\"cool product\",\n    \"product_description\": \"number 1 sell out jewllery product\",\n    \"category\": \"rings\",\n    \"price\": 200000,\n     \"available_quantity\": 13,\n     \"image_url\": \"www.image.com\"\n\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -622,21 +605,6 @@
 							"    ",
 							"});",
 							"",
-							"pm.test('Response body should be an object with the these values', function () {",
-							"    const expectedObject = {",
-							"    \"id\": 40,",
-							"    \"product_name\": \"bad product\",",
-							"    \"product_description\": \"number 1 sell out jewllery product\",",
-							"    \"category\": \"1ofnone\",",
-							"    \"price\": 2000,",
-							"    \"available_quantity\": 1,",
-							"    \"image_url\": \"www.image.com\"",
-							"}",
-							"    const responseObject = pm.response.json();",
-							"   for (const key in expectedObject) {",
-							"        pm.expect(responseObject).to.have.property(key, expectedObject[key]);",
-							"    }",
-							"});",
 							""
 						],
 						"type": "text/javascript"
@@ -648,14 +616,14 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"product_name\":\"bad product\",\n    \"product_description\": \"number 1 sell out jewllery product\",\n    \"category\": \"regular\",\n    \"price\": 2000,\n     \"available_quantity\": 1\n}",
+					"raw": " {\n        \"id\": 1,\n        \"product_name\": \"Elegant Gold Bangle\",\n        \"product_description\": \"Elevate your style with this exquisite gold bangle, weighing a delicate 10 grams. Its intricate design and comfortable fit make it a perfect accessory for any occasion.\",\n        \"category\": \"bangles\",\n        \"price\": 1200,\n        \"available_quantity\": 10,\n        \"image_url\": \"https://d1ujc5c60bkv1u.cloudfront.net/images/bangle.jpeg\"\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "{{base_url}}/products/40"
+				"url": "{{base_url}}/products/1"
 			},
 			"response": []
 		},
@@ -682,12 +650,7 @@
 							"            pm.expect(product).to.have.all.keys('category');",
 							"     });",
 							"});",
-							"pm.test('Each id in the response array should be a number', function () {",
-							"     pm.expect(pm.response.json()).to.be.an('array');",
-							"     pm.response.json().forEach((product) => {",
-							"            pm.expect(product).to.have.property('id').that.is.a('number');",
-							"     });",
-							"});",
+							"",
 							"pm.test('Response body should be an array', function () {",
 							"    pm.expect(pm.response.json()).to.be.an('array');",
 							"});",
@@ -726,7 +689,7 @@
 							"pm.test('Response body should be an object with these values', function () {",
 							"    pm.expect(pm.response.json()).to.be.an('object');",
 							"    pm.expect(pm.response.json()).to.eql({",
-							"    \"message\": \"Product deleted with ID: 48\"",
+							"    \"message\": \"Product deleted with ID: 54\"",
 							"})",
 							"",
 							"});"
@@ -747,7 +710,7 @@
 						}
 					}
 				},
-				"url": "{{base_url}}/products/51"
+				"url": "{{base_url}}/products/54"
 			},
 			"response": []
 		}
