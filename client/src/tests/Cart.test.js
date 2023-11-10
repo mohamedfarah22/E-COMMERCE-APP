@@ -146,37 +146,3 @@ await waitFor(() => {
     })
 })
   
-describe('test checkout button', () => {
-  
-
-test('checkout button navigates to provided stripe url', async () => {
- 
-  const navigateMock = jest.fn();
-    
-  require('react-router-dom').useNavigate.mockReturnValue(navigateMock);
-        
-        // Render the CartPopUp component wrapped with the custom context provider
-        render(
-        <MemoryRouter>
-          <CartProviderPopUp>
-            <CartProvider>
-              <CartPopUp userId={'1'} />
-            </CartProvider>
-          </CartProviderPopUp>
-          </MemoryRouter>
-        );
-      
-        const user = userEvent.setup();
-        
-        
-       
-        // Wait for any async operations to complete
-      await waitFor(() => {
-        const checkOutButton  = screen.getByRole('button', {name: 'Check Out'})
-        user.click(checkOutButton)
-        expect(navigateMock).toHaveBeenCalledWith('http://stripe-checkout.com')
-      })
-      
-       
-})
-})

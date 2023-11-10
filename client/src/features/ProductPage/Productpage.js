@@ -65,7 +65,7 @@ function ProductPage({filterCategory, setFilterCategory, userId, loggedIn, setLo
         </div>: null}
         <div className='grid-product-page-container'>
         <div className="image-container">
-            <img src= {`../images/${selectedProduct[0].image_url}`} alt={selectedProduct[0].product_name}/>
+            <img src= {`${selectedProduct[0].image_url}`} alt={selectedProduct[0].product_name}/>
         </div>
         <div className="product-container-page">
             <h3 className='product-name-page'>{selectedProduct[0].product_name}</h3>

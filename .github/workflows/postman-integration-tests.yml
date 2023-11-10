@@ -1,0 +1,53 @@
+name: Postman Tests
+
+on:
+  pull_request:
+    branches:
+      - test-branch
+
+jobs:
+  products_endpoint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Node.js and Newman
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.16.0
+
+      - name: Run Postman tests - products endpoint
+        run: newman run api/handlers/postman-tests/ProductsEndpoint.postman_collection.json --environment api/handlers/postman-tests/testAPiEnv.postman_environment.json
+
+  carts_endpoint:
+    needs: products_endpoint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Node.js and Newman
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.16.0
+
+      - name: Run Postman tests - carts endpoint
+        run: newman run api/handlers/postman-tests/CartsEndPoint.postman_collection.json --environment api/handlers/postman-tests/testAPiEnv.postman_environment.json
+  auth_endpoint:
+    needs: carts_endpoint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Node.js and Newman
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.16.0
+
+      - name: Run Postman tests - auth endpoint
+        run: newman run api/handlers/postman-tests/authEndPoint.postman_collection.json --environment api/handlers/postman-tests/testAPiEnv.postman_environment.json
