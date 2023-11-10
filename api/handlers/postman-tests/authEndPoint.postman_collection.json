@@ -38,7 +38,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"first_name\":\"Mohamed\",\n    \"last_name\": \"Farah\",\n    \"email\": \"mohamed2@example.com\",\n    \"password\":\"Password1!\"\n}",
+					"raw": "{\n    \"first_name\":\"Mohamed\",\n    \"last_name\": \"Farah\",\n    \"email\": \"mohamed3@example.com\",\n    \"password\":\"Password1!\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
