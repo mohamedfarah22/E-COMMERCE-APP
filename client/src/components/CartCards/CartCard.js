@@ -98,7 +98,7 @@ const increment = (e) => {
        <div> 
         <div className = 'card-cart-container'>
         <div className = "cart-product-image-container" >
-            <img alt = {cartProduct[0].product_name} src={`../images/${cartProduct[0].image_url}`} />
+            <img alt = {cartProduct[0].product_name} src={`${cartProduct[0].image_url}`} />
         </div>
         <div className="cart-item-description">
             <p className="cart-product-name">{cartProduct[0].product_name}</p>

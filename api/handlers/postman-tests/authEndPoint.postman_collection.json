@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "66d155da-3ae2-4443-af35-357dba38a005",
+		"name": "authEndPoint",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "28043584"
+	},
+	"item": [
+		{
+			"name": "registerUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"pm.test(\"response object should equal\", function () {",
+							"    pm.expect(pm.response.json()).to.be.an('object')",
+							"});",
+							"",
+							"",
+							"pm.test(\"response object should equal\", function () {",
+							"    pm.expect(pm.response.json()).to.eql({ message: 'Sign up successful' })",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"first_name\":\"Mohamed\",\n    \"last_name\": \"Farah\",\n    \"email\": \"mohamed4@example.com\",\n    \"password\":\"Password1!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_url}}/auth/register"
+			},
+			"response": []
+		},
+		{
+			"name": "logInUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"pm.test('response should have object with keys - user, tokens, accessToken, refreshToken, idToken', function(){",
+							"    pm.expect(pm.response.json()).to.have.all.keys('user', 'tokens');",
+							"     pm.expect(pm.response.json().tokens).to.have.all.keys('accessToken', 'idToken', 'refreshToken');",
+							"",
+							"})",
+							"",
+							"//save tokens to use in logout",
+							"// Assuming the response is in JSON format",
+							"const response = pm.response.json();",
+							"",
+							"// Save tokens as environment variables",
+							"pm.environment.set(\"userId\", response.userId);",
+							"pm.environment.set(\"accessToken\", response.tokens.accessToken);",
+							"pm.environment.set(\"idToken\", response.tokens.idToken);",
+							"pm.environment.set(\"refreshToken\", response.tokens.refreshToken);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"mohamed1@example.com\",\n    \"password\":\"Password1!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_url}}/auth/login"
+			},
+			"response": []
+		},
+		{
+			"name": "logOutUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"pm.test(\"response object should be an object\", function () {",
+							"    pm.expect(pm.response.json()).to.be.an('object')",
+							"});",
+							"",
+							"pm.test(\"response object should equal\", function () {",
+							"    pm.expect(pm.response.json()).to.eql({ message: 'User signed out successfully' })",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\": \"{{userId}}\",\n    \"accessToken\": \"{{accessToken}}\",\n    \"idToken\": \"{{idToken}}\",\n    \"refreshToken\": \"{{refreshToken}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_url}}/auth/logout"
+			},
+			"response": []
+		}
+	]
+}

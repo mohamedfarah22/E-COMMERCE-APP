@@ -1,0 +1,157 @@
+org: mohamedfarah
+app: ecomm-app-api
+service: ecomm-app-api
+provider:
+  name: aws
+  region: ap-southeast-2
+  runtime: nodejs18.x
+
+functions:
+  dbInitLambdaFunction:
+    handler: handlers/dbinit.dbInitLambdaFunction
+  getProductsLambda:
+    handler: handlers/products.getProducts
+    events:
+    - http:
+       path: products
+       method: get
+       cors: true
+  getCategoriesLambda:
+    handler: handlers/products.getCategories
+    events:
+    - http:
+       path: products/categories
+       method: get
+       cors: true
+  getProductByIDLambda:
+    handler: handlers/products.getProductById
+    events:
+    - http:
+       path: products/{id}
+       method: get
+       cors: true
+  createNewProductLambda:
+    handler: handlers/products.post
+    events:
+    - http:
+       path: products
+       method: post
+       cors: true
+  updateProductLambda:
+    handler: handlers/products.put
+    events:
+      - http:
+         path: products/{id}
+         method: put
+         cors: true 
+  deleteProductLambda:
+    handler: handlers/products.delete
+    events:
+      - http:
+         path: products/{id}
+         method: delete
+         cors: true 
+  getAllCartsLambda:
+    handler: handlers/carts.getAllCarts
+    events:
+      - http:
+         path: carts/all
+         method: get
+         cors: true 
+  getCartTotalLambda:
+    handler: handlers/carts.getCartTotal
+    events:
+      - http: 
+          path: carts/cart-total
+          method: get
+          cors: true
+  getUserProductQueriesLambda:
+    handler: handlers/carts.getUserCartProduct
+    events:
+      - http:
+          path: carts/user-product-queries
+          method: get
+          cors: true
+  createCartItemLambda:
+    handler: handlers/carts.post
+    events:
+      - http:
+         path: carts
+         method: post
+         cors: true 
+  getCartByUserIdLambda:
+    handler: handlers/carts.getCartByUserID
+    events:
+      - http:
+          path: carts/{user_id}
+          method: get
+          cors: true
+  deleteCartItemLambda:
+    handler: handlers/carts.deleteCartItem
+    events:
+      - http:
+          path: carts
+          method: delete
+          cors: true
+  putCartItemLamda: 
+    handler: handlers/carts.put
+    events: 
+      - http:
+          path: carts
+          method: put
+          cors: true
+  getAllUsersLambda: 
+    handler: handlers/users.getAllUsers
+    events:
+      - http: 
+          path: users
+          method: get
+          cors: true
+  getUsersByIdLambda:
+    handler: handlers/users.getUserById
+    events: 
+      - http:
+          path: users/{id}
+          method: get
+          cors: true
+  registerUserLambda:
+    handler: handlers/auth.registerUser
+    events: 
+      - http: 
+          path: auth/register
+          method: post
+          cors: true
+  logInUserLambda:
+    handler: handlers/auth.logIn
+    events:
+      - http: 
+          path: auth/login
+          method: post
+          cors: true
+  logOutUserLambda: 
+    handler: handlers/auth.logOut
+    events:
+      - http: 
+          path: auth/logout
+          method: post
+          cors: true
+  preSignUpLambda:
+    handler: handlers/auth.autoConfirmUsers
+  stripeCheckoutLambda:
+    handler: handlers/stripeRouterCheckout.stripeCheckOut
+    events:
+      - http:
+          path: check-out
+          method: get
+          cors: true 
+  createMappingForIndexLambda:
+    handler: handlers/search.createMappingForIndex
+  bulkProductDataToEs:
+    handler: handlers/search.bulkProductDatatToES
+  searchLambda:
+    handler: handlers/search.search
+    events:
+      - http: 
+          path: search
+          method: get
+          cors: true

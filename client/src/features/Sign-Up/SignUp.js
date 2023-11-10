@@ -21,10 +21,11 @@ function SignUp({filterCategory, setFilterCategory, userId}){
       
         try {
           const response = await axios.post(`${baseURL}/auth/register`, formData);
-      
-          if (response.status === 201) {
+          
+          if (response.status === 200) {
             navigate('/login')
           } else {
+            console.log(response)
             console.log('Form submission failed');
           }
         } catch (error) {

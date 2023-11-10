@@ -16,7 +16,7 @@ const productsRouter = require('./src/Routers/productsRouter.js')(pool)
 const authRouter = require('./src/Routers/authRouter.js')(pool)
 const usersRouter = require('./src/Routers/usersRouter.js')(pool)
 const cartsRouter = require('./src/Routers/cartRouter.js')(pool)
-const stripeRouter = require('./src/Routers/stripeRouterCheckout.js')
+const stripeRouter = require('./src/Routers/stripeRouterCheckout.js')(pool)
 const searchRouter = require('./src/Routers/searchRouter.js')
 //use cors
 app.use(cors());
