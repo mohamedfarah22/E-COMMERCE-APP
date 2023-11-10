@@ -1,9 +1,10 @@
+org: mohamedfarah
+app: ecomm-app-api
 service: ecomm-app-api
 provider:
   name: aws
   region: ap-southeast-2
   runtime: nodejs18.x
-  role: arn:aws:iam::344613385034:role/lambda_execution_role
 
 functions:
   dbInitLambdaFunction:

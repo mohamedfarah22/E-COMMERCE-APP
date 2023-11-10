@@ -4,16 +4,7 @@ const axios = require('axios');
 const {aws4Interceptor} = require("aws4-axios")
 const connection = require('http-aws-es')
 
-const credentials = new AWS.Credentials({
-    accessKeyId: "AKIAVAPEO6NFDJAFENGX",
-    secretAccessKey: "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"
-})
-const region = "ap-southeast-2"
-const esClient = new Client({
-    nodes: 'https://search-product-search-3rxti5gq3imvvpyqxa5jub5aua.ap-southeast-2.es.amazonaws.com/',
-    connectionClass: connection,
-    awsConfig: new AWS.Config({region, credentials})
-})
+
 
 const Pool = require('pg').Pool;
 const fetch = require('node-fetch-commonjs')
