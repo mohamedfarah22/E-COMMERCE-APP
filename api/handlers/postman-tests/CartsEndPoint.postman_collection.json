@@ -1,0 +1,470 @@
+{
+	"info": {
+		"_postman_id": "b778f5d2-e7c0-4a83-a373-c20d78746c61",
+		"name": "CartsEndPoint",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "28043584"
+	},
+	"item": [
+		{
+			"name": "getAllCarts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"pm.test('Array should have objects with keys - id, user_id, product_id, quantity', function () {",
+							"     pm.expect(pm.response.json()).to.be.an('array');",
+							"",
+							"     pm.response.json().forEach((product) => {",
+							"            pm.expect(product).to.be.an('object');",
+							"            pm.expect(product).to.have.all.keys('id', 'user_id', 'product_id', 'quantity');",
+							"     });",
+							"});",
+							"pm.test('Each id in the response array should be a number', function () {",
+							"     pm.expect(pm.response.json()).to.be.an('array');",
+							"     pm.response.json().forEach((product) => {",
+							"            pm.expect(product).to.have.property('id').that.is.a('number');",
+							"     });",
+							"});",
+							"pm.test('Response body should be an array', function () {",
+							"    pm.expect(pm.response.json()).to.be.an('array');",
+							"});",
+							"pm.test('Response body should be an array of objects', function () {",
+							"    pm.expect(pm.response.json()).to.be.an('array');",
+							"    pm.response.json().forEach((product) => {",
+							"     pm.expect(product).to.be.an('object');",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{base_url}}/carts/all"
+			},
+			"response": []
+		},
+		{
+			"name": "getUserCartProduct",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"pm.test('Array should have objects with keys - id, user_id, product_id, quantity', function () {",
+							"    pm.expect(pm.response.json()).to.be.an('array');",
+							"    pm.response.json().forEach(product => {",
+							"        pm.expect(product).to.be.an('object');",
+							"        pm.expect(product).to.have.all.keys('id', 'user_id', 'product_id', 'quantity');",
+							"    });",
+							"})",
+							"",
+							"pm.test('response should equal' , function(){",
+							"    pm.expect(pm.response.json()[0]).to.eql( {",
+							"        \"id\": 4,",
+							"        \"user_id\": \"123\",",
+							"        \"product_id\": 2,",
+							"        \"quantity\": 5",
+							"    })",
+							"",
+							"})",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/carts/user-product-queries?user_id=123&product_id=2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"carts",
+						"user-product-queries"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "123"
+						},
+						{
+							"key": "product_id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCartTotal",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"pm.test('object with key total_cost', function () {",
+							"     pm.expect(pm.response.json()).to.be.an('object');",
+							"     pm.expect(pm.response.json()).to.have.property('total_cost')",
+							"});",
+							"",
+							"pm.test('Response body should equal this array', function () {",
+							"    pm.expect(pm.response.json()).to.eql({",
+							"    \"total_cost\": 6750",
+							"});",
+							"})",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/carts/cart-total?user_id=123",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"carts",
+						"cart-total"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCartByUserId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"pm.test('Array should have objects with keys - id, user_id, product_id, quantity', function () {",
+							"    pm.expect(pm.response.json()).to.be.an('array');",
+							"    pm.response.json().forEach(product => {",
+							"        pm.expect(product).to.be.an('object');",
+							"        pm.expect(product).to.have.all.keys('id', 'user_id', 'product_id', 'quantity');",
+							"    });",
+							"})",
+							"",
+							"pm.test('response should equal' , function(){",
+							"    pm.expect(pm.response.json()[0]).to.eql( {",
+							"        \"id\": 4,",
+							"        \"user_id\": \"123\",",
+							"        \"product_id\": 2,",
+							"        \"quantity\": 5",
+							"    })",
+							"",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{base_url}}/carts/123"
+			},
+			"response": []
+		},
+		{
+			"name": "postCarts-new-cart",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"pm.test('Array should have objects with keys id, user_id, product_id and quantity', function () {",
+							"     pm.expect(pm.response.json()).to.be.an('array');",
+							"",
+							"     pm.response.json().forEach((cart) => {",
+							"            pm.expect(cart).to.be.an('object');",
+							"            pm.expect(cart).to.have.all.keys('id', 'user_id', 'product_id', 'quantity');",
+							"     });",
+							"});",
+							"pm.test('Each id in the response array should be a number', function () {",
+							"     pm.expect(pm.response.json()).to.be.an('array');",
+							"     pm.response.json().forEach((cart) => {",
+							"            pm.expect(cart).to.have.property('id').that.is.a('number');",
+							"     });",
+							"});",
+							"pm.test('response should have correct values for eachh key in cart object based on cart that is created' , function(){",
+							"     pm.response.json().forEach((cart) => {",
+							"            pm.expect(cart).to.have.property('user_id').that.equal('newUser2');",
+							"             pm.expect(cart).to.have.property('product_id').that.equal(3);",
+							"             pm.expect(cart).to.have.property('quantity').that.equal(1);",
+							"     });",
+							"})",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": \"newUser2\",\n    \"product_id\": 3,\n    \"quantity\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_url}}/carts"
+			},
+			"response": []
+		},
+		{
+			"name": "postCarts-existing-cart",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"",
+							"",
+							"pm.test('response should be newQuantity object' , function(){",
+							"    pm.expect(pm.response.json()).to.be.an('object')",
+							"     ",
+							"})",
+							"pm.test('response should be object with newQuantity key value' , function(){",
+							"       pm.expect(pm.response.json()).to.have.property('newQuantity')",
+							"     ",
+							"})",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": \"newUser2\",\n    \"product_id\": 3,\n    \"quantity\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_url}}/carts"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteCartProduct",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"pm.test('response should be an array with keys -id, user_id, product_id, quantity', function () {",
+							"     pm.expect(pm.response.json()).to.be.an('array');",
+							"",
+							"     pm.response.json().forEach((cart) => {",
+							"            pm.expect(cart).to.be.an('object');",
+							"            pm.expect(cart).to.have.all.keys('id', 'user_id', 'product_id', 'quantity');",
+							"     });",
+							"});",
+							"pm.test('Each id in the response array should be a number', function () {",
+							"     pm.expect(pm.response.json()).to.be.an('array');",
+							"     pm.response.json().forEach((cart) => {",
+							"            pm.expect(cart).to.have.property('id').that.is.a('number');",
+							"     });",
+							"});",
+							"pm.test('response should have correct values for eachh key in cart object based on cart that is created' , function(){",
+							"     pm.response.json().forEach((cart) => {",
+							"            pm.expect(cart).to.have.property('user_id').that.equal('newUser2');",
+							"             pm.expect(cart).to.have.property('product_id').that.equal(3);",
+							"             pm.expect(cart).to.have.property('quantity').that.equal(2);",
+							"     });",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/carts?user_id=newUser2&product_id=3",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"carts"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "newUser2"
+						},
+						{
+							"key": "product_id",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateCartQuantity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"pm.test('response should be an array with keys -id, user_id, product_id, quantity', function () {",
+							"     pm.expect(pm.response.json()).to.be.an('array');",
+							"",
+							"     pm.response.json().forEach((cart) => {",
+							"            pm.expect(cart).to.be.an('object');",
+							"            pm.expect(cart).to.have.all.keys('id', 'user_id', 'product_id', 'quantity');",
+							"     });",
+							"});",
+							"pm.test('Each id in the response array should be a number', function () {",
+							"     pm.expect(pm.response.json()).to.be.an('array');",
+							"     pm.response.json().forEach((cart) => {",
+							"            pm.expect(cart).to.have.property('id').that.is.a('number');",
+							"     });",
+							"});",
+							"pm.test('response should have correct values for eachh key in cart object based on cart that is created' , function(){",
+							"     pm.response.json().forEach((cart) => {",
+							"            pm.expect(cart).to.have.property('user_id').that.equal('123');",
+							"             pm.expect(cart).to.have.property('product_id').that.equal(2);",
+							"             pm.expect(cart).to.have.property('quantity').that.equal(6);",
+							"     });",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/carts?user_id=123&product_id=2&quantity=6",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"carts"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "123"
+						},
+						{
+							"key": "product_id",
+							"value": "2"
+						},
+						{
+							"key": "quantity",
+							"value": "6"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

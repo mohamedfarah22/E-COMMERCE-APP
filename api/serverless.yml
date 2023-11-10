@@ -3,7 +3,7 @@ provider:
   name: aws
   region: ap-southeast-2
   runtime: nodejs18.x
-
+  role: arn:aws:iam::344613385034:role/lambda_execution_role
 
 functions:
   dbInitLambdaFunction:
@@ -143,8 +143,10 @@ functions:
           path: check-out
           method: get
           cors: true 
-  indexProductsLambda:
-    handler: handlers/search.indexProductData
+  createMappingForIndexLambda:
+    handler: handlers/search.createMappingForIndex
+  bulkProductDataToEs:
+    handler: handlers/search.bulkProductDatatToES
   searchLambda:
     handler: handlers/search.search
     events:
