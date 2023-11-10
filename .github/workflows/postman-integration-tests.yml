@@ -35,7 +35,7 @@ jobs:
           node-version: 18.16.0
 
       - name: Run Postman tests - carts endpoint
-        run: newman run api/handlers/postman-tests/CartsEndpoint.postman_collection.json --environment api/handlers/postman-tests/testAPiEnv.postman_environment.json
+        run: newman run api/handlers/postman-tests/CartsEndPoint.postman_collection.json --environment api/handlers/postman-tests/testAPiEnv.postman_environment.json
   auth_endpoint:
     needs: carts_endpoint
     runs-on: ubuntu-latest
