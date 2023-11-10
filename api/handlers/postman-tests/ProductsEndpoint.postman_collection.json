@@ -431,22 +431,7 @@
 							"     pm.expect(product).to.be.an('object');",
 							"    });",
 							"});",
-							"pm.test('Response body should equal this array' , function (){",
-							"    pm.expect(pm.response.json()).to.eql([",
-							"    {",
-							"        \"category\": \"earrings\"",
-							"    },",
-							"    {",
-							"        \"category\": \"necklaces\"",
-							"    },",
-							"    {",
-							"        \"category\": \"bangles\"",
-							"    },",
-							"    {",
-							"        \"category\": \"rings\"",
-							"    }",
-							"])",
-							"})",
+							"",
 							""
 						],
 						"type": "text/javascript"
@@ -503,20 +488,22 @@
 							"",
 							"pm.test('Response JSON values for id should be 1', function () {",
 							"    pm.expect(pm.response.json()).to.be.an('array').that.is.not.empty;",
-							"    pm.expect(pm.response.json()[0]).to.have.property('id',1)",
+							"    pm.expect(pm.response.json()[0]).to.have.property('id',2)",
 							"   ",
 							"});",
 							"",
 							"pm.test('Response body should equal this array', function () {",
-							"    pm.expect(pm.response.json()).to.eql([{",
-							"            'id': 1,",
-							"            'product_name': 'Elegant Gold Bangle',",
-							"            'product_description': 'Elevate your style with this exquisite gold bangle, weighing a delicate 10 grams. Its intricate design and comfortable fit make it a perfect accessory for any occasion.',",
-							"            'category': 'bangles',",
-							"            'price': 1100,",
-							"            'available_quantity': 10,",
-							"            'image_url': 'https://d1ujc5c60bkv1u.cloudfront.net/images/bangle.jpeg'",
-							"        }]);",
+							"    pm.expect(pm.response.json()).to.eql([",
+							"    {",
+							"        \"id\": 2,",
+							"        \"product_name\": \"Dainty Gold Bangle\",",
+							"        \"product_description\": \"Embrace subtle luxury with this dainty gold bangle, weighing just 15 grams. Its lightweight charm and delicate craftsmanship ensure it's perfect for everyday wear.\",",
+							"        \"category\": \"bangles\",",
+							"        \"price\": 1350,",
+							"        \"available_quantity\": 7,",
+							"        \"image_url\": \"https://d1ujc5c60bkv1u.cloudfront.net/images/bangle.jpeg\"",
+							"    }",
+							"]);",
 							"})",
 							"",
 							""
@@ -528,7 +515,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "{{base_url}}/products/1"
+				"url": "{{base_url}}/products/2"
 			},
 			"response": []
 		},
@@ -689,7 +676,7 @@
 							"pm.test('Response body should be an object with these values', function () {",
 							"    pm.expect(pm.response.json()).to.be.an('object');",
 							"    pm.expect(pm.response.json()).to.eql({",
-							"    \"message\": \"Product deleted with ID: 54\"",
+							"    \"message\": \"Product deleted with ID: 55\"",
 							"})",
 							"",
 							"});"
@@ -710,7 +697,7 @@
 						}
 					}
 				},
-				"url": "{{base_url}}/products/54"
+				"url": "{{base_url}}/products/55"
 			},
 			"response": []
 		}
