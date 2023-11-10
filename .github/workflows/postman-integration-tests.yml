@@ -19,7 +19,7 @@ jobs:
           node-version: 18.16.0
 
       - name: Run Postman tests - products endpoint
-        run: newman run api/handlers/postman-tests/ProductsEndpoint.json --environment api/handlers/postman-tests/testAPiEnv.postman_environment.json
+        run: newman run api/handlers/postman-tests/ProductsEndpoint.postman_collection.json --environment api/handlers/postman-tests/testAPiEnv.postman_environment.json
 
   carts_endpoint:
     needs: products_endpoint
@@ -35,7 +35,7 @@ jobs:
           node-version: 18.16.0
 
       - name: Run Postman tests - carts endpoint
-        run: newman run api/handlers/postman-tests/CartsEndpoint.json --environment api/handlers/postman-tests/testAPiEnv.postman_environment.json
+        run: newman run api/handlers/postman-tests/CartsEndpoint.postman_collection.json --environment api/handlers/postman-tests/testAPiEnv.postman_environment.json
   auth_endpoint:
     needs: carts_endpoint
     runs-on: ubuntu-latest
@@ -50,4 +50,4 @@ jobs:
           node-version: 18.16.0
 
       - name: Run Postman tests - auth endpoint
-        run: newman run api/handlers/postman-tests/authEndPoint.json --environment api/handlers/postman-tests/testAPiEnv.postman_environment.json
+        run: newman run api/handlers/postman-tests/authEndPoint.postman_collection.json --environment api/handlers/postman-tests/testAPiEnv.postman_environment.json

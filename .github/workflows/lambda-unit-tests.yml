@@ -11,8 +11,8 @@ defaults:
       run:
         working-directory: ./api
 steps:
-     - name: Checkout Repository
-       uses: actions/checkout@v2
+    - name: Checkout Repository
+      uses: actions/checkout@v2
     - name: Set Up Node.js
       uses: actions/setup-node@v2
       with:
@@ -20,5 +20,5 @@ steps:
 
     - name: Install Dependencies
       run: npm install
-     - name: Run Tests
-        run: npm test -- --testPathPattern=api/handlers/tests
+    - name: Run Tests
+      run: npm test -- --testPathPattern=api/handlers/tests
