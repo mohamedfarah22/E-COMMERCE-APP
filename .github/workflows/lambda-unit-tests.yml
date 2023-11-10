@@ -11,14 +11,14 @@ defaults:
       run:
         working-directory: ./api
 steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-    - name: Set Up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: 18.16.0
+  - name: Checkout Repository
+    uses: actions/checkout@v2
+  - name: Set Up Node.js
+    uses: actions/setup-node@v2
+    with:
+      node-version: 18.16.0
 
-    - name: Install Dependencies
-      run: npm install
-    - name: Run Tests
-      run: npm test -- --testPathPattern=api/handlers/tests
+  - name: Install Dependencies
+    run: npm install
+  - name: Run Tests
+    run: npm test -- --testPathPattern=api/handlers/tests
