@@ -16,6 +16,10 @@ try{
     if(category){
         const result = await pool.query('SELECT * FROM products WHERE category= $1', [category])
         return {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+               
+              },
             statusCode: 200,
             body: JSON.stringify(result.rows)
         }
@@ -23,6 +27,10 @@ try{
        
             const result = await pool.query('SELECT * FROM products ORDER BY id ASC')
             return {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    
+                  },
                 statusCode: 200,
                 body: JSON.stringify(result.rows)
             }
@@ -30,6 +38,10 @@ try{
 
 } catch(error){
     return {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+           
+          },
         statusCode: 500,
         body: JSON.stringify({error: 'Internal server error'})
     }
@@ -43,11 +55,19 @@ module.exports.getCategories = async (event) => {
     try{
         const result =  await pool.query('SELECT DISTINCT category FROM products');
         return{
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                
+              },
             statusCode: 200,
             body: JSON.stringify(result.rows)
         }
     } catch(error){
         return {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+               
+              },
             statusCode: 500,
             body: JSON.stringify({error: 'Internal server error'})
         }
@@ -60,6 +80,10 @@ module.exports.getProductById = async (event) => {
         //if id is not valid return 400 and invalid ID
         if(isNaN(id)){
             return {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                   
+                  },
                 statusCode: 400,
                 body: JSON.stringify({message: 'Invalid ID'}),
             };
@@ -67,6 +91,10 @@ module.exports.getProductById = async (event) => {
         const result = await pool.query('SELECT * FROM products WHERE id=$1', [id]);
         if(result.rows.length === 0){
             return {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                   
+                  },
                 statusCode: 404,
                 body: JSON.stringify({ error: "Product not found" })
             
@@ -74,12 +102,21 @@ module.exports.getProductById = async (event) => {
     }
     else{
         return {
+            
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+               
+              },
             statusCode: 200,
             body: JSON.stringify(result.rows)
         }
     }
     }catch(error){
         return {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+               
+              },
             statusCode: 500,
             body: JSON.stringify({error: 'Internal server error'})
         }
@@ -92,6 +129,10 @@ module.exports.post = async (event) => {
     
         if (!event.body) {
             return {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                   
+                  },
                 statusCode: 400,
                 body: JSON.stringify({ msg: 'Please supply valid JSON data' })
             };
@@ -104,6 +145,10 @@ module.exports.post = async (event) => {
         //insert product object into db
         const result = await pool.query('INSERT INTO products (product_name, product_description, category, price, available_quantity, image_url) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *', [product_name, product_description, category, price, available_quantity, image_url]);
         return{
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+               
+              },
             statusCode: 201,
             body: JSON.stringify(result.rows[0])
         }
@@ -111,6 +156,10 @@ module.exports.post = async (event) => {
     } catch(error){
         
         return {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+               
+              },
             statusCode: 500,
             body: JSON.stringify({error: 'Internal server error'})
         }
@@ -124,6 +173,10 @@ try{
     
     if (!event.body) {
      return {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+           
+          },
          statusCode: 400,
          body: JSON.stringify({ msg: 'Please supply valid JSON data' })
      };
@@ -131,6 +184,10 @@ try{
     const id = parseInt(event.pathParameters.id)
     if(isNaN(id)){
         return {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+               
+              },
             statusCode: 400,
             body: JSON.stringify({message: 'Invalid ID'}),
         };
@@ -140,11 +197,19 @@ try{
     const result = await pool.query('UPDATE products SET product_name=$1, product_description=$2, price=$3, available_quantity=$4 WHERE id=$5 RETURNING *', [product_name, product_description, price, available_quantity, id])
     if(result.rows.length === 0){
         return {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+               
+              },
             statusCode: 404,
             body: JSON.stringify({error: 'Product not found'})
         }
     } else{
         return {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+               
+              },
             statusCode: 200,
             body: JSON.stringify(result.rows[0])
         }
@@ -153,6 +218,10 @@ try{
  }
     } catch(error){
         return {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+               
+              },
             statusCode: 500,
             body: JSON.stringify({error: 'Internal server error'})
         }
@@ -165,6 +234,10 @@ module.exports.delete = async (event) => {
         const id = parseInt(event.pathParameters.id)
         if(isNaN(id)){
             return {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                   
+                  },
                 statusCode: 400,
                 body: JSON.stringify({message: 'Invalid ID'}),
             };
@@ -172,11 +245,19 @@ module.exports.delete = async (event) => {
         const result = await pool.query('DELETE FROM products WHERE id=$1 RETURNING *', [id]);
         if(result.rows.length === 0){
             return{
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                   
+                  },
                 statusCode: 404,
                 body: JSON.stringify({error: 'Product not found'})
             }
         } else {
             return {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                   
+                  },
                 statusCode: 200,
                 body: JSON.stringify({message: `Product deleted with ID: ${id}`})
             }
@@ -184,6 +265,10 @@ module.exports.delete = async (event) => {
 
     } catch(error){
         return {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+               
+              },
             statusCode: 500,
             body: JSON.stringify({error: 'Internal server error'})
         }

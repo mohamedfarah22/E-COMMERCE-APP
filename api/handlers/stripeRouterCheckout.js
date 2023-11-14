@@ -1,5 +1,5 @@
-const stripe = require('stripe')('sk_test_51Np5AOLxfJykJ5Q6fYJ4Amv6DmOwzyKOQMGotSZ8A1rkNo7lXv9WmfeozbEJkPj2MCvSHu9Mv6wkTAVdvS0MQ94w00tPwJSP5K');
-const YOUR_DOMAIN = 'https://luxuria.com';
+
+const YOUR_DOMAIN = 'https://d1ujc5c60bkv1u.cloudfront.net';
 const Pool = require('pg').Pool;
 const pool = new Pool({
     user: 'masteruser',
@@ -12,7 +12,11 @@ const pool = new Pool({
 
 module.exports.stripeCheckOut = async (event) => {
     try {
+      
+        const stripe = require('stripe')('sk_test_51Np5AOLxfJykJ5Q6fYJ4Amv6DmOwzyKOQMGotSZ8A1rkNo7lXv9WmfeozbEJkPj2MCvSHu9Mv6wkTAVdvS0MQ94w00tPwJSP5K');
         const cartItems = JSON.parse(event.body);
+        
+
         let lineItems = []; //array to be passed to checkout Session;
         
     const lineItemPromises = cartItems.map(async (item) => {
@@ -46,17 +50,27 @@ module.exports.stripeCheckOut = async (event) => {
         success_url: `${YOUR_DOMAIN}?success=true`,
         cancel_url: `${YOUR_DOMAIN}`,
       });
+      
       return {
-        statusBody: 200,
-        body: JSON.stringify({ url: session.url }),
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': 'Content-Type, X-Your-Custom-Header, Authorization'
+         
+        },
+        statusCode: 200,
+        body: JSON.stringify({ session: session.url }),
       }
 
 
 
     } catch (error) {
         return {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+           
+          },
             statusCode: 500,
-            body: JSON.stringify({ error: 'Internal server error' }),
+            body: JSON.stringify({ error: error.message }),
           };
     }
 }

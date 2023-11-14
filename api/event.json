@@ -1,0 +1,10 @@
+{
+    "body": [
+      {
+        "id": 4,
+        "user_id": "123",
+        "product_id": 2,
+        "quantity": 6
+      }
+    ]
+  }

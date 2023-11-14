@@ -12,6 +12,10 @@ module.exports.registerUser = async (event) => {
     try {
         if (!event.body) {
             return {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                   
+                  },
                 statusCode: 400,
                 body: JSON.stringify({ message: 'Please supply valid JSON data' })
             };
@@ -49,11 +53,19 @@ module.exports.registerUser = async (event) => {
               
        
           return {
+            headers: {
+            'Access-Control-Allow-Origin': '*',
+           
+          },
             statusCode: 200,
             body: JSON.stringify({ message: `Sign up successful`})
           }
         } catch(error){
             return {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                   
+                  },
                 statusCode: 400,
                 body: JSON.stringify({message: error.message})
             }
@@ -61,6 +73,10 @@ module.exports.registerUser = async (event) => {
 
     } catch(error) {
         return{
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+               
+              },
             statusCode: 500,
             body: JSON.stringify({ error: "Internal server error"})
         }
@@ -73,6 +89,10 @@ module.exports.logIn = async (event) => {
         
         if (!event.body) {
             return {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                   
+                  },
                 statusCode: 400,
                 body: JSON.stringify({ message: 'Please supply valid JSON data' })
             };
@@ -112,6 +132,10 @@ module.exports.logIn = async (event) => {
         const idToken = session.getIdToken().getJwtToken();
         const refreshToken = session.getRefreshToken().getToken()
         return {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+               
+              },
             statusCode: 200,
             body: JSON.stringify({user: userID, tokens: {accessToken:accessToken, idToken: idToken, refreshToken: refreshToken}})
         }
@@ -119,6 +143,10 @@ module.exports.logIn = async (event) => {
        } catch (error) {
         
         return {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+               
+              },
             statusCode: 401,
             body: JSON.stringify({ message: error.message }) //change to login failed
         };
@@ -126,6 +154,10 @@ module.exports.logIn = async (event) => {
     } catch (error) {
         
         return{
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+               
+              },
             statusCode: 500,
             body: JSON.stringify({ error: "Internal server error" })
         }
@@ -139,6 +171,10 @@ try {
     
         if (!event.body) {
             return {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                   
+                  },
                 statusCode: 400,
                 body: JSON.stringify({ message: 'Please supply valid JSON data' })
             };
@@ -146,24 +182,40 @@ try {
         const requestBody = JSON.parse(event.body);
         if(!requestBody.accessToken){
             return{
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                   
+                  },
                 statusCode: 404,
                 body:JSON.stringify({message: 'Please supply access token'})
             }
         }
         if(!requestBody.idToken){
             return{
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                   
+                  },
                 statusCode: 404,
                 body:JSON.stringify({message: 'Please supply ID token'})
             }
         }
         if(!requestBody.refreshToken){
             return{
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                   
+                  },
                 statusCode: 404,
                 body:JSON.stringify({message: 'Please supply refresh token'})
             }
         }
         if(!requestBody.userId){
             return{
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                   
+                  },
                 statusCode: 404,
                 body:JSON.stringify({message: 'Please supply valid user id'})
             }
@@ -203,12 +255,20 @@ try {
         });
     });
     return {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+           
+          },
             statusCode,
             body: JSON.stringify(responseBody)
         };
 } catch (error) {
 
     return{
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+           
+          },
         statusCode: 500,
         body: JSON.stringify({ error: "Internal server error" })
     }

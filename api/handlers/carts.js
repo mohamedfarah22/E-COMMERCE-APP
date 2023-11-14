@@ -12,12 +12,20 @@ module.exports.getAllCarts = async (event) => {
     try{
         const result = await pool.query('SELECT * FROM carts ORDER BY id ASC');
         return {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+               
+              },
             statusCode: 200,
             body: JSON.stringify(result.rows)
         }
 
     } catch(error){
         return {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+               
+              },
             statusCode: 500,
             body: JSON.stringify({error: 'Internal server error'})
         }
@@ -29,6 +37,10 @@ module.exports.getCartTotal = async (event) => {
         const userId = event.queryStringParameters && event.queryStringParameters.user_id
         if(!userId){
             return{
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                   
+                  },
                 statusCode: 400,
                 body: JSON.stringify({message: 'invalid user id'})
             }
@@ -36,6 +48,10 @@ module.exports.getCartTotal = async (event) => {
             const result = await pool.query( 'SELECT SUM(quantity * price) AS total_cost FROM carts JOIN products ON carts.product_id = products.id WHERE carts.user_id = $1', [userId])
             const totalCost = result.rows[0].total_cost;
             return{
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                   
+                  },
                 statusCode: 200,
                 body: JSON.stringify({ total_cost: totalCost })
             }
@@ -43,6 +59,10 @@ module.exports.getCartTotal = async (event) => {
         }
     } catch (error) {
         return {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+               
+              },
             statusCode: 500,
             body: JSON.stringify({error: 'Internal server error'})
         }
@@ -56,6 +76,10 @@ module.exports.getUserCartProduct = async (event) => {
         const product_id = event.queryStringParameters && event.queryStringParameters.product_id;
         if(isNaN(product_id)){
             return {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                   
+                  },
                 statusCode: 404,
                 body: JSON.stringify({message: 'invalid product ID, product Id must be a number'})
 
@@ -64,12 +88,20 @@ module.exports.getUserCartProduct = async (event) => {
         const result  = await pool.query('SELECT * FROM carts WHERE user_id = $1 AND product_id = $2', [user_id, product_id])
             if(result.rows.length > 0){
                 return {
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                       
+                      },
                     statusCode: 200,
                     body: JSON.stringify(result.rows)
                 }
             }
              else{
                 return {
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                       
+                      },
                     statusCode: 404,
                     body: JSON.stringify({ message: 'No matching rows found' })
                 }
@@ -77,6 +109,10 @@ module.exports.getUserCartProduct = async (event) => {
         }
      catch (error) {
         return {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+               
+              },
             statusCode: 500,
             body: JSON.stringify({error: 'Internal server error'})
         }
@@ -90,6 +126,11 @@ module.exports.post = async (event) => {
       
         if (!event.body) {
             return {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                   
+                  },
+                
                 statusCode: 400,
                 body: JSON.stringify({ message: 'Please supply valid JSON data' })
             };
@@ -105,6 +146,10 @@ module.exports.post = async (event) => {
                 //cart does not exist in db so insert and return new cart row
                 const result = await pool.query('INSERT INTO carts (user_id, product_id, quantity) VALUES ($1, $2, $3) RETURNING *', [user_id, product_id, quantity])
                 return {
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                       
+                      },
                     statusCode: 200,
                     body: JSON.stringify(result.rows)
                 }
@@ -114,6 +159,10 @@ module.exports.post = async (event) => {
                 const newQuantity = existingQuantity + 1;
                 await pool.query('UPDATE carts SET quantity = $1 WHERE user_id = $2 AND product_id = $3', [newQuantity, user_id, product_id])
                 return {
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                       
+                      },
                     statusCode: 200,
                     body: JSON.stringify({newQuantity: newQuantity})
                 }
@@ -122,6 +171,10 @@ module.exports.post = async (event) => {
         }
     } catch(error){
         return {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+               
+              },
             statusCode: 500,
             body: JSON.stringify({error: 'Internal server error'})
         }
@@ -134,6 +187,10 @@ try{
     const userId = event.pathParameters && event.pathParameters.user_id
     if(!userId){
         return{
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+               
+              },
             statusCode: 400,
             body: JSON.stringify({message: 'invalid user id'})
         }
@@ -141,12 +198,20 @@ try{
   else{
     const response = await pool.query('SELECT * FROM carts WHERE user_id = $1', [userId]);
     return {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+           
+          },
         statusCode: 200,
         body: JSON.stringify(response.rows)
     }
 }
 } catch(error){
     return {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+           
+          },
         statusCode: 500,
         body: JSON.stringify({error: 'Internal server error'})
     }
@@ -160,18 +225,30 @@ module.exports.deleteCartItem = async (event) => {
     const productId = event.queryStringParameters && event.queryStringParameters.product_id
     if(!userId || !productId){
         return{
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+               
+              },
             statusCode: 400,
             body: JSON.stringify({message: 'invalid user id or product ID'})
         }
     } else{
         const result = await pool.query('DELETE FROM carts WHERE user_id = $1 AND product_id = $2 RETURNING *', [userId, productId])
         return {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+               
+              },
             statusCode: 200,
             body: JSON.stringify(result.rows)
         }
     }
 } catch(error){
     return {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+           
+          },
         statusCode: 500,
         body: JSON.stringify({error: 'Internal server error'})
     }
@@ -188,12 +265,20 @@ module.exports.put = async (event) => {
     const parsedQuantity = parseInt(quantity, 10)
     if(!userId || !productId || !quantity){
         return{
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+               
+              },
             statusCode: 400,
             body: JSON.stringify({message: 'invalid user id or product ID or invalid quantity'})
         }
     } 
     if(isNaN(parsedQuantity)){
         return{
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+               
+              },
             statusCode: 400,
             body: JSON.stringify({mesage: 'Invalid quantity, quantity is not a number'})
         }
@@ -202,11 +287,19 @@ module.exports.put = async (event) => {
         const result = await pool.query('UPDATE carts SET quantity = $1 WHERE user_id = $2 AND product_id = $3 RETURNING *', [parsedQuantity, userId, productId])
         if(result.rows.length === 0){
             return {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                   
+                  },
                 statusCode: 404,
                 body : JSON.stringify({message: 'No matching cart item found.'})
             }
         } else{
             return {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                   
+                  },
                 statusCode: 200,
                 body: JSON.stringify(result.rows)
             }
@@ -215,6 +308,10 @@ module.exports.put = async (event) => {
     }
 } catch(error){
     return {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+           
+          },
         statusCode: 500,
         body: JSON.stringify({error: 'Internal server error'})
     }
