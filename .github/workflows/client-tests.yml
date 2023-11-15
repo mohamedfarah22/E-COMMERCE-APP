@@ -1,0 +1,29 @@
+name: Run React Testing Library Tests on Main
+
+on:
+  pull_request:
+    branches:
+      - test-branch
+
+jobs:
+  test:
+    runs-on: macos-latest
+
+    defaults:
+      run:
+        working-directory: ./client
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 18.16.0
+    - name: debugging
+      run: pwd
+    - name: Install dependencies
+      run: npm install  # or yarn install, depending on your project
+
+    - name: Run tests
+      run: npm test -- --testPathPattern=client/src/tests

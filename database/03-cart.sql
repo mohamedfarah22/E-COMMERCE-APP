@@ -2,10 +2,9 @@ DROP TABLE IF EXISTS carts;
 
 CREATE TABLE carts(
     id SERIAL PRIMARY KEY,
-    user_id INTEGER,
-    product_id INTEGER,
+    user_id VARCHAR NOT NULL,
+    product_id INTEGER NOT NULL,
     quantity INTEGER,
-    FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (product_id) REFERENCES products(id)
 );
 

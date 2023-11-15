@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+.popup-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    
+  }
+  
+  .popup-body {
+    position: absolute;
+    left: auto; /* Reset the left property */
+    right: 0%; /* Adjust the right property to push to the right end */
+    bottom: 10%; /* Adjust the bottom property as needed */
+    top: 0%; /* Adjust the top property as needed */
+    text-align: center;
+    margin: auto;
+    border-color: black;
+    background: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    width: 100%;
+    overflow-y: auto;
+  }
+  
+  .material-icons{
+     max-width: 10%;
+     transition: transform 0.3s ease;
+     margin-left: 320px;
+  }
+  .material-icons:hover{
+    transform: rotate(90deg);
+    cursor: pointer;
+  }
+  .total-heading{
+    width:50%;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 24px;
+  }
+  .total-value{
+    width:50%;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 24px;
+  }
+  .totals-container{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
+
+ .empty-cart{
+    font-family: 'Open Sans', sans-serif;
+
+    }
+.check-out-button{
+        height: 50px;
+        background-color: #855dd5;
+        color: white;
+        font-size: white;
+        font-weight: bold;
+        font-size: 18px;
+        width: 80%;
+ }
+ .check-out-button:hover{
+    cursor: pointer;
+
+}
+
+@media only screen and (min-width: 550px){
+ .popup-body{
+  width: 60%;
+ }
+}
+@media only screen and (min-width: 760px){
+  .popup-body{
+    width: 50%;
+   }
+}
+@media only screen and (min-width: 900px){
+  .popup-body{
+    width: 40%;
+   }
+}
+@media only screen and (min-width:1224px){
+  .popup-body{
+    width: 30%;
+   }
+}
+@media only screen and (min-width: 1610px){
+  .popup-body{
+    width: 20%;
+   }
+}

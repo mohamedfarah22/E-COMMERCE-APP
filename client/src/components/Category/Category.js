@@ -1,10 +1,16 @@
 import './Category.css'
-function Category({category}) {
+import { useNavigate } from 'react-router-dom'
+function Category({category, setFilterCategory}) {
+  const navigate = useNavigate()
+  const onClickHandler = (e) =>{
+    e.preventDefault()
+    setFilterCategory(e.target.textContent)
+    navigate('/')
+  }
 
     return (
       <div className="category">
-        <p className="category-text">{category.category}</p>
-        
+        <h3 onClick = {onClickHandler} className="category-text">{category.category}</h3> 
       </div>
     );
   }

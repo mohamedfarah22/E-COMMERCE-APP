@@ -1,0 +1,50 @@
+name: Run server tests with jest and supertest
+
+on: 
+  pull_request:
+    branches:
+      - main
+      - render-deployment
+
+jobs:
+  test:  
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: ./api
+    services:
+      postgres:
+        image: postgres:16beta2-alpine
+        env:
+          POSTGRES_DB: ecommercedatabasetest
+          POSTGRES_USER: admin
+          POSTGRES_PASSWORD: ecommdbtest
+        ports:
+          - 5433:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+      elasticsearch:
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.15.1
+        env:
+          discovery.type: single-node
+        ports:
+          - 9200:9200
+          - 9300:9300
+        volumes:
+          - esdata:/usr/share/elasticsearch/data
+        options: --health-cmd "curl -f http://localhost:9200" --health-interval 10s --health-timeout 5s --health-retries 5
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+    
+     
+      - name: Set Up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18.16.0
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Tests
+        run: npm test -- --testPathPattern=api/src/tests/integration-tests

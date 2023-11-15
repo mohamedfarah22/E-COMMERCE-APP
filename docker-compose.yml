@@ -23,19 +23,7 @@ services:
       - "4000:4000"
     depends_on:
       - database
-  frontend: 
-    container_name: ecomm-client-react
-    build:
-      context: ./client
-      dockerfile: dockerfile
-    volumes:
-      - ./client:/usr/app
-      - /usr/app/node_modules
-    ports:
-      - "3000:3000"
-    depends_on:
-      - api
-      - database
+      - elastic-search
   image-server: 
     container_name: image-container_name
     build:
@@ -43,3 +31,17 @@ services:
       dockerfile: dockerfile
     ports:
       - "8080:80"
+  elastic-search: 
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.15.1
+    container_name: elasticsearch-container
+    environment:
+      - discovery.type=single-node
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    depends_on:
+      - database
+volumes:
+  esdata:

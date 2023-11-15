@@ -1,6 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 .product-image{
-    width: 300px;
-    height: 250px;
+    width: 70%;
+    height:70%;
     
 }
 .product-container{
@@ -8,12 +9,59 @@
     padding: 40px 40px;
     background-color:#FDF5E6;
     border-style: solid;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
     
     
 }
 .product-container:hover{
     box-shadow: 5px 5px 5px;
+    cursor: pointer;
 }
 .product-name{
     font-weight: bold;
+    font-family: 'Open Sans', sans-serif;
+}
+@media only screen and (min-width: 550px){
+    .product-image{
+        width: 60%;
+        height: 60%;
+     
+}
+.product-container{
+    margin: 20px 20px;
+    padding: 20px 20px;
+    max-width: 30%;
+    justify-content:center;
+    align-items: center;
+}
+}
+@media only screen and (min-width: 1224px){
+    .product-image{
+        width: 40%;
+        height: 40%;
+     
+}
+.product-container{
+    margin: 25px 25px;
+    padding: 20px 20px;
+    max-width: 25%;
+    justify-content:center;
+    align-items: center;
+}
+}
+@media only screen and (min-width: 1224px){
+    .product-image{
+        width: 50%;
+        height: 50%;
+     
+}
+.product-container{
+    margin: 30px 30px;
+    padding: 30px 30px;
+    max-width: 25%;
+    justify-content:center;
+    align-items: center;
+}
 }

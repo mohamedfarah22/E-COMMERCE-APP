@@ -1,0 +1,14 @@
+#Node base image
+FROM node:18-alpine
+
+#set working directory in contiainer
+
+WORKDIR /usr/app
+
+#COPY package.json and package-lock.json to workdir 
+COPY package*.json ./
+
+#Install dependencies
+RUN npm install 
+#Copy application code into the container
+COPY src/ ./src/
