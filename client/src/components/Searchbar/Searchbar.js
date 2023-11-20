@@ -3,6 +3,7 @@ import searchButton from "../../images/searchButton.png"
 import {useState} from 'react';
 import axios from 'axios';
 import { useProducts } from '../../features/Products/ProductsContext';
+const baseURL = process.env.REACT_APP_API_URL;
 function Searchbar (){
     const [searchPhrase, setSearchPhrase] = useState('');
     const {setProducts} = useProducts();
@@ -12,9 +13,10 @@ function Searchbar (){
 
     }
     //not used in this deployment
+
     const handleClick = (e) => {
         e.preventDefault();
-        axios.get(`http://localhost:4000/search?q=${searchPhrase}`)
+        axios.get(`${baseURL}/search?q=${searchPhrase}`)
           .then((response) => {
             const newProducts = response.data.map((product) => product["_source"]);
             setProducts(newProducts);
@@ -29,7 +31,7 @@ function Searchbar (){
 
     <div className="SearchBar">
         <input className="input" type="text" placeholder="Search..." aria-label="Search..." onChange = {handleChange}/>
-       <button  className="search-button" ><img src={searchButton} alt="search button"className="search-image" /> </button>
+       <button  className="search-button" ><img src={searchButton} alt="search button"className="search-image" onClick= {handleClick} /> </button>
     </div>
 
     )
