@@ -18,7 +18,7 @@ function Searchbar (){
         e.preventDefault();
         axios.get(`${baseURL}/search?query=${searchPhrase}`)
           .then((response) => {
-            console.log(response)
+            console.log(response.data)
             const newProducts = response.data.map((product) => product["_source"]);
             setProducts(newProducts);
           })
