@@ -58,7 +58,7 @@ module.exports.stripeCheckOut = async (event) => {
          
         },
         statusCode: 200,
-        body: JSON.stringify({ session: session.url }),
+        body: JSON.stringify({ url: session.url }),
       }
 
 
