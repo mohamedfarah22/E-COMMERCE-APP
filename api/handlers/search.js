@@ -45,9 +45,9 @@ module.exports.bulkIndexProductData = async (event) => {
                 'Content-Type': 'application/json',
             },
             body: requestBody
-        }, {
-            accessKeyId: 'AKIAVAPEO6NFPIXWWJNQ',
-            secretAccessKey: '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',
+        },  {
+          accessKeyId: process.env.aws_access_key,
+          secretAccessKey: process.env.aws_secret_key,
         });
 
         // Make the HTTP request
@@ -102,8 +102,8 @@ module.exports.search = async(event) => {
         method: 'GET',
         path: `/product_index/_search?q=${query}`,
     }, {
-      accessKeyId: 'AKIAVAPEO6NFPIXWWJNQ',
-      secretAccessKey: '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',
+      accessKeyId: process.env.aws_access_key,
+      secretAccessKey: process.env.aws_secret_key,
     });
     const response = await new Promise((resolve, reject) => {
       const req = https.request(requestOptions, (res) => {
@@ -127,7 +127,7 @@ module.exports.search = async(event) => {
 
   
   const parsedResponse = JSON.parse(response);
-  console.log('Search Response:', parsedResponse.hits.hits);
+
 
 
   return {
