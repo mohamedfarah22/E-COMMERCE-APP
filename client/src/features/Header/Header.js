@@ -6,7 +6,7 @@ import { useCart } from "../Cart/CartContext";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import {cartQuantityCalculator}from "./HeaderHelperFunctions";
-function Header({loggedIn, setLoggedIn, setUserId}){
+function Header({loggedIn, setLoggedIn, setSearchRoute}){
     const navigate = useNavigate()
     const {setOpenPopUp} = usePopup()
     const {cart} = useCart();
@@ -52,7 +52,7 @@ function Header({loggedIn, setLoggedIn, setUserId}){
             </div>
            < div className="cart-log-search-container">
             <div className="search-container">
-                <Searchbar />
+                <Searchbar setSearchRoute = {setSearchRoute}/>
             </div>
             {loggedIn ?
                 <p className = "login-text" onClick={onClickHandlerLogOut}>Log Out</p>
