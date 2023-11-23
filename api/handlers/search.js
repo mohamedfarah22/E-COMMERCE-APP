@@ -36,7 +36,7 @@ module.exports.bulkIndexProductData = async (event) => {
         const requestBody = bulkBody.map(JSON.stringify).join('\n') + '\n';
 
         const requestOptions = aws4.sign({
-            hostname: 'search-product-search-3rxti5gq3imvvpyqxa5jub5aua.ap-southeast-2.es.amazonaws.com',
+            hostname: 'search-product-search2-gpf6dh65zyaj3f2eg5i3tfzfwa.ap-southeast-2.es.amazonaws.com',
             service: 'es',
             region: 'ap-southeast-2',
             method: 'POST',
@@ -96,7 +96,7 @@ module.exports.search = async(event) => {
     }else {
       console.log( process.env)
       const requestOptions = aws4.sign({
-        hostname: 'search-product-search-3rxti5gq3imvvpyqxa5jub5aua.ap-southeast-2.es.amazonaws.com',
+        hostname: 'search-product-search2-gpf6dh65zyaj3f2eg5i3tfzfwa.ap-southeast-2.es.amazonaws.com',
         service: 'es',
         region: 'ap-southeast-2',
         method: 'GET',
@@ -127,7 +127,7 @@ module.exports.search = async(event) => {
 
   
   const parsedResponse = JSON.parse(response);
-
+  console.log(parsedResponse)
 
 
   return {
@@ -147,7 +147,7 @@ module.exports.search = async(event) => {
          
         },
       statusCode: 500,
-      body: JSON.stringify({error: error})
+      body: JSON.stringify({error: error.message})
   }
 
 
