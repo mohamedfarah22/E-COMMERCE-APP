@@ -52,7 +52,7 @@ function Header({loggedIn, setLoggedIn, setSearchRoute}){
             </div>
            < div className="cart-log-search-container">
             <div className="search-container">
-                <Searchbar setSearchRoute = {setSearchRoute}/>
+                <Searchbar mmit  = {setSearchRoute}/>
             </div>
             {loggedIn ?
                 <p className = "login-text" onClick={onClickHandlerLogOut}>Log Out</p>
