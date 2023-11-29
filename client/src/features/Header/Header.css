@@ -93,47 +93,35 @@
     width: 20px;
     text-align: center;
   }
-  @media only screen and (min-width: 550px){
+  @media only screen and (min-width: 320px){
     .login-text{
-        font-size: 95%;
-        margin-right: 3%;
-        padding-left: 0;
-       
+      font-size: 70%;
     }
-  
-  }
-  @media only screen and (min-width: 760px){
-    .search-container{
-        display: flex;
-        justify-content: flex-end;
-        padding-right: 13%;
-    }
-    
-  }
-  @media only screen and (min-width: 900px){
-  .cart-count{
-    right: 0px;
-  }
-}  @media only screen and (min-width: 1224px){
-    .cart-count{
-      right: 10px;
-      top: 7px;
-    }
-    .search-container{
-        padding-right: 18%; 
-    }
-  }
-  @media only screen and (min-width: 1610px){
-    .cart-count{
-      right: 29px;
 
-    }
+}
+  @media only screen and (min-width: 480px){
+    .login-text{
+      font-size:16px;
+  }
+  }
+  @media only screen and (min-width: 768px){
     .search-container{
-        
-      padding-right: 22%; 
+      margin-left: 180px;
+      margin-top: 10px;
+  }
+  }
+  @media only screen and (min-width: 992px){
+   
+  }
+  @media only screen and (min-width: 1200px){
+    .cart-count {
+      right: 12%;
       
     }
-    .login-text{
-        font-size: 20px;
-    }
+    .search-container{
+      padding-left: 80px;
+     
+     
+  }
+
   }

@@ -13,14 +13,24 @@ p{
 .category-text:hover{
     cursor: pointer;
 }
-@media only screen and (min-width: 550px){
+@media only screen and (min-width: 320px){
     .category-text{
-     font-size: 100%;
+        font-size:12px;
     }
+    
   }
-
-@media only screen and (min-width: 1224px){
+  @media only screen and (min-width: 480px){
     .category-text{
-     font-size: 24px;
+        font-size:20px;
     }
+
+  }
+  @media only screen and (min-width: 768px){
+    
+  }
+  @media only screen and (min-width: 992px){
+   
+  }
+  @media only screen and (min-width: 1200px){
+  
   }

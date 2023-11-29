@@ -76,37 +76,24 @@
     max-width: 100%;
 
 }
-
-@media only screen and (min-width: 550px){
-  .chat-bot-container.open{
-    width: 50%;
+@media only screen and (min-width: 320px){
+  .chat-bot-container.closed{
+    width: 100%;
   }
+}
+@media only screen and (min-width: 480px){
+ 
+}
+@media only screen and (min-width: 768px){
   .chat-bot-container.closed{
     width: 50%;
   }
- }
-
-@media only screen and (min-width:760px){
-  .chat-bot-container.open{
-    width: 40%;
-  }
-  .chat-bot-container.closed{
-    width: 40%;
-  }
- }
- @media only screen and (min-width:1224px){
-  .chat-bot-container.open{
-    width: 30%;
-  }
+}
+@media only screen and (min-width: 992px){
+ 
+}
+@media only screen and (min-width: 1200px){
   .chat-bot-container.closed{
     width: 30%;
   }
- }
- @media only screen and (min-width: 1610px){
-  .chat-bot-container.open{
-    width: 20%;
-  }
-  .chat-bot-container.closed{
-    width: 20%;
-  }
- }
+}
