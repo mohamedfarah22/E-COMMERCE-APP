@@ -84,11 +84,17 @@
   .popup-body{
     width: 30%;
   }
+  .material-icons{
+    margin-left: 180px;
+ }
 }
 @media only screen and (min-width: 992px){
   .popup-body{
     width: 40%;
   }
+  .material-icons{
+    margin-left: 320px;
+ }
 }
 @media only screen and (min-width: 1200px){
   .popup-body{
@@ -98,7 +104,7 @@
 
 @media only screen and (min-width: 1200px){
   .material-icons{
-    margin-left: 420px;
+    margin-left: 320px;
  }
  .popup-body{
   width: 30%;
