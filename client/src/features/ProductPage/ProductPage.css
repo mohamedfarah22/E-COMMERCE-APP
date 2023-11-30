@@ -14,7 +14,8 @@
      margin-top: 16px;
      width: 100%;
     margin-bottom: 30px; 
-    
+    display: flex;
+    justify-content: center;
   }
   .product-container-page{
     display: flex;
@@ -23,10 +24,14 @@
     width: 100%;
 }
 .add-to-cart-button{
-    width: 200px;
-    font-size: 12px;
-    padding-bottom: 12px;
-    padding-top: 12px;
+    padding-bottom: 3%;
+    padding-top: 3%;
+     background-color: #855dd5;
+     color: white;
+     font-size: white;
+     font-weight: bold;
+     font-size: 60%;
+     width: 80%;
  }
  .description-header{
     
@@ -38,16 +43,68 @@
     
 }
 .product-description-text{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    border-top: 2px solid black;
+    padding-top: 3%;
     width: 100%;
     display: flex;
     flex-flow: column nowrap;
-    font-size: 12px;
-    padding-top: 10px;
-    
 }
+
 }
   @media only screen and (min-width: 480px){
-   
+    .grid-product-page-container{
+        display:flex;
+        flex-flow: row wrap;
+        margin-right: 0%;
+    }
+    .image-container img{
+        width: 150px;
+        height: 150px;
+    }
+    .image-container{
+        margin-top: 16px;
+        width: 100%;
+       margin-bottom: 30px; 
+       display: flex;
+       justify-content: center;
+     }
+  .product-container-page{
+    display: flex;
+    align-items: center;
+    flex-flow: column nowrap;
+    width: 100%;
+}
+.add-to-cart-button{
+    padding-bottom: 3%;
+    padding-top: 3%;
+     background-color: #855dd5;
+     color: white;
+     font-size: white;
+     font-weight: bold;
+     font-size: 60%;
+     width: 80%;
+ }
+ .description-header{
+    
+    font-weight: bold;
+    font-family: 'Open Sans', sans-serif;
+     font-size:12px;
+     justify-content: center;
+     padding-right: 0px;
+    
+}
+.product-description-text{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    border-top: 2px solid black;
+    padding-top: 3%;
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
   }
   @media only screen and (min-width: 768px){
     .image-container img{
@@ -64,6 +121,14 @@
         width: 300px;
         
      }
+     .image-container{
+        margin-top: 16px;
+        width: 100%;
+       margin-bottom: 30px; 
+       display: flex;
+       justify-content: center;
+     }
+
   }
   @media only screen and (min-width: 992px){
     .grid-product-page-container{

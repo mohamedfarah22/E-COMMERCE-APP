@@ -30,12 +30,17 @@
   }
   .categories{
     width: 90%;
-    padding-left: 50px;
+    padding-left: 20px;
     
 }
 }
 @media only screen and (min-width: 768px){
-  
+  .categories{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    
+}
 }
 @media only screen and (min-width: 992px){
  .categories{

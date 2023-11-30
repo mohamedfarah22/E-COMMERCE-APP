@@ -40,13 +40,13 @@
 }
 @media only screen and (min-width: 480px){
     .product-image{
-        width: 40%;
-        height: 40%;
+        width: 30%;
+        height: 30%;
      
 }
 .product-container{
-    margin: 10px 10px;
-    padding: 15px 15px;
+    margin: 0px 10px;
+    padding: 10px 10px;
 }
 }
 @media only screen and (min-width: 768px){
@@ -65,13 +65,13 @@
 }
 @media only screen and (min-width: 992px){
     .product-image{
-        width: 50%;
-        height: 50%;
+        width: 70%;
+        height: 70%;
      
 }
 .product-container{
-    margin: 20px 10px;
-    padding: 20px 5px;
+    margin: 20px 20px;
+    padding: 30px 15px;
     max-width: 25%;
     justify-content:center;
     align-items: center;

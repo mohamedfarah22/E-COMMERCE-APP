@@ -82,7 +82,9 @@
   }
 }
 @media only screen and (min-width: 480px){
- 
+  .chat-bot-container.closed{
+    width: 90%;
+  }
 }
 @media only screen and (min-width: 768px){
   .chat-bot-container.closed{
@@ -90,7 +92,9 @@
   }
 }
 @media only screen and (min-width: 992px){
- 
+  .chat-bot-container.closed{
+    width: 40%;
+  }
 }
 @media only screen and (min-width: 1200px){
   .chat-bot-container.closed{
