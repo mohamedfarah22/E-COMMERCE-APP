@@ -8,6 +8,7 @@ import axios from "axios";
 import "./login.css"
 function Login({filterCategory, setFilterCategory, userId, setLoggedIn}){
     const {openPopUp, setOpenPopUp} = usePopup()
+    const [logInFailed, setLogInFailed] = useState(false)
     const baseURL = process.env.REACT_APP_API_URL;
     const [formData, setFormData] = useState({
         email: '',
@@ -27,14 +28,18 @@ function Login({filterCategory, setFilterCategory, userId, setLoggedIn}){
         
             if (response.status === 200) {
              const userId = response.data.user;
+             const tokens = response.data.tokens
              localStorage.setItem('userId', userId);
+             localStorage.setItem('accessToken', tokens.accessToken);
+             localStorage.setItem('idToken', tokens.idToken);
+             localStorage.setItem('refreshToken', tokens.refreshToken);
              setLoggedIn(true);
              localStorage.setItem('isLoggedIn', 'true');
              navigate('/')
-            } else {
-              console.log('login failed');
             }
+            
           } catch (error) {
+            setLogInFailed(true);
             console.error('An error occurred:', error);
           }
         };
@@ -60,8 +65,9 @@ function Login({filterCategory, setFilterCategory, userId, setLoggedIn}){
                 <label className = "label" htmlFor="email">Email</label>
                 <input className= "text" type="text" id = "email" name = "email" required value={formData.email} onChange = {handleChange} placeholder="Email..."/>
                 <label className = "label" htmlFor="email">Password</label>
-                <input className= "text" type="password" id = "password" name = "password" required value={formData.password} onChange = {handleChange} placeholder="Password..."/>
+                <input className= "text" type="password" id = "password" name = "password" required value={formData.password} onChange = {handleChange} placeholder="Password..." pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character."/>
                 <button className="sign-in-button" >Sign In</button>
+                {logInFailed ?  <p className='InvalidUsePw'>Invalid email or password</p>:null}
             </form>
         <div className="create-account-button-container">
             <button onClick = {onClickHandler}className="create-acccount-button">Create Account</button>

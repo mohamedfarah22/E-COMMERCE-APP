@@ -23,7 +23,16 @@ function Header({loggedIn, setLoggedIn, setSearchRoute}){
     const onClickHandlerLogOut = async (e) => {
         e.preventDefault()
         localStorage.removeItem('isLoggedIn');
-        const response  = await axios.post(`${baseURL}/auth/logout`);
+        const userId = localStorage.getItem('userId');
+        const accessToken = localStorage.getItem('accessToken');
+        const idToken = localStorage.getItem('idToken');
+        const refreshToken = localStorage.getItem('refreshToken');  
+        const response  = await axios.post(`${baseURL}/auth/logout`, {
+            userId: userId,
+            accessToken : accessToken,
+            idToken : idToken,
+            refreshToken : refreshToken
+        });
         if(response.status === 200){
         setLoggedIn(false);
         localStorage.removeItem('isLoggedIn');

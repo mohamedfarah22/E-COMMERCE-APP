@@ -25,13 +25,13 @@
     margin-bottom:50px;
 }
 .add-to-cart-button{
-    padding-bottom: 3%;
-    padding-top: 3%;
+    padding-bottom: 15px;
+    padding-top: 15px;
      background-color: #855dd5;
      color: white;
      font-size: white;
      font-weight: bold;
-     font-size: 60%;
+     font-size: 12px;
      width: 80%;
  }
  .description-header{
@@ -44,14 +44,26 @@
      margin-top: 50px;
     
 }
-.product-description-text{
+.price-text{
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
+}
+.product-description-text{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
     border-top: 2px solid black;
     padding-top: 10px;
     width: 100%;
     display: flex;
     flex-flow: column nowrap;
+    margin-top: 5px;
+    justify-content: flex-start;
+}
+
+.description-header{
+    font-size: 16px;
+    margin-bottom: 10px;
+    margin-top: 20px
 }
 
 }
@@ -80,20 +92,20 @@
     margin-bottom:50px;
 }
 .add-to-cart-button{
-    padding-bottom: 3%;
-    padding-top: 3%;
+    padding-bottom: 20px;
+    padding-top: 20px;
      background-color: #855dd5;
      color: white;
      font-size: white;
      font-weight: bold;
-     font-size: 60%;
+     font-size: 16px;
      width: 80%;
  }
  .description-header{
     
     font-weight: bold;
     font-family: 'Open Sans', sans-serif;
-     font-size:12px;
+     font-size:20px;
      justify-content: center;
      padding-right: 0px;
     
@@ -106,6 +118,13 @@
     width: 100%;
     display: flex;
     flex-flow: column nowrap;
+    margin-top:0px;
+}
+.product-name-page{
+    font-size: 20px;
+}
+.price-text{
+    font-size: 20px;
 }
 
   }
@@ -115,14 +134,15 @@
         height: 200px;
     } 
     .product-description-text{
-        font-size: 14px;
+        font-size: 16px;
         width: 80%;
         display: flex;
         flex-flow: column nowrap;
+        margin-top:0px;
     }
     .add-to-cart-button{
         width: 300px;
-        
+        font-size: 14px;
      }
      .image-container{
         margin-top: 16px;
@@ -131,6 +151,11 @@
        display: flex;
        justify-content: center;
      }
+     .description-header{
+         font-size: 20px;
+         margin-top: 35px;
+    
+    }
 
   }
   @media only screen and (min-width: 992px){
@@ -173,7 +198,7 @@
     }
     .product-name-page{
         font-family: 'Open Sans', sans-serif;
-        font-size: 16px;;
+        font-size: 24px;;
      
     }
     .add-to-cart-button{
@@ -183,7 +208,7 @@
         color: white;
         font-size: white;
         font-weight: bold;
-        font-size: 60%;
+        font-size: 14px;
         width: 100%;
     }
     .description-header{
@@ -209,7 +234,6 @@
     
     }
     .price-text{
-        font-family: 'Open Sans', sans-serif;
         margin-top: 10px;
         font-size: 16px;
         max-width: 100%;
@@ -245,5 +269,15 @@
     .image-container img{
         width: 300px;
         height: 300px;
+    }
+    .product-name-page{
+        font-size: 24px;
+    }
+    .add-to-cart-button{
+        padding-bottom: 16px;
+        padding-top: 16px;
+    }
+    .price-text{
+        font-size: 24px;
     }
   }
