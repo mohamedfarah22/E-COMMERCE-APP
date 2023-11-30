@@ -102,15 +102,26 @@
     .login-text{
       font-size:16px;
   }
+  .cart-count {
+    right: 5%;
+    
+  }
   }
   @media only screen and (min-width: 768px){
     .search-container{
       margin-left: 180px;
       margin-top: 10px;
   }
+  .cart-count {
+    right: 3%;
+    
+  }
   }
   @media only screen and (min-width: 992px){
-   
+    .cart-count {
+      right: 12%;
+      
+    }
   }
   @media only screen and (min-width: 1200px){
     .cart-count {
