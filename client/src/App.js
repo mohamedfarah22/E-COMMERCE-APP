@@ -11,11 +11,12 @@ import Login from './features/Login/Login';
 import SignUp from './features/Sign-Up/SignUp';
 import Chatbot from './features/Chatbot/Chatbot';
 import { ProductsProvider } from './features/Products/ProductsContext';
+import { SearchProductProvider } from './components/Searchbar/searchContext';
 function App() {
   const [filterCategory, setFilterCategory] = useState('All') //to filter products by category
   const [loggedIn, setLoggedIn]  =useState(false); //to be passed into login page to authenticate user
   const [userId, setUserId] = useState(null);
-
+ 
   
   
  useEffect(() => {
@@ -37,16 +38,17 @@ function App() {
     <SelectedProductProvider>
       <CartProvider>
         <ProductsProvider>
+          <SearchProductProvider>
   <Router>
     <Routes>
-      <Route path="/:product_id/:product_name" element={<ProductPage filterCategory = {filterCategory} setFilterCategory = {setFilterCategory}  userId = {userId} loggedIn = {loggedIn} setLoggedIn = {setLoggedIn}/>} />
+      <Route path="/:product_id/:product_name" element={<ProductPage filterCategory = {filterCategory} setFilterCategory = {setFilterCategory}  userId = {userId} loggedIn = {loggedIn} setLoggedIn = {setLoggedIn} />} />
       <Route path="/login" element={<Login filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} setLoggedIn = {setLoggedIn} userId={userId} loggedIn = {loggedIn}/>} />
       <Route path="/sign-up" element={<SignUp filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} userId={userId}/>} />
-      <Route path="/" element={<MainLayout filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} userId = {userId} loggedIn = {loggedIn} setLoggedIn = {setLoggedIn} setUserId = {setUserId}/>}/>
+      <Route path="/*" element={<MainLayout filterCategory = {filterCategory} setFilterCategory = {setFilterCategory} userId = {userId} loggedIn = {loggedIn} setLoggedIn = {setLoggedIn} setUserId = {setUserId}/>}/>
     </Routes>
     </Router>
     <Chatbot/>
- 
+    </SearchProductProvider>
     </ProductsProvider>
     </CartProvider>
     </SelectedProductProvider>

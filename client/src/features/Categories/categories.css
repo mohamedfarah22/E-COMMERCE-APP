@@ -11,39 +11,42 @@
     cursor: pointer;
 }
 .all-category{
-    font-size: 90%;
+    font-size: 80%;
 }
-@media only screen and (min-width: 550px){
+@media only screen and (min-width: 320px){
   .categories{
-    margin-top: 20%;
+    margin-top: 130px;
   }
   .all-category{
-    font-size: 100%;
+      font-size:12px
+  
   }
 }
-@media only screen and (min-width: 850px){
-    .categories{
-      margin-top: 15%;
-    }
-    .all-category{
-      font-size: 100%;
-    }
+@media only screen and (min-width: 480px){
+ 
+  .all-category{
+      font-size:20px
+  
   }
-  @media only screen and (min-width: 1224px){
-    .categories{
-      margin-top: 12%;
-      margin-bottom: 2%;
-    }
-    .all-category{
-        font-size: 24px;
-    }
-  }
-  @media only screen and (min-width: 1610px){
-    .categories{
-      margin-top: 8%;
-      margin-bottom: 2%;
-    }
-    .all-category{
-      font-size: 24px;
-    }
-  }
+  .categories{
+    width: 100%;
+    
+}
+}
+@media only screen and (min-width: 768px){
+  .categories{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    
+}
+}
+@media only screen and (min-width: 992px){
+ .categories{
+  margin-bottom: 1%;
+  
+ }
+}
+@media only screen and (min-width: 1200px){
+
+}

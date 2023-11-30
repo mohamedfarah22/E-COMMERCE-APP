@@ -129,7 +129,7 @@ test("cart pop up is open when cart icon is clicked and closed when closed icon 
 test('navigate called on sign up form after successful registration', async() => {
     server.use(
         rest.post(`${baseURL}/auth/register`, (req, res, ctx) => {
-            return res(ctx.status(201))
+            return res(ctx.status(200))
         })
     )
     const navigateMock = jest.fn();

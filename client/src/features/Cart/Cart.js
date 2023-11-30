@@ -11,7 +11,6 @@ function CartPopUp({ userId}){
    const [totals, setTotals] = useState(0)
    const {openPopUp, setOpenPopUp} = usePopup()
    const {cart, setCart} = useCart();
-    const navigate = useNavigate()
     const baseURL = process.env.REACT_APP_API_URL;
     const onClickHandler = (e) => {
         e.preventDefault();
@@ -22,8 +21,7 @@ function CartPopUp({ userId}){
 //get running total
 useEffect(() => {
     axios.get(`${baseURL}/carts/cart-total?user_id=${userId}`).then((response) => {
-      console.log(response.data)
-      console.log(userId)
+      
          setTotals(roundUpToTwoDecimalPlaces(response.data.total_cost))
         
 
@@ -75,10 +73,12 @@ useEffect(()=>{
   //redirect to checkout page after customer is happy with cart
   const onClickHandlerCheckout = (e) =>{
     e.preventDefault();
+    
     axios.post(`${baseURL}/check-out`, cart).then((response) => {
-     
+          
      window.open(response.data.url)
     }).catch((error) => {
+      console.log(cart)    
       console.log('Error ', error);
     })
   }

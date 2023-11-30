@@ -6,7 +6,7 @@ import { useCart } from "../Cart/CartContext";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import {cartQuantityCalculator}from "./HeaderHelperFunctions";
-function Header({loggedIn, setLoggedIn, setUserId}){
+function Header({loggedIn, setLoggedIn, setSearchRoute}){
     const navigate = useNavigate()
     const {setOpenPopUp} = usePopup()
     const {cart} = useCart();
@@ -23,7 +23,16 @@ function Header({loggedIn, setLoggedIn, setUserId}){
     const onClickHandlerLogOut = async (e) => {
         e.preventDefault()
         localStorage.removeItem('isLoggedIn');
-        const response  = await axios.post(`${baseURL}/auth/logout`);
+        const userId = localStorage.getItem('userId');
+        const accessToken = localStorage.getItem('accessToken');
+        const idToken = localStorage.getItem('idToken');
+        const refreshToken = localStorage.getItem('refreshToken');  
+        const response  = await axios.post(`${baseURL}/auth/logout`, {
+            userId: userId,
+            accessToken : accessToken,
+            idToken : idToken,
+            refreshToken : refreshToken
+        });
         if(response.status === 200){
         setLoggedIn(false);
         localStorage.removeItem('isLoggedIn');
@@ -52,7 +61,7 @@ function Header({loggedIn, setLoggedIn, setUserId}){
             </div>
            < div className="cart-log-search-container">
             <div className="search-container">
-                <Searchbar />
+                <Searchbar mmit  = {setSearchRoute}/>
             </div>
             {loggedIn ?
                 <p className = "login-text" onClick={onClickHandlerLogOut}>Log Out</p>

@@ -37,12 +37,7 @@
     }
     }
   
-  @media only screen and (min-width: 1224px){
-      .sign-up-container{
-        width: 100%;
-      }
-        
-      .sign-up-form{
-        width: 20%;
-    }
+  @media only screen and (min-width: 1200px){
+   
+
     }

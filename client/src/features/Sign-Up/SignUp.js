@@ -18,10 +18,8 @@ function SignUp({filterCategory, setFilterCategory, userId}){
       });
       const handleSubmit = async (e) => {
         e.preventDefault();
-      
         try {
           const response = await axios.post(`${baseURL}/auth/register`, formData);
-          
           if (response.status === 200) {
             navigate('/login')
           } else {
@@ -57,7 +55,7 @@ function SignUp({filterCategory, setFilterCategory, userId}){
                 <label className = "label" htmlFor="email">Email</label>
                 <input className= "text" type="text" id = "email" name = "email" required value={formData.email} onChange = {handleChange}  placeholder="Email..."/>
                 <label className = "label" htmlFor="password">Password</label>
-                <input className= "text" type="password" id = "password" name = "password" required value={formData.password} onChange = {handleChange} placeholder="Password..."/>
+                <input className="text" type="password" id="password" name="password" required value={formData.password} onChange={handleChange} placeholder="Password..." pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character."/>
                 <button type="submit" className="create-account-button" >Create Account</button>
             </form>
 

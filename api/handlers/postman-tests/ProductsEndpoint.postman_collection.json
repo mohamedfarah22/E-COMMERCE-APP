@@ -1,0 +1,663 @@
+{
+	"info": {
+		"_postman_id": "cc0f5ace-7a60-41df-8cc9-dd7179a001ae",
+		"name": "ProductsEndpoint",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "28043584"
+	},
+	"item": [
+		{
+			"name": "getAllProducts",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"pm.test('Array should have objects with keys - id, product_name, product_description, category, price, available_quantity, image_url', function () {",
+							"     pm.expect(pm.response.json()).to.be.an('array');",
+							"",
+							"     pm.response.json().forEach((product) => {",
+							"            pm.expect(product).to.be.an('object');",
+							"            pm.expect(product).to.have.all.keys('id', 'product_name', 'product_description', 'category', 'price', 'available_quantity', 'image_url');",
+							"     });",
+							"});",
+							"pm.test('Each id in the response array should be a number', function () {",
+							"     pm.expect(pm.response.json()).to.be.an('array');",
+							"     pm.response.json().forEach((product) => {",
+							"            pm.expect(product).to.have.property('id').that.is.a('number');",
+							"     });",
+							"});",
+							"pm.test('Response body should be an array', function () {",
+							"    pm.expect(pm.response.json()).to.be.an('array');",
+							"});",
+							"pm.test('Response body should be an array of objects', function () {",
+							"    pm.expect(pm.response.json()).to.be.an('array');",
+							"    pm.response.json().forEach((product) => {",
+							"     pm.expect(product).to.be.an('object');",
+							"    });",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{base_url}}/products"
+			},
+			"response": []
+		},
+		{
+			"name": "getProductsByCategories (bangles)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"pm.test('Array should have objects with keys - id, product_name, product_description, category, price, available_quantity, image_url', function () {",
+							"     pm.expect(pm.response.json()).to.be.an('array');",
+							"",
+							"     pm.response.json().forEach((product) => {",
+							"            pm.expect(product).to.be.an('object');",
+							"            pm.expect(product).to.have.all.keys('id', 'product_name', 'product_description', 'category', 'price', 'available_quantity', 'image_url');",
+							"     });",
+							"});",
+							"pm.test('Each id in the response array should be a number', function () {",
+							"     pm.expect(pm.response.json()).to.be.an('array');",
+							"     pm.response.json().forEach((product) => {",
+							"            pm.expect(product).to.have.property('id').that.is.a('number');",
+							"     });",
+							"});",
+							"pm.test('Response body should be an array', function () {",
+							"    pm.expect(pm.response.json()).to.be.an('array');",
+							"});",
+							"pm.test('Response body should be an array of objects', function () {",
+							"    pm.expect(pm.response.json()).to.be.an('array');",
+							"    pm.response.json().forEach((product) => {",
+							"     pm.expect(product).to.be.an('object');",
+							"    });",
+							"});",
+							"pm.test('Response body should be an array of products with only category of bangles', function () {",
+							"    pm.response.json().forEach((product) => {",
+							"     pm.expect(product.category).to.equal(\"bangles\");",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/products?category=bangles",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"products"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "bangles"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProductsByCategory (necklaces)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"pm.test('Array should have objects with keys - id, product_name, product_description, category, price, available_quantity, image_url', function () {",
+							"     pm.expect(pm.response.json()).to.be.an('array');",
+							"",
+							"     pm.response.json().forEach((product) => {",
+							"            pm.expect(product).to.be.an('object');",
+							"            pm.expect(product).to.have.all.keys('id', 'product_name', 'product_description', 'category', 'price', 'available_quantity', 'image_url');",
+							"     });",
+							"});",
+							"pm.test('Each id in the response array should be a number', function () {",
+							"     pm.expect(pm.response.json()).to.be.an('array');",
+							"     pm.response.json().forEach((product) => {",
+							"            pm.expect(product).to.have.property('id').that.is.a('number');",
+							"     });",
+							"});",
+							"pm.test('Response body should be an array', function () {",
+							"    pm.expect(pm.response.json()).to.be.an('array');",
+							"});",
+							"pm.test('Response body should be an array of objects', function () {",
+							"    pm.expect(pm.response.json()).to.be.an('array');",
+							"    pm.response.json().forEach((product) => {",
+							"     pm.expect(product).to.be.an('object');",
+							"    });",
+							"});",
+							"pm.test('Response body should be an array of products with only category of bangles', function () {",
+							"    pm.response.json().forEach((product) => {",
+							"     pm.expect(product.category).to.equal(\"necklaces\");",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/products?category=necklaces",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"products"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "necklaces"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProductsByCategory (rings)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"pm.test('Array should have objects with keys - id, product_name, product_description, category, price, available_quantity, image_url', function () {",
+							"     pm.expect(pm.response.json()).to.be.an('array');",
+							"",
+							"     pm.response.json().forEach((product) => {",
+							"            pm.expect(product).to.be.an('object');",
+							"            pm.expect(product).to.have.all.keys('id', 'product_name', 'product_description', 'category', 'price', 'available_quantity', 'image_url');",
+							"     });",
+							"});",
+							"pm.test('Each id in the response array should be a number', function () {",
+							"     pm.expect(pm.response.json()).to.be.an('array');",
+							"     pm.response.json().forEach((product) => {",
+							"            pm.expect(product).to.have.property('id').that.is.a('number');",
+							"     });",
+							"});",
+							"pm.test('Response body should be an array', function () {",
+							"    pm.expect(pm.response.json()).to.be.an('array');",
+							"});",
+							"pm.test('Response body should be an array of objects', function () {",
+							"    pm.expect(pm.response.json()).to.be.an('array');",
+							"    pm.response.json().forEach((product) => {",
+							"     pm.expect(product).to.be.an('object');",
+							"    });",
+							"});",
+							"pm.test('Response body should be an array of products with only category of bangles', function () {",
+							"    pm.response.json().forEach((product) => {",
+							"     pm.expect(product.category).to.equal(\"rings\");",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/products?category=rings",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"products"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "rings"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProductByCategory (earrings)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"pm.test('Array should have objects with keys - id, product_name, product_description, category, price, available_quantity, image_url', function () {",
+							"     pm.expect(pm.response.json()).to.be.an('array');",
+							"",
+							"     pm.response.json().forEach((product) => {",
+							"            pm.expect(product).to.be.an('object');",
+							"            pm.expect(product).to.have.all.keys('id', 'product_name', 'product_description', 'category', 'price', 'available_quantity', 'image_url');",
+							"     });",
+							"});",
+							"pm.test('Each id in the response array should be a number', function () {",
+							"     pm.expect(pm.response.json()).to.be.an('array');",
+							"     pm.response.json().forEach((product) => {",
+							"            pm.expect(product).to.have.property('id').that.is.a('number');",
+							"     });",
+							"});",
+							"pm.test('Response body should be an array', function () {",
+							"    pm.expect(pm.response.json()).to.be.an('array');",
+							"});",
+							"pm.test('Response body should be an array of objects', function () {",
+							"    pm.expect(pm.response.json()).to.be.an('array');",
+							"    pm.response.json().forEach((product) => {",
+							"     pm.expect(product).to.be.an('object');",
+							"    });",
+							"});",
+							"pm.test('Response body should be an array of products with only category of bangles', function () {",
+							"    pm.response.json().forEach((product) => {",
+							"     pm.expect(product.category).to.equal(\"earrings\");",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/products?category=earrings",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"products"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "earrings"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{base_url}}/products/categories",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"pm.test('Array should have objects with keys category', function () {",
+							"     pm.expect(pm.response.json()).to.be.an('array');",
+							"",
+							"     pm.response.json().forEach((product) => {",
+							"            pm.expect(product).to.be.an('object');",
+							"            pm.expect(product).to.have.all.keys('category');",
+							"     });",
+							"});",
+							"",
+							"pm.test('Response body should be an array', function () {",
+							"    pm.expect(pm.response.json()).to.be.an('array');",
+							"});",
+							"pm.test('Response body should be an array of objects', function () {",
+							"    pm.expect(pm.response.json()).to.be.an('array');",
+							"    pm.response.json().forEach((product) => {",
+							"     pm.expect(product).to.be.an('object');",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{base_url}}/products/categories"
+			},
+			"response": []
+		},
+		{
+			"name": "getCategoriesOfProducts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"pm.test('Array should have objects with keys category', function () {",
+							"     pm.expect(pm.response.json()).to.be.an('array');",
+							"",
+							"     pm.response.json().forEach((product) => {",
+							"            pm.expect(product).to.be.an('object');",
+							"            pm.expect(product).to.have.all.keys('category');",
+							"     });",
+							"});",
+							"",
+							"pm.test('Response body should be an array', function () {",
+							"    pm.expect(pm.response.json()).to.be.an('array');",
+							"});",
+							"pm.test('Response body should be an array of objects', function () {",
+							"    pm.expect(pm.response.json()).to.be.an('array');",
+							"    pm.response.json().forEach((product) => {",
+							"     pm.expect(product).to.be.an('object');",
+							"    });",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{base_url}}/products/categories"
+			},
+			"response": []
+		},
+		{
+			"name": "getProductsById",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Status code is 200', function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"})",
+							"",
+							"pm.test('Status code name has string', function () {",
+							"    pm.response.to.have.status('OK');",
+							"})",
+							"",
+							"pm.test('Array should have objects with keys - id, product_name, product_description, category, price, available_quantity, image_url', function () {",
+							"    pm.expect(pm.response.json()).to.be.an('array');",
+							"    pm.response.json().forEach(product => {",
+							"        pm.expect(product).to.be.an('object');",
+							"        pm.expect(product).to.have.all.keys('id', 'product_name', 'product_description', 'category', 'price', 'available_quantity', 'image_url');",
+							"    });",
+							"})",
+							"",
+							"pm.test('Each id in the response array should be a number', function () {",
+							"    pm.expect(pm.response.json()).to.be.an('array');",
+							"    pm.response.json().forEach(product => {",
+							"        pm.expect(product).to.have.property('id').that.is.a('number');",
+							"    });",
+							"})",
+							"",
+							"pm.test('Response body should be an array', function () {",
+							"    pm.expect(pm.response.json()).to.be.an('array');",
+							"})",
+							"",
+							"pm.test('Response body should be an array of objects', function () {",
+							"    pm.expect(pm.response.json()).to.be.an('array');",
+							"    pm.response.json().forEach(product => {",
+							"        pm.expect(product).to.be.an('object');",
+							"    });",
+							"})",
+							"",
+							"pm.test('Response JSON values for id should be 1', function () {",
+							"    pm.expect(pm.response.json()).to.be.an('array').that.is.not.empty;",
+							"    pm.expect(pm.response.json()[0]).to.have.property('id',2)",
+							"   ",
+							"});",
+							"",
+							"pm.test('Response body should equal this array', function () {",
+							"    pm.expect(pm.response.json()).to.eql([",
+							"    {",
+							"        \"id\": 2,",
+							"        \"product_name\": \"Dainty Gold Bangle\",",
+							"        \"product_description\": \"Embrace subtle luxury with this dainty gold bangle, weighing just 15 grams. Its lightweight charm and delicate craftsmanship ensure it's perfect for everyday wear.\",",
+							"        \"category\": \"bangles\",",
+							"        \"price\": 1350,",
+							"        \"available_quantity\": 7,",
+							"        \"image_url\": \"https://d1ujc5c60bkv1u.cloudfront.net/images/bangle.jpeg\"",
+							"    }",
+							"]);",
+							"})",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{base_url}}/products/2"
+			},
+			"response": []
+		},
+		{
+			"name": "createNewProduct",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(201);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"Created\");",
+							"});",
+							"",
+							"pm.test('Response should be object with keys - id, product_name, product_description, category, price, available_quantity, image_url', function () {",
+							"     pm.expect(pm.response.json()).to.be.an('object');",
+							"    pm.expect(pm.response.json()).to.have.all.keys('id', 'product_name', 'product_description', 'category', 'price', 'available_quantity', 'image_url');",
+							"    ",
+							"});",
+							"pm.test('Id in the object should be a number', function () {",
+							"     pm.expect(pm.response.json()).to.be.an('object');",
+							"     pm.expect(pm.response.json()).to.have.property('id').that.is.a('number');",
+							"    ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"product_name\":\"cool product\",\n    \"product_description\": \"number 1 sell out jewllery product\",\n    \"category\": \"rings\",\n    \"price\": 200000,\n     \"available_quantity\": 13,\n     \"image_url\": \"www.image.com\"\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_url}}/products"
+			},
+			"response": []
+		},
+		{
+			"name": "updatedProduct",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"pm.test('Response should be object with keys - id, product_name, product_description, category, price, available_quantity, image_url', function () {",
+							"     pm.expect(pm.response.json()).to.be.an('object');",
+							"    pm.expect(pm.response.json()).to.have.all.keys('id', 'product_name', 'product_description', 'category', 'price', 'available_quantity', 'image_url');",
+							"    ",
+							"});",
+							"pm.test('Id in the object should be a number', function () {",
+							"     pm.expect(pm.response.json()).to.be.an('object');",
+							"     pm.expect(pm.response.json()).to.have.property('id').that.is.a('number');",
+							"    ",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n        \"id\": 1,\n        \"product_name\": \"Elegant Gold Bangle\",\n        \"product_description\": \"Elevate your style with this exquisite gold bangle, weighing a delicate 10 grams. Its intricate design and comfortable fit make it a perfect accessory for any occasion.\",\n        \"category\": \"bangles\",\n        \"price\": 1200,\n        \"available_quantity\": 10,\n        \"image_url\": \"https://d1ujc5c60bkv1u.cloudfront.net/images/bangle.jpeg\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_url}}/products/1"
+			},
+			"response": []
+		},
+		{
+			"name": "getProductCategories",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"pm.test('Array should have objects with keys category', function () {",
+							"     pm.expect(pm.response.json()).to.be.an('array');",
+							"",
+							"     pm.response.json().forEach((product) => {",
+							"            pm.expect(product).to.be.an('object');",
+							"            pm.expect(product).to.have.all.keys('category');",
+							"     });",
+							"});",
+							"",
+							"pm.test('Response body should be an array', function () {",
+							"    pm.expect(pm.response.json()).to.be.an('array');",
+							"});",
+							"pm.test('Response body should be an array of objects', function () {",
+							"    pm.expect(pm.response.json()).to.be.an('array');",
+							"    pm.response.json().forEach((product) => {",
+							"     pm.expect(product).to.be.an('object');",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{base_url}}/products/categories"
+			},
+			"response": []
+		}
+	]
+}

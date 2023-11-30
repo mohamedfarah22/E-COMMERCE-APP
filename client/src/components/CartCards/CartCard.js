@@ -19,10 +19,10 @@ function CartCard({ cart, cartProduct, userId, setCart}){
     useEffect(()=>{
         //get new product
         
-        axios.get(`${baseURL}/carts/${userId}`).then((response) => {
-       const cart = response.data;
-       setCart(cart);
-       setLoading(false)
+    axios.get(`${baseURL}/carts/${userId}`).then((response) => {
+    const cart = response.data;
+    setCart(cart);
+    setLoading(false)
     
      })
       
@@ -32,10 +32,10 @@ function CartCard({ cart, cartProduct, userId, setCart}){
 const increment = (e) => {
     e.preventDefault()
     const updatedQuantity = numberOfItems + 1
-    setNumberOfItems(updatedQuantity)
     setLoading(true)
     axios.put(`${baseURL}/carts?user_id=${userId}&product_id=${cartProduct[0].id}&quantity=${updatedQuantity}`).then((response) => {
-                
+                //set quantity
+                setNumberOfItems(response.data.quantity)
                 
             }).catch((error) => {
                 console.log('Error',  error)
@@ -98,7 +98,7 @@ const increment = (e) => {
        <div> 
         <div className = 'card-cart-container'>
         <div className = "cart-product-image-container" >
-            <img alt = {cartProduct[0].product_name} src={`../images/${cartProduct[0].image_url}`} />
+            <img alt = {cartProduct[0].product_name} src={`${cartProduct[0].image_url}`} />
         </div>
         <div className="cart-item-description">
             <p className="cart-product-name">{cartProduct[0].product_name}</p>
